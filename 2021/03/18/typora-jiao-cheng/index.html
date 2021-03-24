@@ -451,23 +451,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>==1（1）标题==</p>
-<h1 id="一级标题"><a href="#一级标题" class="headerlink" title="一级标题"></a>一级标题</h1><h2 id="二级标题"><a href="#二级标题" class="headerlink" title="二级标题"></a>二级标题</h2><h3 id="三级标题"><a href="#三级标题" class="headerlink" title="三级标题"></a>三级标题</h3><h4 id="四级标题"><a href="#四级标题" class="headerlink" title="四级标题"></a>四级标题</h4><h5 id="五级标题"><a href="#五级标题" class="headerlink" title="五级标题"></a>五级标题</h5><h6 id="六级标题"><a href="#六级标题" class="headerlink" title="六级标题"></a>六级标题</h6><p>==（2）字体==</p>
-<p><strong>加粗</strong></p>
-<p><em>斜体</em></p>
-<p><em><strong>斜体加粗</strong></em></p>
-<p><del>删除线</del></p>
-<p>==高亮==</p>
-<p>我是 ^上标^</p>
-<p>我是<del>下标</del></p>
+                <p>==（1）标题==</p>
+<h1 id="一级标题-一级标题使用1个-Ctrl-1"><a href="#一级标题-一级标题使用1个-Ctrl-1" class="headerlink" title="一级标题(一级标题使用1个#)(Ctrl+1)"></a>一级标题(一级标题使用1个#)(Ctrl+1)</h1><h2 id="二级标题-二级标题使用2个-Ctrl-2"><a href="#二级标题-二级标题使用2个-Ctrl-2" class="headerlink" title="二级标题(二级标题使用2个#)(Ctrl+2)"></a>二级标题(二级标题使用2个#)(Ctrl+2)</h2><h3 id="三级标题-三级标题使用3个-Ctrl-3"><a href="#三级标题-三级标题使用3个-Ctrl-3" class="headerlink" title="三级标题(三级标题使用3个#)(Ctrl+3)"></a>三级标题(三级标题使用3个#)(Ctrl+3)</h3><h4 id="四级标题-四级标题使用4个-Ctrl-4"><a href="#四级标题-四级标题使用4个-Ctrl-4" class="headerlink" title="四级标题(四级标题使用4个#)(Ctrl+4)"></a>四级标题(四级标题使用4个#)(Ctrl+4)</h4><h5 id="五级标题-五级标题使用5个-Ctrl-5"><a href="#五级标题-五级标题使用5个-Ctrl-5" class="headerlink" title="五级标题(五级标题使用5个#)(Ctrl+5)"></a>五级标题(五级标题使用5个#)(Ctrl+5)</h5><h6 id="六级标题-六级标题使用6个-Ctrl-6"><a href="#六级标题-六级标题使用6个-Ctrl-6" class="headerlink" title="六级标题(六级标题使用6个#)(Ctrl+6)"></a>六级标题(六级标题使用6个#)(Ctrl+6)</h6><p>==（2）字体==</p>
+<p>** 加粗 **<br><strong>加粗</strong> 或 <strong>加粗</strong>(Ctrl + B)</p>
+<p>*斜体 *<br><em>斜体</em> 或 <em>斜体</em>(Ctrl + H)</p>
+<ul>
+<li><ul>
+<li>*斜体加粗 * * *</li>
+</ul>
+</li>
+<li><strong>斜体加粗</strong>* 或 <em><strong>斜体加粗</strong></em></li>
+</ul>
+<p>~~ 删除线 ~~<br><del>删除线</del> (使用波浪号)(Alt+Shift+5)</p>
+<p>== 高亮 ==<br>==高亮==</p>
+<p>我是^上标 ^<br>我是 ^上标^</p>
+<p>我是^下标 ^<br>我是<del>下标</del></p>
 <p>==（3）列表==</p>
 <ul>
-<li><p>一二三四五</p>
-<ul>
-<li><p>上山打老虎</p>
-<ul>
-<li><p>老虎没打到</p>
-<ul>
+<li>一二三四五<ul>
+<li>上山打老虎<ul>
+<li>老虎没打到<ul>
 <li>打到小松鼠</li>
 </ul>
 </li>
@@ -476,17 +479,14 @@
 </ul>
 </li>
 </ul>
+<p>+ 一二三四五<br>+ 上山打老虎<br>+ 老虎没打到<br>+ 打到小松鼠</p>
 <ol>
-<li><p>一二三四五</p>
-</li>
-<li><p>上山打老虎</p>
-</li>
-<li><p>老虎没打到</p>
-</li>
-<li><p>打到小松鼠</p>
-</li>
+<li>一二三四五</li>
+<li>上山打老虎</li>
+<li>老虎没打到</li>
+<li>打到小松鼠</li>
 </ol>
-<p>==（4）表格==</p>
+<p>==（4）表格(Ctrl+T)==</p>
 <table>
 <thead>
 <tr>
@@ -523,28 +523,32 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>| 打老虎 | 打老虎 | 打老虎 | 打老虎 | 打老虎 |</p>
-<p>==（5）引用==</p>
+<p>| Mon  | TUE  | WED  | THU  | FRI  |</p>
+<p>| —- | —- | —- | —- | —- |</p>
+<p>|        |        |        |        |        |</p>
+<p>| 上山 | 上山 | 上山 | 上山 | 上山 |</p>
+<p>| —- | —- | —- | —- | —- |</p>
+<p>|        |        |        |        |        |<br>==（5）引用(Ctrl+Shift+Q)==</p>
 <blockquote>
-<p>一二三四五</p>
+<p>一二三四五   （ &gt;一二三四五 ）</p>
 </blockquote>
 <blockquote>
 <blockquote>
-<p>上山打老虎</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>老虎没打到</p>
-</blockquote>
+<p>上山打老虎   （ &gt;&gt;一二三四五 ）</p>
 </blockquote>
 </blockquote>
 <blockquote>
 <blockquote>
 <blockquote>
+<p>老虎没打到   （ &gt;&gt;&gt;一二三四五 ）</p>
+</blockquote>
+</blockquote>
+</blockquote>
 <blockquote>
-<p>打到小松鼠</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>打到小松鼠   （ &gt;&gt;&gt;&gt;一二三四五 ）</p>
 </blockquote>
 </blockquote>
 </blockquote>

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -452,19 +452,254 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="1、凯撒密码"><a href="#1、凯撒密码" class="headerlink" title="1、凯撒密码"></a>1、凯撒密码</h2><h3 id="1、初步搭建框架"><a href="#1、初步搭建框架" class="headerlink" title="1、初步搭建框架"></a>1、初步搭建框架</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210406193842.jpg" alt="框架"></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">input</span><span class="params">()</span><span class="comment">//用户输入明文</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> plaintext;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;请输入明文:&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; plaintext;</span><br><span class="line">	<span class="keyword">return</span> plaintext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class=" language-c++"><code class="language-c++">string input()//用户输入明文
+&#123;
+    string plaintext;
+    cout << "请输入明文:" << endl;
+    cin >> plaintext;
+    return plaintext;
+&#125;
+</code></pre>
 <h3 id="2、如何计算字符串长度"><a href="#2、如何计算字符串长度" class="headerlink" title="2、如何计算字符串长度"></a>2、如何计算字符串长度</h3><p>目的：作为循环条件<br>解决：string库中包含计算字符串长度函数<br>用法：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">string</span> plaintext;</span><br><span class="line"><span class="keyword">int</span> num;</span><br><span class="line">num = plaintext.size();</span><br></pre></td></tr></table></figure>
-
-<h5 id="经过多次思考，没有必要计算字符串长度"><a href="#经过多次思考，没有必要计算字符串长度" class="headerlink" title="经过多次思考，没有必要计算字符串长度"></a>经过多次思考，没有必要计算字符串长度</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; plaintext[i] != <span class="number">0</span>; i++)</span><br><span class="line">	&#123;	&#125;</span><br></pre></td></tr></table></figure>
-
+<pre class=" language-c++"><code class="language-c++">string plaintext;
+int num;
+num = plaintext.size();
+</code></pre>
+<h5 id="经过多次思考，没有必要计算字符串长度"><a href="#经过多次思考，没有必要计算字符串长度" class="headerlink" title="经过多次思考，没有必要计算字符串长度"></a>经过多次思考，没有必要计算字符串长度</h5><pre class=" language-c++"><code class="language-c++">for (i = 0; plaintext[i] != 0; i++)
+    &#123;    &#125;
+</code></pre>
 <h3 id="3、将明文转换为一串数字"><a href="#3、将明文转换为一串数字" class="headerlink" title="3、将明文转换为一串数字"></a>3、将明文转换为一串数字</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210406194218.jpg" alt="将明文转换为一串数字"></p>
-<h3 id="4、设计密文生成算法"><a href="#4、设计密文生成算法" class="headerlink" title="4、设计密文生成算法"></a>4、设计密文生成算法</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; a[i] != <span class="number">0</span>; i++)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (a[i] &gt; <span class="number">64</span> &amp;&amp; a[i] &lt; <span class="number">91</span>)<span class="comment">//如果是大写字母</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] + num &lt; <span class="number">65</span>)</span><br><span class="line">			b[i] = a[i] + num +<span class="number">26</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a[i] + num &gt;= <span class="number">65</span> &amp;&amp; a[i] + num &lt;= <span class="number">90</span>)</span><br><span class="line">			b[i] = a[i] + num;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			b[i] = a[i] + num - <span class="number">26</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (a[i] &gt; <span class="number">96</span> &amp;&amp; a[i] &lt; <span class="number">123</span>)<span class="comment">//如果是小写字母</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] + num &lt; <span class="number">97</span>)</span><br><span class="line">			b[i] = a[i] + num + <span class="number">26</span>;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a[i] + num &gt;= <span class="number">97</span> &amp;&amp; a[i] + num &lt;= <span class="number">122</span>)</span><br><span class="line">			b[i] = a[i] + num;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">			b[i] = a[i] + num - <span class="number">26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;		</span><br></pre></td></tr></table></figure>
+<h3 id="4、设计密文生成算法"><a href="#4、设计密文生成算法" class="headerlink" title="4、设计密文生成算法"></a>4、设计密文生成算法</h3><pre class=" language-c++"><code class="language-c++">for (i = 0; a[i] != 0; i++)
+&#123;
+    if (a[i] > 64 && a[i] < 91)//如果是大写字母
+    &#123;
+        if (a[i] + num < 65)
+            b[i] = a[i] + num +26;
+        else if (a[i] + num >= 65 && a[i] + num <= 90)
+            b[i] = a[i] + num;
+        else
+            b[i] = a[i] + num - 26;
+    &#125;
+    
+    else if (a[i] > 96 && a[i] < 123)//如果是小写字母
+    &#123;
+        if (a[i] + num < 97)
+            b[i] = a[i] + num + 26;
+        else if (a[i] + num >= 97 && a[i] + num <= 122)
+            b[i] = a[i] + num;
+        else
+            b[i] = a[i] + num - 26;
+    &#125;
+&#125;        
+</code></pre>
+<h3 id="5、最终成果："><a href="#5、最终成果：" class="headerlink" title="5、最终成果："></a>5、最终成果：</h3><pre class=" language-c++"><code class="language-c++">#include<iostream>
+#include<string>
+using namespace std;
 
-<h3 id="5、最终成果："><a href="#5、最终成果：" class="headerlink" title="5、最终成果："></a>5、最终成果：</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">input</span><span class="params">()</span><span class="comment">//用户输入明文</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> plaintext;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;请输入明文:&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; plaintext;</span><br><span class="line">	<span class="keyword">return</span> plaintext;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">key</span><span class="params">(<span class="built_in">string</span> plaintext)</span><span class="comment">//形成密文，并输出</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> num = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">1000</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//明文</span></span><br><span class="line">	<span class="keyword">int</span> b[<span class="number">1000</span>] = &#123; <span class="number">0</span> &#125;;<span class="comment">//密文</span></span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; plaintext[i] != <span class="number">0</span>; i++)<span class="comment">//将明文转化为一个由ASCⅡ表对应数字的数组</span></span><br><span class="line">	&#123;</span><br><span class="line">		a[i] = (<span class="keyword">int</span>)plaintext[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;请输入您想位移的数字：（正数—右移，负数—左移）&quot;</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; num;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; a[i] != <span class="number">0</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a[i] &gt; <span class="number">64</span> &amp;&amp; a[i] &lt; <span class="number">91</span>)<span class="comment">//如果是大写字母</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i] + num &lt; <span class="number">65</span>)</span><br><span class="line">				b[i] = a[i] + num +<span class="number">26</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (a[i] + num &gt;= <span class="number">65</span> &amp;&amp; a[i] + num &lt;= <span class="number">90</span>)</span><br><span class="line">				b[i] = a[i] + num;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				b[i] = a[i] + num - <span class="number">26</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (a[i] &gt; <span class="number">96</span> &amp;&amp; a[i] &lt; <span class="number">123</span>)<span class="comment">//如果是小写字母</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i] + num &lt; <span class="number">97</span>)</span><br><span class="line">				b[i] = a[i] + num + <span class="number">26</span>;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span> (a[i] + num &gt;= <span class="number">97</span> &amp;&amp; a[i] + num &lt;= <span class="number">122</span>)</span><br><span class="line">				b[i] = a[i] + num;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">				b[i] = a[i] + num - <span class="number">26</span>;</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;密文为：&quot;</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; b[i] != <span class="number">0</span>; i++)</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; (<span class="keyword">char</span>)b[i] ;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">string</span> plaintext;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	</span><br><span class="line">	plaintext = input();<span class="comment">//输入明文</span></span><br><span class="line">	</span><br><span class="line">	key(plaintext);</span><br><span class="line">	</span><br><span class="line">	system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+string input()//用户输入明文
+&#123;
+    string plaintext;
+    cout << "请输入明文:" << endl;
+    cin >> plaintext;
+    return plaintext;
+&#125;
 
+void key(string plaintext)//形成密文，并输出
+&#123;
+    int i;
+    int num = 0;
+    int a[1000] = &#123; 0 &#125;;//明文
+    int b[1000] = &#123; 0 &#125;;//密文
+    for (i = 0; plaintext[i] != 0; i++)//将明文转化为一个由ASCⅡ表对应数字的数组
+    &#123;
+        a[i] = (int)plaintext[i];
+    &#125;
+    cout << "请输入您想位移的数字：（正数—右移，负数—左移）" << endl;
+    cin >> num;
+    for (i = 0; a[i] != 0; i++)
+    &#123;
+        if (a[i] > 64 && a[i] < 91)//如果是大写字母
+        &#123;
+            if (a[i] + num < 65)
+                b[i] = a[i] + num +26;
+            else if (a[i] + num >= 65 && a[i] + num <= 90)
+                b[i] = a[i] + num;
+            else
+                b[i] = a[i] + num - 26;
+        &#125;
+        else if (a[i] > 96 && a[i] < 123)//如果是小写字母
+        &#123;
+            if (a[i] + num < 97)
+                b[i] = a[i] + num + 26;
+            else if (a[i] + num >= 97 && a[i] + num <= 122)
+                b[i] = a[i] + num;
+            else
+                b[i] = a[i] + num - 26;
+        &#125;        
+    &#125;
+    cout << "密文为：";
+    for (i = 0; b[i] != 0; i++)
+        cout << (char)b[i] ;
+    cout << "\n";
+&#125;
+
+int main()
+&#123;
+    string plaintext;
+    int i;
+    
+    plaintext = input();//输入明文
+    
+    key(plaintext);
+    
+    system("pause");
+    return 0;
+&#125;
+</code></pre>
 <h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210406193941.jpg" alt="测试1"><br>任务文件中示例<br><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210406195002.jpg" alt="测试2"></p>
+<h2 id="2、关键字密码"><a href="#2、关键字密码" class="headerlink" title="2、关键字密码"></a>2、关键字密码</h2><h3 id="1、初步搭建框架-1"><a href="#1、初步搭建框架-1" class="headerlink" title="1、初步搭建框架"></a>1、初步搭建框架</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408172734.jpg" alt="框架"></p>
+<p>这个框架仅为初步搭建，后期的编写中再次对框架进行修改，但解决问题的流程大致没变</p>
+<blockquote>
+<p>本次编写是我首次运用了面向对象的方法，对方法进行了封装</p>
+</blockquote>
+<h3 id="2、class中的属性"><a href="#2、class中的属性" class="headerlink" title="2、class中的属性"></a>2、class中的属性</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408173301.jpg" alt="属性"></p>
+<h3 id="3、生成密码表"><a href="#3、生成密码表" class="headerlink" title="3、生成密码表"></a>3、生成密码表</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408173323.jpg" alt="生成密码表"></p>
+<h3 id="4、将明文转化为密文"><a href="#4、将明文转化为密文" class="headerlink" title="4、将明文转化为密文"></a>4、将明文转化为密文</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408173340.jpg" alt="将明文转换为密文"></p>
+<h3 id="5、最终成果"><a href="#5、最终成果" class="headerlink" title="5、最终成果"></a>5、最终成果</h3><pre class=" language-c++"><code class="language-c++">#include<iostream>
+#include<string>
+#include<memory>
+using namespace std;
+
+class KeyWord_class
+&#123;
+public:
+
+//方法
+    void input(string plaintext)//用户输入明文
+    &#123;
+        int i;
+        for (i = 0; (int)plaintext[i] != 0; i++)
+            m_Plaintext[i] = (int)plaintext[i];//将字符转换为数字
+    &#125;
+
+    void keyword(string keyword)//用户输入关键字
+    &#123;
+        m_keyword = keyword;
+    &#125;
+
+    void turn01(string keyword)//生成密码表
+    &#123;
+        int i, j;//循环变量
+        int s = 0;//状态变量，1—存在，0—不存在
+        int letter = 0;
+        int list[26] = &#123; 0 &#125;;//存放字母表的整形数组
+        int num = keyword.size();
+        for (i = 0; i < num; i++)
+        &#123;
+            list[i] = (int)keyword[i];//先把关键字转换为数字形式放入字母表
+        &#125;
+        letter = list[num - 1] + 1;
+        for (i = num; i < 26; i++)//接着关键字继续放入其余字母
+        &#123;
+            for (j = 0; j < num; j++)//依次查看关键字中每个字母
+            &#123;
+                if (list[j] == letter)//如果已经存在该字母，使s变为1
+                &#123;
+                    s = 1;
+                &#125;
+            &#125;
+            if (s == 1)
+                i--;
+            else//如果不存在该字母，接着关键字放入字母
+            &#123;
+                if (letter > 90)//如果超过Z，从A开始
+                    letter = 65;
+                list[i] = letter;
+            &#125;
+            letter++;
+            s = 0;//重置状态变量
+        &#125;
+        for (i = 0; i < 26; i++)//放入字母表
+        &#123;
+            m_list[i] = list[i];
+        &#125;
+    &#125;
+
+    void turn02()//将明文转换为密文
+    &#123;
+        int i, j;
+        for (i = 0; m_Plaintext[i] != 0; i++)//依次在明文中遍历
+        &#123;
+            for (j = 0; j < 26; j++)//在字母表中查找
+            &#123;
+                if (m_Plaintext[i] - 65 == j)
+                &#123;
+                    m_ciphertext[i] = m_list[j];
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    void output01(int list[26])
+    &#123;
+        int i;
+        for (i = 0; i < 26; i++)
+        &#123;
+            cout << (char)list[i];
+        &#125;
+        cout << "\n";
+    &#125;
+    void output()
+    &#123;
+        int i;
+        for (i = 0; m_ciphertext[i] != 0; i++)
+        &#123;
+            cout << (char)m_ciphertext[i];
+        &#125;
+        cout << "\n";
+    &#125;
+
+
+private:
+    //属性    
+    int m_Plaintext[1000] = &#123; 0 &#125;;//明文
+    string m_keyword;//关键字
+    int m_list[26] = &#123; 0 &#125;;//字母表
+    int m_ciphertext[1000] = &#123; 0 &#125;;//密文
+
+&#125;;
+
+int main()
+&#123;
+    KeyWord_class k;//创建一个对象，类的实例化
+    string plaintext;
+    string keyword;
+
+    //输入明文
+    cout << "请输入明文（大写字母）：" << endl;
+    cin >> plaintext;
+    k.input(plaintext);
+
+    //输入关键字
+    cout << "请输入关键字：" << endl;
+    cin >> keyword;
+    k.keyword(keyword);
+
+    //生成字母表
+    k.turn01(keyword);
+
+    //明文转化为密文
+    k.turn02();
+
+    //输出密文
+    cout << "输出密文：" << endl;
+    k.output();
+
+    system("pause");
+    return 0;
+&#125;
+</code></pre>
+<h3 id="6、测试"><a href="#6、测试" class="headerlink" title="6、测试"></a>6、测试</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408173459.jpg" alt="成功"></p>
 
                 
             </div>

@@ -567,7 +567,6 @@ int main()
 <h3 id="4、将明文转化为密文"><a href="#4、将明文转化为密文" class="headerlink" title="4、将明文转化为密文"></a>4、将明文转化为密文</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408173340.jpg" alt="将明文转换为密文"></p>
 <h3 id="5、最终成果"><a href="#5、最终成果" class="headerlink" title="5、最终成果"></a>5、最终成果</h3><pre class=" language-c++"><code class="language-c++">#include<iostream>
 #include<string>
-#include<memory>
 using namespace std;
 
 class KeyWord_class
@@ -700,6 +699,156 @@ int main()
 &#125;
 </code></pre>
 <h3 id="6、测试"><a href="#6、测试" class="headerlink" title="6、测试"></a>6、测试</h3><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210408173459.jpg" alt="成功"></p>
+<h3 id="3、纵栏式移项密码"><a href="#3、纵栏式移项密码" class="headerlink" title="3、纵栏式移项密码"></a>3、纵栏式移项密码</h3><h4 id="1、框架"><a href="#1、框架" class="headerlink" title="1、框架"></a>1、框架</h4><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210409095901.jpg" alt="框架"></p>
+<h4 id="2、对关键字排序"><a href="#2、对关键字排序" class="headerlink" title="2、对关键字排序"></a>2、对关键字排序</h4><pre class=" language-c++"><code class="language-c++">void sort()//对关键字排序
+    &#123;
+        int m, n;
+        int i, j;
+        int a[10] = &#123; 0 &#125;;
+        for (i = 0; i < 10; i++)//对关键字排序
+        &#123;
+            for (m = 0, n = 1; n < 10; n++)//m为这个数组中最大元素
+            &#123;
+                if (m_keyword[m] < m_keyword[n])
+                    m = n;
+            &#125;
+            a[i] = (m == m_num - 1 ? 0 : m + 1);
+            m_keyword[m] = 0;
+        &#125;
+
+        for (i = m_num - 1, j = 0; i > -1; i--, j++)//将密码表内数字按从小到大的顺序放入
+        &#123;
+            m_keyword[j] = a[i];
+        &#125;
+    &#125;
+</code></pre>
+<h4 id="3、将明文转化为密文"><a href="#3、将明文转化为密文" class="headerlink" title="3、将明文转化为密文"></a>3、将明文转化为密文</h4><pre class=" language-c++"><code class="language-c++">void turn()//将明文转化为密文
+    &#123;
+        int i, j, k = 0;
+        for (i = 0; i < m_num; i++)
+        &#123;
+            for (j = 0; m_plaintext[j] != 0; j++)
+            &#123;
+                if ((j + 4) % m_num == m_keyword[i])
+                &#123;
+                    m_ciphertext[k] = m_plaintext[j];
+                    k++;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<h4 id="4、最终成果"><a href="#4、最终成果" class="headerlink" title="4、最终成果"></a>4、最终成果</h4><pre class=" language-c++"><code class="language-c++">#include<iostream>
+#include<string>
+using namespace std;
+
+class column
+&#123;
+public:
+    void input(string plaintext)//输入明文，并转换为数字
+    &#123;
+        int i;
+        for (i = 0; plaintext[i] != 0; i++)
+        &#123;
+            m_plaintext[i] = plaintext[i];
+        &#125;
+    &#125;
+
+    void put_keyword(string keyword)//输入关键字，并转化为数字
+    &#123;
+        int i;
+        m_num = keyword.size();
+        if (m_num > 11)
+            return;
+        for (i = 0; keyword[i] != 0; i++)
+        &#123;
+            m_keyword[i] = keyword[i];
+        &#125;
+    &#125;
+
+    void sort()//对关键字排序
+    &#123;
+        int m, n;
+        int i, j;
+        int a[10] = &#123; 0 &#125;;
+        for (i = 0; i < 10; i++)//对关键字排序
+        &#123;
+            for (m = 0, n = 1; n < 10; n++)//m为这个数组中最大元素
+            &#123;
+                if (m_keyword[m] < m_keyword[n])
+                    m = n;
+            &#125;
+            a[i] = (m == m_num - 1 ? 0 : m + 1);
+            m_keyword[m] = 0;
+        &#125;
+
+        for (i = m_num - 1, j = 0; i > -1; i--, j++)//将密码表内数字按从小到大的顺序放入
+        &#123;
+            m_keyword[j] = a[i];
+        &#125;
+    &#125;
+
+    void turn()//将明文转化为密文
+    &#123;
+        int i, j, k = 0;
+        for (i = 0; i < m_num; i++)
+        &#123;
+            for (j = 0; m_plaintext[j] != 0; j++)
+            &#123;
+                if ((j + 4) % m_num == m_keyword[i])
+                &#123;
+                    m_ciphertext[k] = m_plaintext[j];
+                    k++;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    void output()//输出密文
+    &#123;
+        int i;
+        for (i = 0; m_ciphertext[i] != 0; i++)
+        &#123;
+            cout << (char)m_ciphertext[i];
+        &#125;
+        cout << "\n";
+    &#125;
+
+private:
+    int m_plaintext[1000] = &#123; 0 &#125;;//明文
+    int m_keyword[10] = &#123;0&#125;;//关键字
+    int m_num = 0;//关键字长度
+    int m_ciphertext[1000] = &#123; 0 &#125;;//密文
+
+&#125;;
+
+
+int main()
+&#123;
+    column c;
+    string plaintext;
+    string keyword;
+
+    cout << "请输入明文（大写字母）：" << endl;
+    cin >> plaintext;
+    c.input(plaintext);
+
+    cout << "请输入关键字（少于10个大写字母）：" << endl;
+    cin >> keyword;
+    c.put_keyword(keyword);
+
+    c.sort();//关键字排序
+
+    c.turn();//明文转密文
+
+    cout << "密文为：" << endl;//输出密文
+    c.output();
+
+    system("pause");
+    return 0;
+&#125;
+</code></pre>
+<h4 id="6、测试-1"><a href="#6、测试-1" class="headerlink" title="6、测试"></a>6、测试</h4><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210409100328.jpg" alt="测试"></p>
 
                 
             </div>

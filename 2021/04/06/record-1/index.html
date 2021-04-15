@@ -1274,6 +1274,127 @@ int main()
 </code></pre>
 <p>测试：</p>
 <p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210414225138.jpg" alt="分类成功"></p>
+<h2 id="6、收获"><a href="#6、收获" class="headerlink" title="6、收获"></a>6、收获</h2><h3 id="1、智能指针"><a href="#1、智能指针" class="headerlink" title="1、智能指针"></a>1、智能指针</h3><blockquote>
+<ul>
+<li><strong>what：</strong><br>C++新标准库提供了智能指针来管理动态对象，它的行为类似于常规指针，重要的区别是它能够自动释放所指向对象的空间，并且它是封装好的模板类</li>
+<li><strong>why：</strong><br>为了安全方便地使用动态内存，管理动态内存的开辟与释放，避免内存泄露。</li>
+<li><strong>how：</strong><br>智能指针分为四种：<strong>auto_ptr</strong>、<strong>shared_ptr</strong>、<strong>unique_ptr</strong>、<strong>weak_ptr</strong></li>
+</ul>
+</blockquote>
+<h4 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h4><blockquote>
+<p><strong>初始化方法</strong></p>
+<ul>
+<li><p>方法一：<br>std::unique_ptr&lt;类型&gt; p1(new 类型(值));</p>
+</li>
+<li><p>方法二：<br>std::unique_ptr&lt;类型&gt; p1<br>p1.reset(new 类型(值));</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="2、封装"><a href="#2、封装" class="headerlink" title="2、封装"></a>2、封装</h3><blockquote>
+<p><strong>封装的意义：</strong></p>
+<ul>
+<li>将属性和行为作为一个整体，表现生活中的事物</li>
+<li>将属性和行为加以权限控制</li>
+</ul>
+</blockquote>
+<p><strong>语法：</strong><code>class 类名&#123;  访问权限：    属性/行为&#125;;</code></p>
+<blockquote>
+<p><strong>访问权限：</strong></p>
+<ul>
+<li>公共权限：public            类内可以访问   类外可以访问</li>
+<li>保护权限：protected      类内可以访问   类外不可以访问</li>
+<li>私有权限：private           类内可以访问   类外不可以访问</li>
+</ul>
+</blockquote>
+<h3 id="3、C-文件和流"><a href="#3、C-文件和流" class="headerlink" title="3、C++ 文件和流"></a>3、C++ 文件和流</h3><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ofstream</td>
+<td align="left">该数据类型表示输出文件流，用于创建文件并向文件写入信息。</td>
+</tr>
+<tr>
+<td align="left">ifstream</td>
+<td align="left">该数据类型表示输入文件流，用于从文件读取信息。</td>
+</tr>
+<tr>
+<td align="left">fstream</td>
+<td align="left">该数据类型通常表示文件流，且同时具有 ofstream 和 ifstream 两种功能，这意味着它可以创建文件，向文件写入信息，从文件读取信息。</td>
+</tr>
+</tbody></table>
+<h4 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h4><p>基础语法：</p>
+<pre class=" language-c++"><code class="language-c++">void open(const char *filename, ios::openmode mode);
+</code></pre>
+<p>在这里，<strong>open()</strong> 成员函数的第一参数指定要打开的文件的名称和位置，第二个参数定义文件被打开的模式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">模式标志</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ios::app</td>
+<td align="left">追加模式。所有写入都追加到文件末尾。</td>
+</tr>
+<tr>
+<td align="left">ios::ate</td>
+<td align="left">文件打开后定位到文件末尾。</td>
+</tr>
+<tr>
+<td align="left">ios::in</td>
+<td align="left">打开文件用于读取。</td>
+</tr>
+<tr>
+<td align="left">ios::out</td>
+<td align="left">打开文件用于写入。</td>
+</tr>
+<tr>
+<td align="left">ios::trunc</td>
+<td align="left">如果该文件已经存在，其内容将在打开文件之前被截断，即把文件长度设为 0。</td>
+</tr>
+</tbody></table>
+<h4 id="关闭文件"><a href="#关闭文件" class="headerlink" title="关闭文件"></a>关闭文件</h4><p>基础语法：</p>
+<pre class=" language-c++"><code class="language-c++">void close();
+</code></pre>
+<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><p>在 C++ 编程中，我们使用流插入运算符（ &lt;&lt; ）向文件写入信息，就像使用该运算符输出信息到屏幕上一样。唯一不同的是，在这里您使用的是 <strong>ofstream</strong> 或 <strong>fstream</strong> 对象，而不是 <strong>cout</strong> 对象。</p>
+<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><p>在 C++ 编程中，我们使用流提取运算符（ &gt;&gt; ）从文件读取信息，就像使用该运算符从键盘输入信息一样。唯一不同的是，在这里您使用的是 <strong>ifstream</strong> 或 <strong>fstream</strong> 对象，而不是 <strong>cin</strong> 对象。</p>
+<h3 id="4、vector容器的使用"><a href="#4、vector容器的使用" class="headerlink" title="4、vector容器的使用"></a>4、vector容器的使用</h3><h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><pre class=" language-c++"><code class="language-c++">vector<T> v;       //采用模板实现类实现，默认构造函数
+vector(v.begin() , v.end( ));//将v[begin(), end())区间中的元素拷贝给本身
+vector(n,elem);    //构造函数将n个elem拷贝给本身。
+vector( const vector &vec) ; //拷贝构造函数。
+</code></pre>
+<h4 id="插入函数"><a href="#插入函数" class="headerlink" title="插入函数"></a>插入函数</h4><pre class=" language-c++"><code class="language-c++">push_back(ele);//尾部插入元素ele
+pop_back() ;//删除最后一个元素
+insert(const_iterator pos, ele);//迭代器指向位置pos插入元素ele
+insert(const_iterator pos，int count,ele);//迭代器指向位置pos插入count个元素
+erase(const_iterator pos ) ;//册除迭代器指向的元素
+erase(const_iterator start, const_iterator end);//删除迭代器从start到end之间的元素clear();
+clear();//册除容器中所有元素
+</code></pre>
+<h3 id="5、map容器的使用"><a href="#5、map容器的使用" class="headerlink" title="5、map容器的使用"></a>5、map容器的使用</h3><p><strong>简介：</strong></p>
+<ul>
+<li>map中所有元素都是pair</li>
+<li>pair中第一个元素为<strong>key(键值)<strong>，起到索引作期，第二个元素为</strong>value (实值)</strong></li>
+<li>所有元素都会根据元素的键值自动排序</li>
+</ul>
+<p><strong>用途：</strong>提供一对一的映射矢系</p>
+<h4 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h4><pre class=" language-c++"><code class="language-c++">map<T1，T2> mp;         //map默认构造函数:
+map(const map &mp ) ;   //拷贝构造函数
+</code></pre>
+<h4 id="插入函数-1"><a href="#插入函数-1" class="headerlink" title="插入函数"></a>插入函数</h4><pre class=" language-c++"><code class="language-c++">//第一种
+m. insert(pair<int，int>(1，10) ) ;
+//第二种
+m. insert (make_pair(2，20) ) ;
+//第三种
+m.insert (map<int， int> : : value_type(3，30) ) ;
+//第四种
+m[4] = 40;
+</code></pre>
 
                 
             </div>

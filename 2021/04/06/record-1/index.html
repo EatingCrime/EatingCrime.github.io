@@ -1018,17 +1018,19 @@ int main()
 <h3 id="3、数据集以txt格式输入程序"><a href="#3、数据集以txt格式输入程序" class="headerlink" title="3、数据集以txt格式输入程序"></a>3、数据集以txt格式输入程序</h3><p>知识点：C++的文件操作<br>参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7591.html">C++文件类（文件流类）及用法详解</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Br4y1P7vt?from=search&seid=10903177255095331889">[C++：不如Coding]（27）：文件操作(1)：使用文件流简单地读取和写入文件</a></p>
 <p>最后还是没学会，选择在程序窗口输入数据集</p>
-<h3 id="4、输入函数的实现"><a href="#4、输入函数的实现" class="headerlink" title="4、输入函数的实现"></a>4、输入函数的实现</h3><h4 id="1、训练集输入"><a href="#1、训练集输入" class="headerlink" title="1、训练集输入"></a>1、训练集输入</h4><pre class=" language-c++"><code class="language-c++">void input_d(vector<Data>& dataset)
+<h3 id="4、输入函数的实现"><a href="#4、输入函数的实现" class="headerlink" title="4、输入函数的实现"></a>4、输入函数的实现</h3><h4 id="1、训练集输入"><a href="#1、训练集输入" class="headerlink" title="1、训练集输入"></a>1、训练集输入</h4><pre class=" language-c++"><code class="language-c++">void input_d(vector<Data>& dataset, int m)
 &#123;
-    int i, j;
+    int i, j, n = 0;
     float item;
     string label;
+    cout << "请输入训练集的大小：" << endl;
+    cin >> n;
     
     cout << "请输入训练集：" << endl;
-    for (j = 0; j < 120; j++)
+    for (j = 0; j < n; j++)
     &#123;
         Data t;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < m; i++)
         &#123;
             cin >> item;
             t.attribute.push_back(item);
@@ -1041,16 +1043,18 @@ int main()
 </code></pre>
 <p>测试：</p>
 <p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210414224525.jpg" alt="检验输入训练集"></p>
-<h4 id="2、训练集输入"><a href="#2、训练集输入" class="headerlink" title="2、训练集输入"></a>2、训练集输入</h4><pre class=" language-c++"><code class="language-c++">void input_t(vector<Data>& testset)
+<h4 id="2、训练集输入"><a href="#2、训练集输入" class="headerlink" title="2、训练集输入"></a>2、训练集输入</h4><pre class=" language-c++"><code class="language-c++">void input_t(vector<Data>& testset, int m)
 &#123;
-    int i, j;
+    int i, j, n = 0;
     float item;
+    cout << "请输入测试集的大小：" << endl;
+    cin >> n;
 
     cout << "请输入测试集：" << endl;
-    for (j = 0; j < 30; j++)
+    for (j = 0; j < n; j++)
     &#123;
         Data t;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < m; i++)
         &#123;
             cin >> item;
             t.attribute.push_back(item);
@@ -1144,17 +1148,19 @@ typedef struct my
     float distance = 0;
 &#125;Data;
 
-void input_d(vector<Data>& dataset)
+void input_d(vector<Data>& dataset, int m)
 &#123;
-    int i, j;
+    int i, j, n = 0;
     float item;
     string label;
+    cout << "请输入训练集的大小：" << endl;
+    cin >> n;
     
     cout << "请输入训练集：" << endl;
-    for (j = 0; j < 120; j++)
+    for (j = 0; j < n; j++)
     &#123;
         Data t;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < m; i++)
         &#123;
             cin >> item;
             t.attribute.push_back(item);
@@ -1165,16 +1171,18 @@ void input_d(vector<Data>& dataset)
     &#125;
 &#125;
 
-void input_t(vector<Data>& testset)
+void input_t(vector<Data>& testset, int m)
 &#123;
-    int i, j;
+    int i, j, n = 0;
     float item;
+    cout << "请输入测试集的大小：" << endl;
+    cin >> n;
 
     cout << "请输入测试集：" << endl;
-    for (j = 0; j < 30; j++)
+    for (j = 0; j < n; j++)
     &#123;
         Data t;
-        for (i = 0; i < 4; i++)
+        for (i = 0; i < m; i++)
         &#123;
             cin >> item;
             t.attribute.push_back(item);
@@ -1249,11 +1257,14 @@ int main()
 &#123;
     unsigned int i;
     int k = 0;
+    int m = 0;//数据属性的维数
     vector<Data> dataset;
     vector<Data> testset;
+    cout << "请输入数据属性的维数：" << endl;
+    cin >> m;
     
-    input_d(dataset);//输入训练集
-    input_t(testset);//输入测试集
+    input_d(dataset, m);//输入训练集
+    input_t(testset, m);//输入测试集
 
     cout << "输入您期望的k值：" << endl;//输入k值
     cin >> k;

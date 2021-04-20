@@ -1043,7 +1043,7 @@ int main()
 </code></pre>
 <p>测试：</p>
 <p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210414224525.jpg" alt="检验输入训练集"></p>
-<h4 id="2、训练集输入"><a href="#2、训练集输入" class="headerlink" title="2、训练集输入"></a>2、训练集输入</h4><pre class=" language-c++"><code class="language-c++">void input_t(vector<Data>& testset, int m)
+<h4 id="2、测试集输入"><a href="#2、测试集输入" class="headerlink" title="2、测试集输入"></a>2、测试集输入</h4><pre class=" language-c++"><code class="language-c++">void input_t(vector<Data>& testset, int m)
 &#123;
     int i, j, n = 0;
     float item;
@@ -1285,6 +1285,78 @@ int main()
 </code></pre>
 <p>测试：</p>
 <p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210414225138.jpg" alt="分类成功"></p>
+<h3 id="9、输入函数重新设计-文件流形式"><a href="#9、输入函数重新设计-文件流形式" class="headerlink" title="9、输入函数重新设计(文件流形式)"></a>9、输入函数重新设计(文件流形式)</h3><h4 id="1、训练集输入-1"><a href="#1、训练集输入-1" class="headerlink" title="1、训练集输入"></a>1、训练集输入</h4><pre class=" language-c++"><code class="language-c++">void input_d(vector<Data>& dataset, int n)
+&#123;
+    int i, j, size = 0;
+    float item;
+    ifstream asd;
+
+    cout << "请输入训练集的大小：" << endl;
+    cin >> size;
+
+    asd.open("iris_train.txt");
+    if (!asd.is_open())
+    &#123;
+        cout << "打开文件失败！" << endl;
+        return;
+    &#125;
+
+    for (j = 0; j < size; j++)
+    &#123;
+        Data t;
+
+        //asd >> t.label;
+        for (i = 0; i < n; i++)
+        &#123;
+            asd >> item;
+            t.attribute.push_back(item);
+        &#125;
+        asd >> t.label;
+        dataset.push_back(t);
+    &#125;
+
+    asd.close();
+    //output(dataset, size, n);
+&#125;
+</code></pre>
+<h4 id="2、测试集输入-1"><a href="#2、测试集输入-1" class="headerlink" title="2、测试集输入"></a>2、测试集输入</h4><pre class=" language-c++"><code class="language-c++">void input_t(vector<Data>& dataset, int n)
+&#123;
+    int i, j, size = 0;
+    float item;
+    ifstream asd;
+
+    cout << "请输入测试集的大小：" << endl;
+    cin >> size;
+
+    asd.open("iris_test.txt");
+    if (!asd.is_open())
+    &#123;
+        cout << "打开文件失败！" << endl;
+        return;
+    &#125;
+
+    for (j = 0; j < size; j++)
+    &#123;
+        Data t;
+
+        for (i = 0; i < n; i++)
+        &#123;
+            asd >> item;
+            t.attribute.push_back(item);
+        &#125;
+        dataset.push_back(t);
+    &#125;
+
+    asd.close();
+    //output(dataset, size, n);
+&#125;
+</code></pre>
+<p><strong>好处：</strong>简化输入步骤，方便大型数据集的输入</p>
+<h3 id="10、其他数据集的测试"><a href="#10、其他数据集的测试" class="headerlink" title="10、其他数据集的测试"></a>10、其他数据集的测试</h3><p>测试数据集：鲍鱼、葡萄酒</p>
+<p>下图为针对葡萄酒数据集，计算距离函数的修改</p>
+<p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210420152116.jpg"></p>
+<p><strong>结果：</strong></p>
+<p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210420152219.jpg"></p>
 <h2 id="6、收获"><a href="#6、收获" class="headerlink" title="6、收获"></a>6、收获</h2><h3 id="1、智能指针"><a href="#1、智能指针" class="headerlink" title="1、智能指针"></a>1、智能指针</h3><blockquote>
 <ul>
 <li><strong>what：</strong><br>C++新标准库提供了智能指针来管理动态对象，它的行为类似于常规指针，重要的区别是它能够自动释放所指向对象的空间，并且它是封装好的模板类</li>

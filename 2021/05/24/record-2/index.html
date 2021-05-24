@@ -649,10 +649,7 @@ key_table <span class="token operator">=</span> <span class="token string">"BCLO
                 <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token punctuation">)</span>
 </code></pre>
 <h3 id="3、同态加密"><a href="#3、同态加密" class="headerlink" title="3、同态加密"></a>3、同态加密</h3><p><strong>功能：</strong>经过同态加密的数据进行处理得到的结果与用相同方法处理未加密得到的结果相同</p>
-<h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><h5 id="密钥生成"><a href="#密钥生成" class="headerlink" title="密钥生成"></a>密钥生成</h5><p>选择具有相等位长的两个随机质数p和q，以确保它们具有λ位安全性。 </p>
-<p>n = pq，g = n + 1，l=(p − 1)(q − 1)，并且<img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205720.jpg" alt="方案一公式">。 返回私钥SK =(l，y)和公钥PK =(n，g)。</p>
-<h5 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h5><p>加密m∈<img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205509.jpg" alt="wps2">，从<img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205516.jpg" alt="wps3">采样一个随机数r，计算<img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205536.jpg" alt="wps4">，然后返回c。</p>
-<h5 id="解密"><a href="#解密" class="headerlink" title="解密"></a>解密</h5><p>解密c∈<img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205628.jpg" alt="wps5">，计算x = c^l^mod n^2^，将（x − 1)除以n，得到x’，然后返回（x’ · y∈<img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205509.jpg" alt="wps2">)</p>
+<h4 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h4><p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210525002417.jpg" alt="方案一"></p>
 <h4 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h4><p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33885461/article/details/86555560">Paillier cryptosystem（Paillier 密码系统）</a></p>
 <p><img src="https://gitee.com/eatingcrime/origin-picture/raw/master/img/20210524205651.jpg" alt="方案二"></p>
 <h2 id="三、实验结果"><a href="#三、实验结果" class="headerlink" title="三、实验结果"></a>三、实验结果</h2><ol>
@@ -663,7 +660,7 @@ key_table <span class="token operator">=</span> <span class="token string">"BCLO
 <li>计算每个距离的时间也随相关向量的维数线性增长</li>
 </ol>
 <h2 id="四、其他方案"><a href="#四、其他方案" class="headerlink" title="四、其他方案"></a>四、其他方案</h2><ol>
-<li>各方分别持有<strong>同一组数据的不同属性</strong>，分别计算各自分区内实例与查询向量的距离，<strong>加同态加密方案</strong>和<strong>随机扰动技术</strong>把这些距离结合起来找到k个最近邻(Zhan等，2005)（交互）</li>
+<li>各方分别持有同一组数据的不同属性，分别计算各自分区内实例与查询向量的距离，加同态加密方案和随机扰动技术把这些距离结合起来找到k个最近邻(Zhan等，2005)（交互）</li>
 <li>几个数据所有者每个人都有一个私有数据库，新实例的分类由每个用户在自己的数据库中执行，根据每个数据库的k个最近邻对实例进行分类（Xiong等人，2006；Xiong等人，2007）（交互）</li>
 <li>三种保护数据隐私的方法来找到k个最邻近的邻居（Choi等，2014）（不执行分类问题）（交互）</li>
 <li>数据所有者对数据进行加密并将其发送到云，其他用户可以提交查询向量以保持隐私的方式获得最近的邻居。（Zhu等，2013）（不执行分类问题）（交互）</li>

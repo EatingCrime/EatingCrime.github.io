@@ -1,0 +1,1668 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MISC—流量分析, OrigiN">
+    <meta name="description" content="CTF——MISC——流量分析概括来讲在比赛中的流量分析有以下三个方向：1、流量包修复2、协议分析3、数据提取
+一、流量包修复比如一个流量包它的文件头也是对的，里边也没有包含其他的文件等等等等，但是就是打开出现一些未知的错误，这时候就要考虑">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MISC—流量分析 | OrigiN</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">OrigiN</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">OrigiN</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MISC—流量分析</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/CTF/" class="post-category">
+                                CTF
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-07
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="CTF——MISC——流量分析"><a href="#CTF——MISC——流量分析" class="headerlink" title="CTF——MISC——流量分析"></a>CTF——MISC——流量分析</h1><p><strong>概括来讲在比赛中的流量分析有以下三个方向：</strong><br>1、流量包修复<br>2、协议分析<br>3、数据提取</p>
+<h2 id="一、流量包修复"><a href="#一、流量包修复" class="headerlink" title="一、流量包修复"></a>一、流量包修复</h2><p>比如一个流量包它的文件头也是对的，里边也没有包含其他的文件等等等等，但是就是打开出现一些未知的错误，这时候就要考虑对流量包进行修复。</p>
+<p>这类题目考察较少，通常都借助现成的工具例如PCAPFIX直接修复。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Rup0rt/pcapfix/tree/devel">PcapFix</a></p>
+<h2 id="二、协议分析"><a href="#二、协议分析" class="headerlink" title="二、协议分析"></a>二、协议分析</h2><p>此类方向需要对分析流量包工具所用的语法有一定的掌握，这里以wireshark为例，须掌握wireshark过滤器（捕捉过滤器与显示过滤器）的基础语法，从而更快更精准的获取指定的信息。</p>
+<p>捕捉过滤器：用于决定将什么样的信息记录在捕捉结果中，需要在开始捕捉前设置。<br>显示过滤器：用于在捕获结果中进行详细查找，可以在得到捕捉结果后进行更改</p>
+<p><em><strong>*捕捉过滤器基础语法*</strong></em><br><em><strong>*Protocol Direction Host(s) Value LogicalOperations other expression*</strong></em><br><em><strong>*tcp dst 10.1.1.1 80 and tcp dst 10.2.2.2 3128*</strong></em></p>
+<p><strong>Protocol</strong><br>可能的值: ether, fddi, ip, arp, rarp, decnet,lat, sca, moprc, mopdl, tcp and udp，如果没有特别指明是什么协议，则默认使用所有支持的协议。<br><strong>Direction</strong><br>可能的值: src, dst, src and dst, src or dst，如果没有特别指明来源或目的地，则默认使用 “src or dst” 作为关键字。<br><strong>Host(s)</strong><br>可能的值： net, port,host, portrange，如果没有指定此值，则默认使用”host”关键字。<br>例如，”src 10.1.1.1”与”src host 10.1.1.1”相同。<br><strong>Logical Operations</strong><br>可能的值：not, and, or<br>否(“not”)具有最高的优先级，或(“or”)和与(“and”)具有相同的优先级<br>“not tcp port 3128 and tcp port23”与”(not tcp port 3128) and tcp port23”相同。</p>
+<p><strong>举例分析：</strong><br>tcp dst port 3128 &#x2F;&#x2F;目的TCP端口为3128的封包。<br>ip src host 10.1.1.1 &#x2F;&#x2F;来源IP地址为10.1.1.1的封包。<br>host 10.1.2.3 &#x2F;&#x2F;目的或来源IP地址为10.1.2.3的封包。<br>src portrange 2000-2500<br>&#x2F;&#x2F;来源为UDP或TCP，并且端口号在2000至2500范围内的封包<br>not icmp &#x2F;&#x2F;除了icmp以外的所有封包。</p>
+<p><em><strong>*显示过滤器基础语法*</strong></em><br><em><strong>*Protocol String1 String2 ComparisonOperator Value Logical Operations other expression*</strong></em><br><strong>Protocol</strong><br>可以使用大量位于OSI模型第2至7层的协议。在Expression中可以看到，例如，IP，TCP，DNS，SSH<br><strong>String1，String2</strong><br>可选择显示过滤器右侧表达式，点击父类的+号，然后查看其子类<br><strong>Comparison Oerators</strong><br>可以使用六种比较运算符</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835570258139.png" alt="img"></p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835570023637.png" alt="img"></p>
+<p><strong>举例分析：</strong><br>snmp || dns || icmp &#x2F;&#x2F;显示SNMP或DNS或ICMP封包<br>ip.addr &#x3D;&#x3D; 10.1.1.1 &#x2F;&#x2F;显示源或目的IP为10.1.1.1的封包<br>ip.src !&#x3D; 10.1.2.3 and ip.dst!&#x3D;10.4.5.6 &#x2F;&#x2F;显示源不为10.1.2.3并且目的不为10.4.5.6的封包<br>tcp.port &#x3D;&#x3D; 25 &#x2F;&#x2F;显示来源或目的TCP端口号为25的封包<br>tcp.dport &#x3D;&#x3D; 25 &#x2F;&#x2F;显示目的TCP端口号为25的封包</p>
+<p>如果过滤器语法是正确的，表达式背景为绿色，否则为红色</p>
+<h2 id="三、数据提取"><a href="#三、数据提取" class="headerlink" title="三、数据提取"></a>三、数据提取</h2><p>这一块是流量包中另一个重点，通过对协议分析，找到题目的关键点，从而对所需要的数据进行提取。</p>
+<p>Wireshark支持提取通过http传输（上传&#x2F;下载）的文件内容，方法如下：<br><strong>自动提取通过http传输的文件内容</strong><br>文件-&gt;导出对象-&gt;HTTP</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835569232935.png" alt="img"></p>
+<p>在打开的对象列表中找到有价值的文件，如压缩文件、文本文件、音频文件、图片等，点击<code>Save</code>进行保存，或者<code>Save All</code>保存所有对象再进入文件夹进行分析。</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835568917133.png" alt="img"></p>
+<p><strong>手动提取通过http传输的文件内容</strong><br>选中http文件传输流量包，在分组详情中找到<code>data</code>,<code>Line-based text</code>, <code>JPEG File Interchange Format</code>, <code>data:text/html</code>层，鼠标右键点击 – 选中 导出分组字节流。</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835568565631.png" alt="img"></p>
+<p>如果是菜刀下载文件的流量，需要删除分组字节流前开头和结尾的X@Y字符，否则下载的文件会出错。鼠标右键点击 – 选中 显示分组字节 </p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835568209229.png" alt="img"></p>
+<p>在弹出的窗口中设置开始和结束的字节（原字节数开头加3，结尾减3）</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835567873427.png" alt="img"></p>
+<p>最后点击<code>Save as</code>按钮导出。</p>
+<h2 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h2><h3 id="1，题目：Cephalopod-图片提取"><a href="#1，题目：Cephalopod-图片提取" class="headerlink" title="1，题目：Cephalopod(图片提取)"></a>1，题目：Cephalopod(图片提取)</h3><p>题目来源：XCTF 3rd-HITB CTF-2017<br>考点：图片提取<br>题目信息：(Cephalopod.pcapng)</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835567470825.png" alt="img"></p>
+<p>c中zxz中z</p>
+<h3 id="2-题目：特殊后门-icmp协议信息传输"><a href="#2-题目：特殊后门-icmp协议信息传输" class="headerlink" title="2,题目：特殊后门(icmp协议信息传输)"></a>2,题目：特殊后门(icmp协议信息传输)</h3><p>题目来源：第七届山东省大学生网络安全技能大赛<br>考点：字符串搜索，icmp协议信息传输<br>题目信息：(backdoor++.pcapng)</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835566988423.png" alt="img"></p>
+<p>打卡数据包，先在字节流中 搜索 flag 字符串 ：搜索到了 一段连续的数据包 里面都有flag字符串 </p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835566681221.png" alt="img"></p>
+<p>发现下面每一个 包里 都有一个 字符：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835566404219.png" alt="img"></p>
+<p>一个一个收集后得到：</p>
+<p><strong>flag{Icmp_backdoor_can_transfer-some_infomation}</strong></p>
+<p><strong>小知识点：</strong></p>
+<p><strong>ICMP（Internet Control Message Protocol）Internet控制<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%8A%A5%E6%96%87/3164352">报文</a>协议，它是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/TCP%2FIP%E5%8D%8F%E8%AE%AE%E7%B0%87">TCP&#x2F;IP协议簇</a>的一个子协议，用于在IP<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%BB%E6%9C%BA/455151">主机</a>、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B7%AF%E7%94%B1">路由</a>器之间传递控制消息。控制消息是指<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E9%80%9A">网络通</a>不通、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%BB%E6%9C%BA/455151">主机</a>是否可达、<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%B7%AF%E7%94%B1/363497">路由</a>是否可用等网络本身的消息。这些控制消息虽然并不传输用户数据，但是对于用户数据的传递起着重要的作用，ICMP协议是一种面向无连接的协议，用于传输出错报告控制信息。它是一个非常重要的协议，它对于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8">网络安全</a>具有极其重要的意义。</strong></p>
+<h3 id="3-题目：手机热点-蓝牙传输协议obex-数据提取"><a href="#3-题目：手机热点-蓝牙传输协议obex-数据提取" class="headerlink" title="3,题目：手机热点(蓝牙传输协议obex,数据提取)"></a>3,题目：手机热点(蓝牙传输协议obex,数据提取)</h3><p><strong>题目来源：第七季极客大挑战<br>考点：蓝牙传输协议obex,数据提取<br>题目信息：(Blatand_1.pcapng)</strong></p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835565887217.png" alt="img"></p>
+<p>题中说用 没流浪 向电脑传了文件 那肯定是 用的蓝牙 蓝牙协议 为  obex协议</p>
+<p>帅选出 obex 协议包 ：发现 有一个包 里有一个 rar压缩包：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835565508615.png" alt="img"></p>
+<p>要分离出 这个 rar 包：</p>
+<p>方法一：直接复制 数据块 然后复制到winhex中 转存为 rar </p>
+<p>复制数据块 as Hex stream  &gt;  在winhex中粘贴 为 ASCII HEX &gt;  删除前面的 多余信息  &gt; 保存为 rar</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166835565177713.png" alt="img"></p>
+<p>方法二 ：用formost 分离：分离出来好多东西，不过我们目标是rar包</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20190915104146559.png" alt="img"></p>
+<p>得到一张flag.git:</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20190915104430573.gif" alt="img"></p>
+<h3 id="4-题目：想蹭网先解开密码-无线密码破解"><a href="#4-题目：想蹭网先解开密码-无线密码破解" class="headerlink" title="4,题目：想蹭网先解开密码(无线密码破解)"></a>4,题目：想蹭网先解开密码(无线密码破解)</h3><p>题目来源：bugku<br>考点：无线密码破解<br>题目信息：(wifi.cap)</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16683556383439.png" alt="img"></p>
+<p>wifi 连接认证 的重点在于 WAP的 四次握手过程 ，就是 EAPOL 协议的包，</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16683556345287.png" alt="img"></p>
+<p>存在 握手过程：直接进行爆破：</p>
+<p>先用 linux中的 crunch 生成一个字典：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20190915110315929.png" alt="img"></p>
+<p>然后 用 aircrack-ng 进行爆破：<br><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16683556269594.png" alt="img"></p>
+<p>得到 WiFi密码</p>
+<h3 id="5-我的的教练也想打CTF"><a href="#5-我的的教练也想打CTF" class="headerlink" title="5,我的的教练也想打CTF"></a>5,我的的教练也想打CTF</h3><p>打开流量包，直接搜 字符串 flag ，找到很多 包，仔细看这些包的info ，发现是 sql 注入语句 布尔注入：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16683556227142.png" alt="img"></p>
+<p>鉴于 sql 注入的 布尔注入 的原理：逐个字母爆破要查询的字符，我们可以把 查询到的每个字符 收集起来就能 得到 flag了</p>
+<p>注： 爆破每个字符的最后一个 查询语句 对应的字符就是 正确的字符</p>
+<p>本题的爆破语句 ：</p>
+<p>?id&#x3D;1’ and ascii(substring((select keyid from flag limit 0,1),1,1))&#x3D;33 %23</p>
+<p>意思是： 截取 keyid 的第一个字符 ，并转化为 ascii 与 33 进行比较，正确 就停止，不正确就继续试 34,35……</p>
+<p>按照这个规律 得到 keyid 的 所有字符对应的 ascii ：</p>
+<pre><code class="undefined">102 108 97 103 123 99 50 98 98 102 57 99 101 99 100 97 102 54 53 54 99 102 53 50 52 100 48 49 52 99 53 98 102 48 52 54 99 125
+</code></pre>
+<p>将其转化为 字符就可以了：</p>
+<pre><code class="vbscript">chars = &quot;102 108 97 103 123 99 50 98 98 102 57 99 101 99 100 97 102 54 53 54 99 102 53 50 52 100 48 49 52 99 53 98 102 48 52 54 99 125&quot;
+char = chars.split(&quot; &quot;)
+for c in char :
+    print(chr(int(c)),end=&quot;&quot;)
+flag&#123;c2bbf9cecdaf656cf524d014c5bf046c&#125;
+</code></pre>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+<p>大佬的脚本直接跑：</p>
+<pre><code class="python">import pyshark
+lastt=256
+flag=&quot;flag is &quot;
+capa=pyshark.FileCapture(&#39;misc.pcapng&#39;,only_summaries=True,display_filter=&quot;http.request == 1&quot;)
+for arps in capa:
+    now=eval(str(arps).split(&quot; &quot;)[7].split(&#39;=&#39;)[2].split(&#39;%&#39;)[0])
+    if now &lt; lastt &amp; lastt &lt;= 255:
+       flag+=chr(lastt)
+   lastt=now
+flag+=&#39;&#125;&#39;
+print(flag)
+</code></pre>
+<p>上面的看不太懂，贴一个自己写的：</p>
+<p>（过滤 http  然后 文件 》 导出分组解析结果 》 为 CVS  ,保存为 12.txt ）</p>
+<pre><code class="python">import re
+import urllib.parse
+f = open(r&#39;12.txt&#39;)
+file = f.readlines()
+datas = []
+#urldecode
+for i in file:
+    datas.append(urllib.parse.unquote(i))
+lines = []
+#提取注入flag的语句
+for i in range(0,len(datas)):
+    if datas[i].find(&quot;flag limit 0,1),1,1))=32# HTTP/1.1&quot;) &gt; 0:
+        lines = datas[i:]
+        break
+flag = &#123;&#125;
+macth = re.compile(r&quot;limit 0,1\),(.*?),1\)\)=(.*?)# HTTP/1.1&quot;) #匹配我们需要的信息块
+for i in range(0,len(lines),2):
+    obj = macth.search(lines[i])
+    if obj:
+        key = int(obj.group(1)) #获取字符的位置
+        value = int(obj.group(2))#获取字符的ascii值
+        flag[key] = value #不断的更新，进而保留最后一个
+f.close()
+result = &#39;&#39;
+for value in flag.values():
+    result += chr(value)
+print(result) 
+</code></pre>
+<h1 id="CTF——流量分析题型整理总结"><a href="#CTF——流量分析题型整理总结" class="headerlink" title="CTF——流量分析题型整理总结"></a>CTF——流量分析题型整理总结</h1><h3 id="一，ping-报文信息-（icmp协议）"><a href="#一，ping-报文信息-（icmp协议）" class="headerlink" title="一，ping 报文信息 （icmp协议）"></a><strong>一，ping 报文信息 （icmp协议）</strong></h3><p>例1.1</p>
+<p>打开流量包，发现有一大段的icmp协议的包，发现在icmp报文中夹杂着flag</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70.jpeg" alt="img"></p>
+<p>这里可以依次查看每一个icmp报文数据，然后得到flag</p>
+<p>也可以用脚本处理：（不推荐）</p>
+<p>先过滤出 icmp协议的包》导出特定分组 》保存为flag.pcapng》然后用脚本处理：</p>
+<p>（这个脚本只能处理data只有一个字节的包，局限性较大，还不如直接一个包一个包查看，反正flag也不会太长）</p>
+<pre><code class="python">import  pyshark
+cap = pyshark.FileCapture(&#39;flag.pcapng&#39;)
+for packet in cap:
+    data = &#39;&#39;+packet[packet.highest_layer].data
+    print(chr(int(data,16)),end=&#39;&#39;)
+cap.close()
+</code></pre>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219143525585.jpg" alt="img"></p>
+<h3 id="二，上传-x2F-下载文件（蓝牙obex，http，难-文件的分段上传-x2F-下载）"><a href="#二，上传-x2F-下载文件（蓝牙obex，http，难-文件的分段上传-x2F-下载）" class="headerlink" title="二，上传&#x2F;下载文件（蓝牙obex，http，难:文件的分段上传&#x2F;下载）"></a><strong>二，上传&#x2F;下载文件（蓝牙obex，http，难:文件的分段上传&#x2F;下载）</strong></h3><p>这类夹杂着文件的流量包最好处理，</p>
+<p><strong>方法一</strong>，直接用foremost直接分离提取一下就能提取出其中隐藏的文件，一般会直接分离出来一个 压缩包，一张图片，或者flag.txt都是有可能的</p>
+<p><strong>方法二，</strong></p>
+<p><strong>自动提取通过http传输的文件内容</strong><br>文件-&gt;导出对象-&gt;HTTP</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068851.png" alt="img"></p>
+<p>在打开的对象列表中找到有价值的文件，如压缩文件、文本文件、音频文件、图片等，点击<code>Save</code>进行保存，或者<code>Save All</code>保存所有对象再进入文件夹进行分析。</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068852.png" alt="img"></p>
+<p><strong>手动提取通过http传输的文件内容</strong><br>选中http文件传输流量包，在分组详情中找到<code>data</code>,<code>Line-based text</code>, <code>JPEG File Interchange Format</code>, <code>data:text/html</code>层，鼠标右键点击 – 选中 导出分组字节流。</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068853.png" alt="img"></p>
+<p>如果是菜刀下载文件的流量，需要删除分组字节流前开头和结尾的X@Y字符，否则下载的文件会出错。鼠标右键点击 – 选中 显示分组字节</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068854.png" alt="img"></p>
+<p>在弹出的窗口中设置开始和结束的字节（原字节数开头加3，结尾减3）</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068855.png" alt="img"></p>
+<p>最后点击<code>Save as</code>按钮导出。</p>
+<p><strong>例2.1手机热点(蓝牙传输协议obex,数据提取)</strong></p>
+<p><strong>题目来源：第七季极客大挑战<br>考点：蓝牙传输协议obex,数据提取<br>题目信息：(Blatand_1.pcapng)</strong></p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068866.png" alt="img"></p>
+<p>题中说用 没流浪 向电脑传了文件 那肯定是 用的蓝牙 蓝牙协议 为  obex协议</p>
+<p>帅选出 obex 协议包 ：发现 有一个包 里有一个 rar压缩包：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068867.png" alt="img"></p>
+<p>要分离出 这个 rar 包：</p>
+<p>方法一：直接复制 数据块 然后复制到winhex中 转存为 rar </p>
+<p>复制数据块 as Hex stream  &gt;  在winhex中粘贴 为 ASCII HEX &gt;  删除前面的 多余信息  &gt; 保存为 rar</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068868.png" alt="img"></p>
+<p>方法二 ：用formost 分离：分离出来好多东西，不过我们目标是rar包</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20190915104146559-166857030689973.png" alt="img"></p>
+<p>得到一张flag.git:</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20190915104430573-166857030689975.gif" alt="img"></p>
+<p><strong>例2.2 抓到一只苍蝇</strong></p>
+<p><strong>这题属于比较难的类型，是文件的分段传输，我们需要将几段数据拼接起来</strong></p>
+<p>首先在 分组字节流中 搜索一下 字符串 flag 找到第一个 包，追踪一下数据流 ，</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-16685703068869.png" alt="img"></p>
+<p>然后就看到了上述信息，知道了应该是在用 qq邮箱传输文件，</p>
+<p>文件的信息： fly.rar 文件的大小为 525701</p>
+<p>{“path”:”fly.rar”,”appid”:””,”size”:525701,”<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=md5&spm=1001.2101.3001.7020">md5</a>“:”e023afa4f6579db5becda8fe7861c2d3”,”sha”:”ecccba7aea1d482684374b22e2e7abad2ba86749”,”sha3”:””}</p>
+<p>既然知道了在上传文件，肯定要用到 http的request的 POST方法</p>
+<p>在过滤器中 输入</p>
+<pre><code class="vbscript">http &amp;&amp; http.request.method==POST
+</code></pre>
+<p>然后找到这5个包，第一个包是 文件的信息，后面5个包为数据</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688610.png" alt="img"></p>
+<p>分别查看其中 date 的长度：<br><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688611.png" alt="img"></p>
+<p>前四个 为 131436 最后一个为 17777</p>
+<p>所以 131436*4 +17777&#x3D;527571 与第一个包给出的 fly.rar的长度 525701 差 1820</p>
+<p>因为每个包都包含头信息，1820&#x2F;5 &#x3D; 364</p>
+<p>所以每个包的头信息为 364</p>
+<p><strong>接下来导出数据包：</strong></p>
+<p>wireshark-&gt;文件-&gt;导出对象-&gt;http-&gt;选择save对象</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688612.png" alt="img"></p>
+<p>将对应的包 分别save 为 1 2 3 4 5</p>
+<p>将这五个包拖进 kali中 </p>
+<p>执行：</p>
+<pre><code class="sql">dd if=1 bs=1 skip=364 of=11
+dd if=2 bs=1 skip=364 of=22
+dd if=3 bs=1 skip=364 of=33
+dd if=4 bs=1 skip=364 of=44
+dd if=5 bs=1 skip=364 of=55
+</code></pre>
+<p>将数据包的头部的 364个字节去除 得到 11 22 33 44 55</p>
+<p>将这五个包合并</p>
+<pre><code class="bash">cat 11 22 33  44 55 &gt; fly.rar
+</code></pre>
+<p>查看一下 flag.rar的md5值是否正确</p>
+<pre><code class="bash">md5sum fly.rar
+</code></pre>
+<p>正确</p>
+<p>解压，跳出提示文件头损坏，并且要求输入密码</p>
+<p>知道是伪密码，用winhex打开，修改文件头，将 84 改为 80，保存</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191018203553172.png" alt="img"></p>
+<p>解压得到，flag.txt 打开一堆乱码，直接用 foremost分离一下，得到很多的图片</p>
+<p>发现一张二维码，扫描后得到flag</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688613.png" alt="img"></p>
+<p>flag{m1Sc_oxO2_Fly}</p>
+<p>其实我刚开始不是这么做的，我是直接用foremost分离 流量包 ，然后分离出来几张图片 和一个压缩包，尝试解压</p>
+<p>爆出一堆错误，并提示输入密码，将 文件头的 84 修改为 80 后依然打不开 ，，可能是 这个文件中还包含了其他错误信息，然后就换用上面的方法了</p>
+<h3 id="三，sql注入攻击"><a href="#三，sql注入攻击" class="headerlink" title="三，sql注入攻击"></a><strong>三，sql注入攻击</strong></h3><p><strong>例3.1信息提取（超详细）</strong></p>
+<p><strong>曾经在比赛中也遇过几乎一样的题，一直没有好好的写过一篇详细的博客，今天决定借助这个题好好记录理解一下这种类型的题</strong></p>
+<p>提示 ： sqlmap</p>
+<p>打开流量包，也观察到了 是 用sqlmap进行的 sql盲注的过程，用的是二分法</p>
+<p>为了更好的理解 注入的过程 我们首先把 注入语句提取出来，这样方便观察</p>
+<p>过滤http流量 ，然后  文件 》导出分组解析结果 》为CSV   保存为 123.txt</p>
+<p>用notepad++ 打开 123.txt，可以看到语句语句中还是夹杂着很多的urlcode </p>
+<p>全选 , 然后  插件 》MIME Tools 》 url decode ，这样就把URLcode转为更直观的 ascii了</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688714.png" alt="img"></p>
+<p>然后再 来理解用 二分法 进行sql盲注的过程</p>
+<p>以flag 的第一个字符为 例 ：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688715.png" alt="img"></p>
+<p>绿色框中的数字 代表是测试第几个 字符</p>
+<p>红色框中的数字 代表 与当前测试的字符的ascii值 相比较的 值</p>
+<p>粉色框中数字 代表返回的数据的长度（一会我们要依据这个来判断上面的语句是否正确）</p>
+<p><strong>ascii有 128个所以从 64 开始判断，然后是96(64和128的中间值)，说明&gt;64是正确的 ，才会取96，然后是 80，80小于96，说明&gt;96是错误的，所以才会取 64和96 的中间值 80，然后是 72 ，说明&gt;80是错误的，取80和64之间的中间值72，然后是76，说明&gt;72是正确的，才会取 72 和80之间的中间值76，然后是 74，说明&gt;76是错误的，才会取 72 和76的中间值 74，然后是73，说明&gt;74是错误的，才会取 72 和 74的中间值 73</strong></p>
+<p>至于 &gt; 73 语句是否正确，关系到我们最后的取值，</p>
+<p>我们已经知道了 <strong>第一个字符 的ascii值 的范围 为 72&lt; x &lt;&#x3D; 74,</strong> 至于是 73 还是 74 ，需另做判断：</p>
+<p>若 &gt; 73 正确， 则 x &#x3D; 74 第一个字符 的ascii值为 74 就是 J</p>
+<p>若 &gt;73 错误，则 x &#x3D; 73 就是 I</p>
+<p>由于我们上面已经知道了 &gt;64 是正确的  返回包的数据长度是 467</p>
+<p>​                     &gt;96 是错误的  返回包的数据长度是 430</p>
+<p>​                     &gt;80 是错误的  返回包的数据长度是 430</p>
+<p>​                     &gt;72 是正确的  返回包的数据长度是 467</p>
+<p>​                     &gt;76 是错误的  返回包的数据长度是 430</p>
+<p>​                     &gt;74 是错误的  返回包的数据长度是 430</p>
+<p>可以看到 当判断语句正确时 ，返包的数据长度 是 大于 430的 ，错误时 是小于等于 430</p>
+<p>然后看到 最后一条语句 &gt;73 的返回值 为 430，说明与错误， 第一个字符的ascii 为 73 </p>
+<p>理解了过程就好做多了</p>
+<p><strong>我们只需要 找到 当前测试字符的 最后一条的测试语句的 ascii值 和 返回值</strong></p>
+<p><strong>如果返回值大于 430 则  当前测试字符的ascii 值 为  最后一条测试语句的ascii值</strong></p>
+<p><strong>如果返回值 小于等于 430 则 当前测试字符的ascii值 为 最后一条测试语句的ascii  +  1</strong></p>
+<p>方法一：（当flag 较短的时候）</p>
+<p>当flag较短的时候，我们肯定是用手工 一个一个记下 每个字符的ascii值 比较快</p>
+<p>方法二： （当flag 较长时）</p>
+<p>当flag 为 25个字符以上的时候，手工就显得太费劲，不如写个脚本来的快，就想本题一样，flag的长度为 33</p>
+<p>上脚本：</p>
+<pre><code class="python">import re
+import urllib.parse
+ 
+# 更改为自己从wireshark提取出的csv文件地址
+f = open(r&quot;123.txt&quot;)
+lines = f.readlines()
+datas = []
+# 转码, 保存进datas
+for line in lines:
+    datas.append(urllib.parse.unquote(line))
+lines = []  # 懒得改, 就复用一下, 这个lines保存注入flag的url
+for i in range(len(datas)):  # 提取出注入flag的url
+    if datas[i].find(&quot;isg.flags ORDER BY `value` LIMIT 0,1),1,1))&gt;64&quot;) &gt; 0:
+        lines = datas[i:]
+        break
+flag = &#123;&#125;
+# 用正则匹配
+macth1 = re.compile(r&quot;LIMIT 0,1\),(\d*?),1\)\)&gt;(\d*?) HTTP/1.1&quot;)
+macth2 = re.compile(r&#39;&quot;HTTP&quot;,&quot;(\d*?)&quot;,&quot;HTTP/1.1 200 OK&#39;)
+for i in range(0, len(lines), 2):  # 因为有返回响应, 所以步长为2
+    get1 = macth1.search(lines[i])
+    if get1:
+        key = int(get1.group(1))  # key保存字符的位置
+        value = int(get1.group(2))  # value保存字符的ascii编码
+        get2 = macth2.search(lines[i + 1])
+        if get2:
+            if int(get2.group(1)) &gt; 450:
+                value += 1
+        flag[key] = value  # 用字典保存flag
+f.close()
+result = &#39;&#39;
+for value in flag.values():
+    result += chr(value)
+print(result)
+</code></pre>
+<p>为什么脚本中 判断的返回值取 450 呢？ 因为 取430时，得出来的flag不对，仔细查看123.txt后，发现 其中还有一些错误的语句的返回 包 为 431 或者 432，所以就干纯粹取个 450 （433~460都可以）</p>
+<p>（这再看不懂就考虑换专业吧）</p>
+<p>得到flag：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191019161519909.png" alt="img"></p>
+<p>ISG{BLind_SQl_InJEcTi0N_DeTEcTEd}</p>
+<p><em><strong>*例3.2日志审计*</strong></em></p>
+<p>用 notepad++ 打开 日志文件，先用 插件中的 MIME Tool 中的 URL decode 解一下码</p>
+<p>然后就能清楚的看出来 是在进行 sql 盲注操作，</p>
+<p>进一步审查，还可以看到每一条语句 返回的<strong>状态码</strong> ，并且知道 他是用的 <strong>二分法</strong>在进行 sql盲注</p>
+<p>我需要做的就是找到 每一个 测试的字符的 最后一条状态码为 200 的 语句中的 ascii 值并记录下来</p>
+<p>例如：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688716.png" alt="img"></p>
+<p>由于使用的是二分法，所以我们这里可以知道 flag的第 18 个字符的ascii 为 117+1 ，118</p>
+<p>当然你你也可以用手工的方法，一个一个的记下 flag 每一个 字符的 ascii 值 （flag也就 25个字符，如果写不出代码的话）</p>
+<p>当然最好是用脚本跑出来</p>
+<p>我找了个脚本：</p>
+<pre><code class="python"># coding:utf-8
+import re
+import urllib
+ 
+f = open(&#39;access.log&#39;, &#39;r&#39;)
+lines = f.readlines()
+datas = []
+for line in lines:
+    t = urllib.unquote(line)
+ # 过滤出与flag相关，正确的猜解，这里只收集正确的猜解，而测试字符的ascii = 最后一个正确的猜解的ascii +1（这是二分法的一个隐藏规律）
+    if &#39;200 1765&#39; in t and &#39;flag&#39; in t: 
+        datas.append(t)
+ 
+flag_ascii = &#123;&#125;
+for data in datas:
+    matchObj = re.search(r&#39;LIMIT 0,1\),(.*?),1\)\)&gt;(.*?) AND&#39;, data)
+    if matchObj:
+        key = int(matchObj.group(1))
+        value = int(matchObj.group(2)) + 1
+        flag_ascii[key] = value  # 使用字典，保存最后一次猜解正确的ascii码
+ 
+flag = &#39;&#39;
+for value in flag_ascii.values():
+    flag += chr(value)
+ 
+print flag
+</code></pre>
+<p>解释一下：</p>
+<p><em><strong>*t &#x3D; urllib.unquote(line)*</strong></em>      就是将 文本进行 urldecode 解码</p>
+<p><em><strong>*if ‘200 1765’ in t and ‘flag’ in t:*</strong></em>  如果语句中有这两个字符串就直接将这个语句 存入 数组datas中<br>    <strong>datas.append(t)</strong></p>
+<p><strong>matchObj &#x3D; re.search(r’LIMIT 0,1),(.*?),1))&gt;(.*?) AND’, data)</strong>  在date 中搜索符合 正则表达的 字符串并 将匹配的字符串存入变量 matchObj 中</p>
+<p>​    key &#x3D; int(matchObj.group(1))     取 变量matchObj 中 的第一个括号里的内容 （也就是上条语句中的 （.*?）中的内容）并转为10进制<br>​    value &#x3D; int(matchObj.group(2)) + 1   取 变量matchObj 中 的第二个括号里的内容，并转为 10 进制</p>
+<p>得到 flag：flag{sqlm4p_15_p0werful}</p>
+<h3 id="四，访问特定的加密解密网站（md5，base64）"><a href="#四，访问特定的加密解密网站（md5，base64）" class="headerlink" title="四，访问特定的加密解密网站（md5，base64）"></a><strong>四，访问特定的加密解密网站（md5，base64）</strong></h3><p>例4.1：你能找到我吗？</p>
+<p>打开流量包，在分组字节流中搜索 字符串 flag，找到了几个包，但都没有什么可利用的信息</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688717.jpeg" alt="img"></p>
+<p>然后尝试着过滤出http包，（别问我为什么要过滤出http包，经验告诉我http有问题的可能性最大）</p>
+<p>然后就剩6个包了：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688718.jpeg" alt="img"></p>
+<p>点击第一个包，右键 追踪流 》http </p>
+<p>然后仔细审查这个包，发现了<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=base64&spm=1001.2101.3001.7020">base64</a> ，访问域名：<a target="_blank" rel="noopener" href="http://tool.chinaz.com/Tools/Base64.aspx">http://tool.chinaz.com/Tools/Base64.aspx</a></p>
+<p>发现是个base64<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%8A%A0%E5%AF%86&spm=1001.2101.3001.7020">加密</a>解密的网站：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688719.jpeg" alt="img"></p>
+<p>然后把 result后面的密文复制下来，解密两次 拿到了flag：sdut2019{Traffic_analysis_seclab507}</p>
+<h3 id="五，后台扫描-弱密码爆破-菜刀"><a href="#五，后台扫描-弱密码爆破-菜刀" class="headerlink" title="五，后台扫描+弱密码爆破+菜刀"></a><strong>五，后台扫描+弱密码爆破+菜刀</strong></h3><p><strong>例5.1，中国菜刀</strong></p>
+<p>在 分组字节流中搜索 flag 字符串，找到第8 个包，追踪tcp数据流</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191017191231313.png" alt="img"></p>
+<p>看到了 flag.tar.gz，猜测流量包中隐藏了一个压缩包，</p>
+<p>用binwalk 审查一下：发现了一个压缩包，分离</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191017191552929.png" alt="img"></p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191017191624789.png" alt="img"></p>
+<p>key{8769fe393f2b998fa6a11afe2bfcd65e}</p>
+<p><strong>例5.2 密码爆破</strong></p>
+<p>flag为flag{管理员入口 地址 + 管理员密码 }</p>
+<p>找不到源文件了，大致的过程就是 黑客先利用后台扫描工具，扫描出来了网站的后台管理员入口</p>
+<p>然后用 用户名 admin 进行密码的暴力破解，破解成功，然后干了些猥琐的事情的过程</p>
+<p>我们需要找到黑客扫描到的 管理员入口的地址 并找到他破解出admin 的密码</p>
+<h3 id="六，usb流量分析"><a href="#六，usb流量分析" class="headerlink" title="六，usb流量分析"></a><strong>六，usb流量分析</strong></h3><p>usb流量分析，包括usb键盘流量，usb鼠标流量</p>
+<p>键盘流量数据为 8个字节</p>
+<p>鼠标流量数据为 4个字节 （具体每个字节代表些啥，自行百度）</p>
+<p><em><strong>*例6.1：usb流量分析*</strong></em></p>
+<p>打开流量包：看到的确是usb流量，并且没有杂包（如果有不是usb的包需提前滤除掉）</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688820.jpeg" alt="img"></p>
+<p>把这个包放进linux中提取数据：</p>
+<pre><code class="r">tshark -r example.pcap -T fields -e usb.capdata &gt; usbdata.txt
+</code></pre>
+<p>然后就得到了 usbdata.txt文件：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688821.jpeg" alt="img"></p>
+<p>看到每行为8个字节，确定是 键盘流量数据，</p>
+<p>然后用脚本进行处理得到flag：</p>
+<pre><code class="python">normalKeys = &#123;&quot;04&quot;: &quot;a&quot;, &quot;05&quot;: &quot;b&quot;, &quot;06&quot;: &quot;c&quot;, &quot;07&quot;: &quot;d&quot;, &quot;08&quot;: &quot;e&quot;, &quot;09&quot;: &quot;f&quot;, &quot;0a&quot;: &quot;g&quot;, &quot;0b&quot;: &quot;h&quot;, &quot;0c&quot;: &quot;i&quot;,
+              &quot;0d&quot;: &quot;j&quot;, &quot;0e&quot;: &quot;k&quot;, &quot;0f&quot;: &quot;l&quot;, &quot;10&quot;: &quot;m&quot;, &quot;11&quot;: &quot;n&quot;, &quot;12&quot;: &quot;o&quot;, &quot;13&quot;: &quot;p&quot;, &quot;14&quot;: &quot;q&quot;, &quot;15&quot;: &quot;r&quot;,
+              &quot;16&quot;: &quot;s&quot;, &quot;17&quot;: &quot;t&quot;, &quot;18&quot;: &quot;u&quot;, &quot;19&quot;: &quot;v&quot;, &quot;1a&quot;: &quot;w&quot;, &quot;1b&quot;: &quot;x&quot;, &quot;1c&quot;: &quot;y&quot;, &quot;1d&quot;: &quot;z&quot;, &quot;1e&quot;: &quot;1&quot;,
+              &quot;1f&quot;: &quot;2&quot;, &quot;20&quot;: &quot;3&quot;, &quot;21&quot;: &quot;4&quot;, &quot;22&quot;: &quot;5&quot;, &quot;23&quot;: &quot;6&quot;, &quot;24&quot;: &quot;7&quot;, &quot;25&quot;: &quot;8&quot;, &quot;26&quot;: &quot;9&quot;, &quot;27&quot;: &quot;0&quot;,
+              &quot;28&quot;: &quot;&lt;RET&gt;&quot;, &quot;29&quot;: &quot;&lt;ESC&gt;&quot;, &quot;2a&quot;: &quot;&lt;DEL&gt;&quot;, &quot;2b&quot;: &quot;\t&quot;, &quot;2c&quot;: &quot;&lt;SPACE&gt;&quot;, &quot;2d&quot;: &quot;-&quot;, &quot;2e&quot;: &quot;=&quot;, &quot;2f&quot;: &quot;[&quot;,
+              &quot;30&quot;: &quot;]&quot;, &quot;31&quot;: &quot;\\&quot;, &quot;32&quot;: &quot;&lt;NON&gt;&quot;, &quot;33&quot;: &quot;;&quot;, &quot;34&quot;: &quot;&#39;&quot;, &quot;35&quot;: &quot;&lt;GA&gt;&quot;, &quot;36&quot;: &quot;,&quot;, &quot;37&quot;: &quot;.&quot;, &quot;38&quot;: &quot;/&quot;,
+              &quot;39&quot;: &quot;&lt;CAP&gt;&quot;, &quot;3a&quot;: &quot;&lt;F1&gt;&quot;, &quot;3b&quot;: &quot;&lt;F2&gt;&quot;, &quot;3c&quot;: &quot;&lt;F3&gt;&quot;, &quot;3d&quot;: &quot;&lt;F4&gt;&quot;, &quot;3e&quot;: &quot;&lt;F5&gt;&quot;, &quot;3f&quot;: &quot;&lt;F6&gt;&quot;,
+              &quot;40&quot;: &quot;&lt;F7&gt;&quot;, &quot;41&quot;: &quot;&lt;F8&gt;&quot;, &quot;42&quot;: &quot;&lt;F9&gt;&quot;, &quot;43&quot;: &quot;&lt;F10&gt;&quot;, &quot;44&quot;: &quot;&lt;F11&gt;&quot;, &quot;45&quot;: &quot;&lt;F12&gt;&quot;&#125;
+ 
+shiftKeys = &#123;&quot;04&quot;: &quot;A&quot;, &quot;05&quot;: &quot;B&quot;, &quot;06&quot;: &quot;C&quot;, &quot;07&quot;: &quot;D&quot;, &quot;08&quot;: &quot;E&quot;, &quot;09&quot;: &quot;F&quot;, &quot;0a&quot;: &quot;G&quot;, &quot;0b&quot;: &quot;H&quot;, &quot;0c&quot;: &quot;I&quot;,
+             &quot;0d&quot;: &quot;J&quot;, &quot;0e&quot;: &quot;K&quot;, &quot;0f&quot;: &quot;L&quot;, &quot;10&quot;: &quot;M&quot;, &quot;11&quot;: &quot;N&quot;, &quot;12&quot;: &quot;O&quot;, &quot;13&quot;: &quot;P&quot;, &quot;14&quot;: &quot;Q&quot;, &quot;15&quot;: &quot;R&quot;,
+             &quot;16&quot;: &quot;S&quot;, &quot;17&quot;: &quot;T&quot;, &quot;18&quot;: &quot;U&quot;, &quot;19&quot;: &quot;V&quot;, &quot;1a&quot;: &quot;W&quot;, &quot;1b&quot;: &quot;X&quot;, &quot;1c&quot;: &quot;Y&quot;, &quot;1d&quot;: &quot;Z&quot;, &quot;1e&quot;: &quot;!&quot;,
+             &quot;1f&quot;: &quot;@&quot;, &quot;20&quot;: &quot;#&quot;, &quot;21&quot;: &quot;$&quot;, &quot;22&quot;: &quot;%&quot;, &quot;23&quot;: &quot;^&quot;, &quot;24&quot;: &quot;&amp;&quot;, &quot;25&quot;: &quot;*&quot;, &quot;26&quot;: &quot;(&quot;, &quot;27&quot;: &quot;)&quot;,
+             &quot;28&quot;: &quot;&lt;RET&gt;&quot;, &quot;29&quot;: &quot;&lt;ESC&gt;&quot;, &quot;2a&quot;: &quot;&lt;DEL&gt;&quot;, &quot;2b&quot;: &quot;\t&quot;, &quot;2c&quot;: &quot;&lt;SPACE&gt;&quot;, &quot;2d&quot;: &quot;_&quot;, &quot;2e&quot;: &quot;+&quot;, &quot;2f&quot;: &quot;&#123;&quot;,
+             &quot;30&quot;: &quot;&#125;&quot;, &quot;31&quot;: &quot;|&quot;, &quot;32&quot;: &quot;&lt;NON&gt;&quot;, &quot;33&quot;: &quot;\&quot;&quot;, &quot;34&quot;: &quot;:&quot;, &quot;35&quot;: &quot;&lt;GA&gt;&quot;, &quot;36&quot;: &quot;&lt;&quot;, &quot;37&quot;: &quot;&gt;&quot;, &quot;38&quot;: &quot;?&quot;,
+             &quot;39&quot;: &quot;&lt;CAP&gt;&quot;, &quot;3a&quot;: &quot;&lt;F1&gt;&quot;, &quot;3b&quot;: &quot;&lt;F2&gt;&quot;, &quot;3c&quot;: &quot;&lt;F3&gt;&quot;, &quot;3d&quot;: &quot;&lt;F4&gt;&quot;, &quot;3e&quot;: &quot;&lt;F5&gt;&quot;, &quot;3f&quot;: &quot;&lt;F6&gt;&quot;,
+             &quot;40&quot;: &quot;&lt;F7&gt;&quot;, &quot;41&quot;: &quot;&lt;F8&gt;&quot;, &quot;42&quot;: &quot;&lt;F9&gt;&quot;, &quot;43&quot;: &quot;&lt;F10&gt;&quot;, &quot;44&quot;: &quot;&lt;F11&gt;&quot;, &quot;45&quot;: &quot;&lt;F12&gt;&quot;&#125;
+output = []
+keys = open(&#39;usbdata.txt&#39;)
+for line in keys:
+    try:
+        if line[0]!=&#39;0&#39; or (line[1]!=&#39;0&#39; and line[1]!=&#39;2&#39;) or line[3]!=&#39;0&#39; or line[4]!=&#39;0&#39; or line[9]!=&#39;0&#39; or line[10]!=&#39;0&#39; or line[12]!=&#39;0&#39; or line[13]!=&#39;0&#39; or line[15]!=&#39;0&#39; or line[16]!=&#39;0&#39; or line[18]!=&#39;0&#39; or line[19]!=&#39;0&#39; or line[21]!=&#39;0&#39; or line[22]!=&#39;0&#39; or line[6:8]==&quot;00&quot;:
+             continue
+        if line[6:8] in normalKeys.keys():
+            output += [[normalKeys[line[6:8]]],[shiftKeys[line[6:8]]]][line[1]==&#39;2&#39;]
+        else:
+            output += [&#39;[unknown]&#39;]
+    except:
+        pass
+keys.close()
+ 
+flag=0
+print(&quot;&quot;.join(output))
+for i in range(len(output)):
+    try:
+        a=output.index(&#39;&lt;DEL&gt;&#39;)
+        del output[a]
+        del output[a-1]
+    except:
+        pass
+for i in range(len(output)):
+    try:
+        if output[i]==&quot;&lt;CAP&gt;&quot;:
+            flag+=1
+            output.pop(i)
+            if flag==2:
+                flag=0
+        if flag!=0:
+            output[i]=output[i].upper()
+    except:
+        pass
+print (&#39;output :&#39; + &quot;&quot;.join(output))
+</code></pre>
+<p><strong>例6.2 usb流量</strong></p>
+<p>打开发现有大量的usb协议的流量包，不过其中有很多的杂包，</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688822.jpeg" alt="img"></p>
+<p>发现其中有一大段是 4个字节的 usb数据（鼠标数据）</p>
+<p>先将这些鼠标流量的包过滤出来，</p>
+<p>usb.src &#x3D;&#x3D; “2.3.1”  过滤后，文件 》导出特殊分组 》保存为 jjj.pcap</p>
+<p>把jjj.pcap放进linux中：</p>
+<pre><code class="r">tshark -r  jjj.pcap -T fields -e usb.capdata &gt; usbdata.txt
+</code></pre>
+<p>生成usbdata.txt文件，然后将usbdata.txt中的鼠标流量数据转换为坐标</p>
+<pre><code class="python">nums = []
+keys = open(&#39;usbdata.txt&#39;,&#39;r&#39;)
+file = open(&#39;xy.txt&#39;,&#39;w&#39;)
+posx = 0
+posy = 0
+for line in keys:
+    if len(line) != 12 :
+         continue
+    x = int(line[3:5],16)
+    y = int(line[6:8],16)
+    if x &gt; 127 :
+        x -= 256
+    if y &gt; 127 :
+        y -= 256
+    posx += x
+    posy += y
+    btn_flag = int(line[0:2],16)  # 1 for left , 2 for right , 0 for nothing
+    if btn_flag == 1 :
+        string = str(posx) + &#39; &#39;+str(posy) +&#39;\n&#39;
+        file.write(string)
+keys.close()
+file.close()
+</code></pre>
+<p>生成了xy.txt文件：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688823.jpeg" alt="img"></p>
+<p>然后在linux中 执行</p>
+<pre><code class="erlang">gnuplot
+
+&gt;plot &quot;xy.txt&quot;
+</code></pre>
+<p>就得到了用鼠标画的图了：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688824.jpeg" alt="img"></p>
+<h3 id="七，WiFi无线密码破解"><a href="#七，WiFi无线密码破解" class="headerlink" title="七，WiFi无线密码破解"></a><strong>七，WiFi无线密码破解</strong></h3><p><strong>例7.1题目：想蹭网先解开密码(无线密码破解)</strong></p>
+<p>题目来源：bugku<br>考点：无线密码破解<br>题目信息：(wifi.cap)</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688825.png" alt="img"></p>
+<p>wifi 连接认证 的重点在于 WAP的 四次握手过程 ，就是 EAPOL 协议的包，</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688826.png" alt="img"></p>
+<p>存在 握手过程：直接进行爆破：</p>
+<p>先用 linux中的 crunch 生成一个字典：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219161515651.jpg" alt="img"></p>
+<p>然后 用 aircrack-ng 进行爆破：<br><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688827.jpeg" alt="img"></p>
+<p>得到 WiFi密码：13910407686</p>
+<h3 id="八，根据一组流量包了解黑客的具体行为"><a href="#八，根据一组流量包了解黑客的具体行为" class="headerlink" title="八，根据一组流量包了解黑客的具体行为"></a><strong>八，根据一组流量包了解黑客的具体行为</strong></h3><p>参考：<a target="_blank" rel="noopener" href="https://jwt1399.top/2019/07/29/ctf-liu-liang-fen-xi-zong-jie/%EF%BC%88%E6%83%B3%E8%A6%81%E4%B8%8B%E9%9D%A2%E4%BE%8B%E5%AD%90%E6%BA%90%E6%96%87%E4%BB%B6%E7%9A%84%E5%8E%BB%E7%9C%8B%E7%9C%8B%EF%BC%89">https://jwt1399.top/2019/07/29/ctf-liu-liang-fen-xi-zong-jie/（想要下面例子源文件的去看看）</a></p>
+<p><strong>例8.1 （1.pcap）</strong></p>
+<p>2018信息安全铁人三项数据赛</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219203655300.jpg" alt="img"></p>
+<p>打开流量包，流量包有点大，打开比较慢，这里我们先过滤为HTTP协议可以看到<code>202.1.1.2</code>对<code>192.168.1.8</code>进行了疯狂的爆破</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688928.jpeg" alt="img"></p>
+<p>不难看出，黑客利用的SqlMap在对目标站点进行不断的SQL试探注入<br><strong>因此受害主机的网卡IP地址为*<em><code>192.168.1.8</code>*</em><br>而注入的参数也可以清晰的看见，为*<em><code>list[select]</code>*</em></strong></p>
+<p>追踪http流，根据回显内容，目标站点数据库抛出的错误，可以清晰的看见</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688929.jpeg" alt="img"></p>
+<p>不难确定，目标站点的数据库表名前缀为**<code>ajtuc_</code>**</p>
+<p>接着为了确定受害主机网站数据库的名字，再进行了一次过滤</p>
+<pre><code class="lisp">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; http
+</code></pre>
+<p>此时挑选最后一次注入的payload进行url解码</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/2019121920424782.jpg" alt="img"></p>
+<p>可以清楚的看到</p>
+<pre><code class="css">FROM joomla.ajtuc_users
+</code></pre>
+<p>因此数据库名为**<code>joomla</code>**</p>
+<p>所以答案：</p>
+<pre><code class="scss">1.黑客攻击的第一个受害主机的网卡IP地址 
+192.168.1.8
+2.黑客对URL的哪一个参数实施了SQL注入
+list[select]
+3.第一个受害主机网站数据库的表前缀(加上下划线例如abc_)
+ajtuc_
+4.第一个受害主机网站数据库的名字
+joomla
+</code></pre>
+<p><strong>例8.2(2.pcap)</strong></p>
+<p>题目来源：2018信息安全铁人三项数据赛</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219204430496.jpg" alt="img"></p>
+<p>根据题目一已确定目标ip，所以依旧使用以下过滤简化操作</p>
+<pre><code class="lisp">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; http
+</code></pre>
+<p>可以看到一个奇怪文件<code>kkkaaa.php</code>,跟进POST数据查看</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688930.jpeg" alt="img"></p>
+<p>不难发现，是中国菜刀的流量,木马密码为**<code>zzz</code>**<br>接着确定黑客第二次上传php木马的时间<br>我进行了过滤，猜想黑客应该是根据第一个木马来上传的第二个木马</p>
+<pre><code class="vbscript">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; http.request.method==POST
+</code></pre>
+<p>此时一条数据格外引人注目</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688931.jpeg" alt="img"></p>
+<p>我们对其16进制进行分析</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688932.jpeg" alt="img"></p>
+<p>将保存的值放入winhex中得到源码</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688933.jpeg" alt="img"></p>
+<p>将文件保存为php,但是代码经过混淆过的，在代码末尾加上下面两句代码</p>
+<pre><code class="scss">var_dump($j);
+var_dump($x);
+</code></pre>
+<p>运行php进行解混淆，发现这就是木马</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030688934.jpeg" alt="img"></p>
+<p>由此可确定这个引人注目的包上传了第二个木马<br>因此上传时间为:<code>17:20:44.248365</code></p>
+<p>还是使用过滤</p>
+<pre><code class="lisp">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; http
+</code></pre>
+<p>然后可以看到许多请求footer.php的页面，点开一个查看详情</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219211732928.jpg" alt="img"></p>
+<p>容易发现referer数据十分可疑，而ACCEPT_LANGUAGE较为正常<br>所以可以基本确定，木马通过HTTP协议中的**<code>Referer</code>**头传递数据</p>
+<p>答案</p>
+<pre><code class="undefined">1.黑客第一次获得的php木马的密码是什么
+zzz
+2.黑客第二次上传php木马是什么时间
+17:20:44.248365
+3.第二次上传的木马通过HTTP协议中的哪个头传递数据
+Referer
+</code></pre>
+<p><em><strong>*例.8.3(3.pcap)*</strong></em></p>
+<p>题目来源：2018信息安全铁人三项数据赛</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219212845108.jpg" alt="img"></p>
+<p>直接进行过滤</p>
+<pre><code class="sql">tcp contains &quot;mysql&quot; &amp;&amp; mysql
+</code></pre>
+<p>得到大量数据，可以发现黑客应该在对Mysql的登录进行爆破，内网受害机器为192.168.2.20</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689035.jpeg" alt="img"></p>
+<p>我们找到最后一条登录数据</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689036.jpeg" alt="img"></p>
+<p>该值就为我们需要的mysql密码hash了</p>
+<p>简单过滤一下</p>
+<pre><code class="lisp">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; http
+</code></pre>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689037.jpeg" alt="img"></p>
+<p>目标机器已经被挂上了tunnel.php，方便外网对内网的访问<br>为方便查看黑客操作，我们过滤出POST请求</p>
+<pre><code class="vbscript">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; http.request.method==POST &amp;&amp; http
+</code></pre>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689038.jpeg" alt="img"></p>
+<p>我们清晰的看见黑客的php代理第一次使用时最先连接4.2.2.2这个ip,并且端口为53</p>
+<p>答案</p>
+<pre><code class="bash">1.内网主机的mysql用户名和请求连接的密码hash是多少(用户:密码hash)
+admin:1a3068c3e29e03e3bcfdba6f8669ad23349dc6c4
+2.php代理第一次被使用时最先连接了哪个IP地址
+4.2.2.2
+</code></pre>
+<p><em><strong>*例8.4（4.pcap)*</strong></em></p>
+<p>题目来源：2018信息安全铁人三项数据赛</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/201912192139196.jpg" alt="img"></p>
+<p>为确定黑客第一次获取到当前目录下的文件列表的漏洞利用请求发生在什么时候，我们继续进行过滤</p>
+<pre><code class="lisp">(ip.addr == 192.168.1.8 || ip.addr == 202.1.1.2) &amp;&amp; (http contains &quot;dir&quot; || http contains &quot;ls&quot;)
+</code></pre>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689039.jpeg" alt="img"></p>
+<p>此时一条为ls，一条为dir，我们先对ls的进行验证<br>追踪其tcp流<br><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689040.jpeg" alt="img"></p>
+<p>发现并没有执行成功,再对dir进行验证</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689041.jpeg" alt="img"></p>
+<p>于是可以确定无误，目标系统为windows，同时dir命令执行成功<br>时间为：<code>18:37:38.482420</code><br>既然该192.168.2.20的机器可以执行命令，于是我改变过滤方式，查看黑客如何进行攻击</p>
+<pre><code class="undefined">ip.addr == 192.168.2.20 &amp;&amp; http
+</code></pre>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689042.jpeg" alt="img"></p>
+<p>可以看到上面几条受害机器分别执行了 dir ，pwd，dir，以及echo%20…..等命令</p>
+<p>不难发现,黑客利用echo命令写入了一个名为sh.php的后门</p>
+<p>然后往下翻看到黑客利用这个后门post 了一些东西，猜测应该是木马文件，看一下：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689143.jpeg" alt="img"></p>
+<p>果然，木马的密码是123，是中国菜刀的流量</p>
+<p>我们进一步跟进黑客执行的指令，由于是中国菜刀流量，我们选择根据回显明文，猜测指令，这样更有效率</p>
+<pre><code class="undefined">ip.src == 192.168.2.20 &amp;&amp; http
+</code></pre>
+<p>在18:50:09.344660时，我们发现可疑操作,我们发现一条可疑数据，判断黑客应该是执行了<code>net user</code>的命令</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689144.jpeg" alt="img"></p>
+<p>然后在18:50:42.908737发现黑客再次执行了net user命令<br>此时回显为：</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689145.jpeg" alt="img"></p>
+<p>看来黑客成功添加了管理员用户kaka<br>确定了大致的作案时间，我们即可使用过滤</p>
+<p>确定了大致的作案时间，我们即可使用过滤</p>
+<pre><code class="undefined">ip.addr == 192.168.2.20 &amp;&amp; http
+</code></pre>
+<p>根据之前的判断，我们可以知道<br>18:49:27.767754时，不存在kaka用户</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689146.jpeg" alt="img"><br>18:50:42.908737时，kaka用户已成为管理员<br>所以可以断定作案时间点在这段时间内</p>
+<p>在此期间，一共4个POST请求，我们挨个查看，果不其然，在第一个POST中就发现了问题</p>
+<pre><code class="undefined">Y2QvZCJDOlxwaHBTdHVkeVxXV1dcYjJldm9sdXRpb25caW5zdGFsbFx0ZXN0XCImbmV0IHVzZXIg
+
+a2FrYSBrYWthIC9hZGQmZWNobyBbU10mY2QmZWNobyBbRV0=
+</code></pre>
+<p>解码后</p>
+<pre><code class="sql">cd/d&quot;C:\phpStudy\WWW\b2evolution\install\test\&quot;&amp;net user kaka kaka /add&amp;echo [S]&amp;cd&amp;echo [E]
+</code></pre>
+<p>可以明显看到</p>
+<pre><code class="sql">net user kaka kaka /add
+</code></pre>
+<p>于是可以断定，用户名和密码均为<code>kaka</code><br>最后一题既然是下载，应该是利用中国菜刀进行下载了，那我们只过滤出post流量，查看命令即可</p>
+<pre><code class="vbscript">ip.dst == 192.168.2.20 &amp;&amp; http.request.method==POST
+</code></pre>
+<p>然后我们在数据包的最后发现如下数据</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689147.jpeg" alt="img"></p>
+<p>我们将其解码</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219222852431.jpg" alt="img"></p>
+<p>发现使用了procdump.exe<br>同时发现文件</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Zoa2pod2Jz,size_16,color_FFFFFF,t_70-166857030689148.jpeg" alt="img"></p>
+<p>解码得到</p>
+<p><img src="/../pic/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90.assets/20191219222934268.jpg" alt="img"></p>
+<p>最后我们可以确定，黑客下载了<code>lsass.exe_180208_185247.dmp</code>文件</p>
+<p>答案</p>
+<pre><code class="vbnet">1.黑客第一次获取到当前目录下的文件列表的漏洞利用请求发生在什么时候
+18:37:38.482420
+2.黑客在内网主机中添加的用户名和密码是多少
+kaka:kaka
+3.黑客从内网服务器中下载下来的文件名
+lsass.exe_180208_185247.dmp
+</code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Daniel</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://eatingcrime.github.io/2023/03/07/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/">https://eatingcrime.github.io/2023/03/07/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Daniel</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/07/CTF%E2%80%94%E2%80%94MISC%E2%80%94%E2%80%94%E9%9F%B3%E9%A2%91%E9%9A%90%E5%86%99/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="MISC—音频隐写">
+                        
+                        <span class="card-title">MISC—音频隐写</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/03/07/CTF%E6%AF%94%E8%B5%9B%E5%BF%85%E5%A4%87%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="CTF比赛必备常用工具">
+                        
+                        <span class="card-title">CTF比赛必备常用工具</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="917184825"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">Daniel</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/eatingcrime" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1012375523@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=101237523" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 101237523" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

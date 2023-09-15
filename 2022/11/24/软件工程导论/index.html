@@ -1,0 +1,1506 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="软件工程导论, OrigiN">
+    <meta name="description" content="软件工程导论一、软件工程学概述1.1 软件与软件危机一、软件的概念、特点与发展(1)软件发展经历三个阶段：程序设计阶段一50至60年代程序系统阶段一60至70年代软件工程阶段一70年代以后
+(2)软件的概念：软件是计算机系统中与硬件相互依存">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>软件工程导论 | OrigiN</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">OrigiN</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">OrigiN</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/blinkfox/hexo-theme-matery" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/blinkfox/hexo-theme-matery" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">软件工程导论</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/log/" class="post-category">
+                                log
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2022-11-24
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="软件工程导论"><a href="#软件工程导论" class="headerlink" title="软件工程导论"></a>软件工程导论</h1><h2 id="一、软件工程学概述"><a href="#一、软件工程学概述" class="headerlink" title="一、软件工程学概述"></a>一、软件工程学概述</h2><h3 id="1-1-软件与软件危机"><a href="#1-1-软件与软件危机" class="headerlink" title="1.1 软件与软件危机"></a>1.1 软件与软件危机</h3><h4 id="一、软件的概念、特点与发展"><a href="#一、软件的概念、特点与发展" class="headerlink" title="一、软件的概念、特点与发展"></a>一、软件的概念、特点与发展</h4><h5 id="1-软件发展经历三个阶段："><a href="#1-软件发展经历三个阶段：" class="headerlink" title="(1)软件发展经历三个阶段："></a>(1)软件发展经历三个阶段：</h5><p>程序设计阶段一50至60年代<br>程序系统阶段一60至70年代<br>软件工程阶段一70年代以后</p>
+<h5 id="2-软件的概念："><a href="#2-软件的概念：" class="headerlink" title="(2)软件的概念："></a>(2)软件的概念：</h5><p>软件是计算机系统中与硬件相互依存的另一部分，它包括<strong>程序</strong>、<strong>数据</strong>及其<strong>相关文档</strong>的完整集合。软件&#x3D;程序+数据+文档<br><strong>数据</strong>：是使程序能够适当处理信息的数据结构。<br><strong>程序</strong>：是能够完成预定功能和性能的可执行指令序列。<br><strong>文档</strong>：是开发、使用和维护过程程序所需要的图文资料。</p>
+<h5 id="3-软件的特点："><a href="#3-软件的特点：" class="headerlink" title="(3)软件的特点："></a>(3)软件的特点：</h5><p>1.软件本身的复杂性<br>2.软件的成本高昂<br>3.软件开发未摆脱手工开发方式<br>4.软件维护与硬件有本质差，维护难度高<br>5.软件开发不是传统硬件制造过程<br>6.软件是一种逻辑实体，无磨损性</p>
+<h4 id="二、软件危机"><a href="#二、软件危机" class="headerlink" title="二、软件危机"></a>二、软件危机</h4><h5 id="1-软件危机的概念："><a href="#1-软件危机的概念：" class="headerlink" title="(1)软件危机的概念："></a>(1)软件危机的概念：</h5><p>在计算机软件开发和维护过程中所遇到的一系列严重问题。<br>软件危机包含两方面内容：<br>1、如何开发软件，以满足对软件日益增长的需常<br>2、如何维护数量不断膨胀的已有软件</p>
+<p><strong>(2)软件危机的表现：</strong></p>
+<ul>
+<li>对软件开发成本和进度估算不准确</li>
+<li>用户对已完成软件不满意</li>
+<li>软件质量不可靠</li>
+<li>软件不可维护</li>
+<li>没有适当文档资料</li>
+<li>软件成本在计算机系统中所占比例逐年上升</li>
+<li>软件开发生产率低</li>
+</ul>
+<h5 id="3-软件危机的原因"><a href="#3-软件危机的原因" class="headerlink" title="(3)软件危机的原因"></a>(3)软件危机的原因</h5><p><strong>1、主观原因：</strong><br>忽视需求分析<br>轻视软件维护<br>没有认识到程序只是软件的一部分<br>没有认识到软件开发只是漫长的软件生命周期中一个比较次要阶段<br>越到后期引入变动付出代价越高昂</p>
+<p><strong>2、客观原因：</strong><br>软件是逻辑实体、缺乏可见性，管理和控制困难<br>软件不会磨损，维护意味着修改原来设计，维护困难<br>软件规模庞大，程序复杂性随规模增加指数上升</p>
+<h5 id="4-消除软件危机的途径："><a href="#4-消除软件危机的途径：" class="headerlink" title="(4)消除软件危机的途径："></a>(4)消除软件危机的途径：</h5><p>1、对计算机软件应该有正确认识<br>2、吸取借鉴人类长期从事各种工程项目积累的原理、概念、技术和方法<br>3、积极开发和使用计算机辅助开发工具<br>4、探索更好更有效的管理措施和手段对开发过程进行控制和管理</p>
+<p>管理+技术</p>
+<h3 id="1-2-软件工程"><a href="#1-2-软件工程" class="headerlink" title="1.2 软件工程"></a>1.2 软件工程</h3><h5 id="1-软件工程定义："><a href="#1-软件工程定义：" class="headerlink" title="(1)软件工程定义："></a>(1)软件工程定义：</h5><p>采用<strong>工程</strong>的概念、原理、技术和方法来开发与维护软件，把经过时间考验而证明正确的<strong>管理技术</strong>和当前能够得到的最好的<strong>技术方法</strong>结合起来，<strong>经济</strong>的开发出<strong>高质量</strong>的软件并<strong>维护</strong>它。</p>
+<h5 id="2-软件工程的本质特性："><a href="#2-软件工程的本质特性：" class="headerlink" title="(2)软件工程的本质特性："></a>(2)软件工程的本质特性：</h5><ul>
+<li>关注大型程序的构造</li>
+<li>中心课题是控制复杂性</li>
+<li>软件经常变化</li>
+<li>开发效率非常重要</li>
+<li>开发人员和谐合作是关键</li>
+<li>软件需有效支持用户</li>
+<li>软件开发者替代其他领域人员创造产品</li>
+</ul>
+<h5 id="3-软件工程基本原理："><a href="#3-软件工程基本原理：" class="headerlink" title="(3)软件工程基本原理："></a>(3)软件工程基本原理：</h5><ul>
+<li>按软件生存期分阶段制定计划并认真实施</li>
+<li>坚持进行阶段评审</li>
+<li>坚持严格的产品控制</li>
+<li>使用现代程序设计技术</li>
+<li>结果能够得到清楚的审查</li>
+<li>用人少而精</li>
+<li>承认不断改进软件工程实践的必要性</li>
+</ul>
+<h5 id="※-4-软件工程方法学："><a href="#※-4-软件工程方法学：" class="headerlink" title="※(4)软件工程方法学："></a>※(4)软件工程方法学：</h5><p>把在软件生命周期全过程中使用的<strong>一整套技术方法的集合</strong>称为方法学，也称为泛型。<br>软件工程方法学包括三个要素：<strong>方法、工具和过程</strong>。</p>
+<p><strong>方法</strong>：完成软件开发各项任务的技术方法，回答“怎么做”<br><strong>工具</strong>：为运用方法提供的自动或半自动软件工程支撑环境<br><strong>过程</strong>：是为了获得高质量软件所需要完成的一系列任务框架，回答“何时做”</p>
+<h5 id="5-软件工程方法学分类："><a href="#5-软件工程方法学分类：" class="headerlink" title="(5)软件工程方法学分类："></a>(5)软件工程方法学分类：</h5><p>传统方法学（生命周期方法学）</p>
+<p>面向对象方法学：</p>
+<h3 id="1-3-软件生命周期"><a href="#1-3-软件生命周期" class="headerlink" title="1.3 软件生命周期"></a>1.3 软件生命周期</h3><p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121155257150.png" alt="image-20221121155257150"></p>
+<h3 id="1-4-软件过程"><a href="#1-4-软件过程" class="headerlink" title="1.4 软件过程"></a>1.4 软件过程</h3><p>软件过程：是为了获得高质量软件所需要完成的一系列任务框架。<br>通常用软件生命周期模型描述软件过程。</p>
+<h4 id="瀑布模型"><a href="#瀑布模型" class="headerlink" title="瀑布模型"></a>瀑布模型</h4><p>将软件生命周期的各项活动规定为依照固定顺序连接的若干阶段工作，最终得到软件产品</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121160058408.png" alt="image-20221121160058408"></p>
+<p><strong>瀑布模型特点：</strong></p>
+<ol>
+<li>阶段间具有顺序性和依赖性。</li>
+<li>推迟实现的观点。</li>
+<li>质量保证的观点<ol>
+<li>每个阶段必须完成规定的文档</li>
+<li>每个阶段结束前完成文档审查</li>
+<li>及早改正错误</li>
+</ol>
+</li>
+</ol>
+<p><strong>1、瀑布模型的优点</strong></p>
+<p>(强迫开发人员使用规范的方法，严格规定了每个阶段必须提交的文档，要求每个阶段)<br>可以强迫开发人员采用规范的方法，<br>严格规定了每个阶段必须提交的文档：<br>要求每个阶段交出的所有产品都必须经过质量保证小组的仔细验证。</p>
+<p><strong>2、瀑布模型的缺点</strong></p>
+<p>在软件开发的初期阶段就要求做出正确、全面、完整的需求分析对许多应用软件来说是极其困难的。<br>在需求分析阶段，当需求确定后，无法及时验证需求是否正确、完整。<br>作为整体开发的瀑布模型，由于不支持产品的演化，缺乏灵活性，对开发过程中很难发现的错误，只有在最终产品运行时才能暴露出来，从而使软件产品难以维护。</p>
+<p><strong>改进的瀑布模型</strong></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121160239486.png" alt="image-20221121160239486"></p>
+<h4 id="快速原型模型"><a href="#快速原型模型" class="headerlink" title="快速原型模型"></a>快速原型模型</h4><p>快速建立可运行的程序，他完成的功能往往是最终产品功能的一个<strong>子集</strong></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121160356731.png" alt="image-20221121160356731"></p>
+<p><strong>快速原型模型优缺点：</strong></p>
+<p><strong>优点：</strong></p>
+<p>1、开发的软件产品通常满足用户需求<br>2、软件产品开发基本是线性过程</p>
+<p><strong>缺点：</strong></p>
+<p>1、准确原型设计困难<br>2、原型理解可能不同<br>3、不利于开发人员创新</p>
+<h4 id="增量模型"><a href="#增量模型" class="headerlink" title="增量模型"></a>增量模型</h4><p>先完成一个系统子集的开发，再按同样的开发步骤增加功能（系统子集），如此递增下去直至满足全部系统需求。</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121160827817.png" alt="image-20221121160827817"></p>
+<p><strong>增量模型优缺点：</strong></p>
+<p><strong>优点：</strong></p>
+<p>1、短时间内可提交完成部分功能<br>2、逐渐增加产品功能，用户适应产品快。</p>
+<p><strong>缺点：</strong></p>
+<p>1、增量构件划分以及集成困难。<br>2、容易退化为边做边改模型。</p>
+<h4 id="螺旋模型"><a href="#螺旋模型" class="headerlink" title="螺旋模型"></a>螺旋模型</h4><p>在每个阶段之前都增加了风险分析过程的快速原型模型，看作增加了<strong>风险分析</strong>的<strong>快速原型模型</strong></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121161053021.png" alt="image-20221121161053021"></p>
+<p><strong>螺旋模型优缺点</strong>：</p>
+<p><strong>优点</strong>：</p>
+<p>1、利于把软件质量作为软件开发目标。<br>2、减少测试<br>3、维护和开发不分开</p>
+<p><strong>缺点</strong>：</p>
+<p>1、风险估计困难</p>
+<h4 id="喷泉模型"><a href="#喷泉模型" class="headerlink" title="喷泉模型"></a>喷泉模型</h4><p>典型的<strong>面向对象</strong>的软件过程模型，体现<strong>迭代</strong>和<strong>无缝</strong>的特性</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121161336367.png" alt="image-20221121161336367"></p>
+<h2 id="二、可行性研究"><a href="#二、可行性研究" class="headerlink" title="二、可行性研究"></a>二、可行性研究</h2><h3 id="2-1-可行性研究任务"><a href="#2-1-可行性研究任务" class="headerlink" title="2.1 可行性研究任务"></a>2.1 可行性研究任务</h3><p>(1)可行性研究自的：<br>用最小的代价在最小的时间内确定问题是否能够解决。(5%-10%)</p>
+<p>(2)可行性研究实质：<br>系统分析和设计过程的大大压缩和简化，在较高层次上以较为抽象的方式进行系统的分析和设计过程。</p>
+<p>(3)可行性研究过程：</p>
+<p>1.分析和澄清问题定义。</p>
+<p>2.导出系统的逻辑模型。(数据流图+数据字典)</p>
+<p>3.根据逻辑模型探索若干种可供选择解法</p>
+<p>4.研究每种解法可行性。</p>
+<p><strong>经济可行性</strong>：经济效益是否大于开发成本<br><strong>技术可行性</strong>：现有技术能否实现<br><strong>操作可行性</strong>：系统操作方式是否可行<br><strong>其他可行性</strong>：法律、社会效益。</p>
+<h3 id="2-2-可行性研究内容"><a href="#2-2-可行性研究内容" class="headerlink" title="2.2 可行性研究内容"></a>2.2 可行性研究内容</h3><p>(1)可行性研究步骤：</p>
+<p>1.复查系统规模和目标。</p>
+<p>对问题定义阶段初步确定的规模和目标进行肯定或改正，并列出对目标系统的约束和限制。</p>
+<p>2.研究目前正在使用的系统。</p>
+<p>了解现有系统能做什么，而不花费过多时间分析怎么实现这些功能。</p>
+<p>3.导出新系统的高层逻辑模型。</p>
+<p>现有物理系统 &gt;&gt;现有逻辑模型&gt;&gt;自标逻辑模型&gt;&gt;目标物理系统</p>
+<p>4.进一步定义问题。</p>
+<p>分析员和用户一起再次复查系统。前四个步骤构成一个循环。</p>
+<p>5.导出和评价供选择的解法</p>
+<p>技术角度排除不可行方案<br>操作可行性排除用户不能接受方案<br>经济可行估算成本和收益</p>
+<p>6.推荐行动方针。</p>
+<p>给出是否继续的结论</p>
+<p>7.草拟开发计划。</p>
+<p>制定进度表<br>开发人员、计算机资源分析<br>估计每阶段成本、下阶段详细分析，</p>
+<p>8.书写文档提交审查。</p>
+<h3 id="2-3-系统流程图"><a href="#2-3-系统流程图" class="headerlink" title="2.3 系统流程图"></a>2.3 系统流程图</h3><p>是一种描绘<strong>物理系统</strong>的图，用图符号以黑盒子形式描绘<strong>物理系统</strong>的各部件表达<strong>数据在系统各部件之间流动的情况</strong>。而不是对数据进行加工处理的控制过程。</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121165543762.png" alt="image-20221121165543762"></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124162911640.png" alt="image-20221124162911640"></p>
+<h3 id="2-4-数据流图和数据字典（※）"><a href="#2-4-数据流图和数据字典（※）" class="headerlink" title="2.4 数据流图和数据字典（※）"></a>2.4 数据流图和数据字典（※）</h3><h4 id="数据流图-DFD"><a href="#数据流图-DFD" class="headerlink" title="数据流图(DFD)"></a>数据流图(DFD)</h4><p>描述<strong>信息流和数据</strong>从输入到输出过程所经受的变换。<em>没有任何具体物理部件</em>，只是描绘数据在软件中流动和被处理的<strong>逻辑过程</strong>。</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121165648839.png" alt="image-20221121165648839"></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124173610683.png" alt="image-20221124173610683"></p>
+<p>数据流图画法：<br>(1)确定系统输入输出、源点以及终点</p>
+<p>(2)画系统顶层数据流图</p>
+<p>用加将输入输出数据连接起来，给加工、数据等命名</p>
+<p>(3)自顶向下分解，画出分层数据流图</p>
+<p>将加工细分，细分成几个数据流图表示</p>
+<h4 id="数据字典"><a href="#数据字典" class="headerlink" title="数据字典"></a>数据字典</h4><p>是关于数据的信息集合，即对数据流图中包含的所有元素定义的集合。</p>
+<p>1.数据字典的内容：数据流、数据流分量(数据元素)、数据存储、处理。</p>
+<p>2.定义数据的方法：</p>
+<p>由数据元素组成数据的方式：顺序、选择、重复、可选</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121170418723.png" alt="image-20221121170418723"></p>
+<p><strong>例题：</strong></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121170747737.png" alt="image-20221121170747737"></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221121170812436.png" alt="image-20221121170812436"></p>
+<p><strong>数据字典用途：</strong></p>
+<p>在软件分析和设计的过程中给人提供关于数据的描述信息。</p>
+<ol>
+<li>作为分析阶段的工具</li>
+<li>估计改变一个数据将产生的影响</li>
+<li>是数据库开发的第一步</li>
+</ol>
+<h3 id="2-5-成本效益分析"><a href="#2-5-成本效益分析" class="headerlink" title="2.5 成本效益分析"></a>2.5 成本效益分析</h3><h5 id="一、分析目的"><a href="#一、分析目的" class="headerlink" title="一、分析目的"></a>一、分析目的</h5><p>从经济角度分析新系统的开发是否能盈利，帮助使用部门正确做出是否投资的决定。</p>
+<h5 id="二、成本估计"><a href="#二、成本估计" class="headerlink" title="二、成本估计"></a>二、成本估计</h5><p><strong>1.代码行技术</strong><br>软件成本 &#x3D; 每行代码的平均成本 * 源代码行数</p>
+<p><strong>2.任务分解技术</strong>：按开发阶段将系统划分成任务</p>
+<p>每个任务的成本 &#x3D; 人力 * 人平均工资</p>
+<p>软件成本 &#x3D; ∑独立任务的成本</p>
+<h5 id="三、成本-x2F-效益分析步骤"><a href="#三、成本-x2F-效益分析步骤" class="headerlink" title="三、成本&#x2F;效益分析步骤"></a>三、成本&#x2F;效益分析步骤</h5><p>1.估计开发成本、运行费用和新系统带来的经济效益。</p>
+<p>2.比较新系统的开发成本和经济效益。</p>
+<h5 id="四、成本-x2F-效益分析的方法"><a href="#四、成本-x2F-效益分析的方法" class="headerlink" title="四、成本&#x2F;效益分析的方法"></a>四、成本&#x2F;效益分析的方法</h5><p>1.货币的时间价值F&#x3D;P(1+i)</p>
+<p>2.投资回收期</p>
+<p>3.纯收入</p>
+<p>4.投资回收率</p>
+<h2 id="三、需求分析"><a href="#三、需求分析" class="headerlink" title="三、需求分析"></a>三、需求分析</h2><h3 id="3-1-需求分析任务"><a href="#3-1-需求分析任务" class="headerlink" title="3.1 需求分析任务"></a>3.1 需求分析任务</h3><h4 id="需求分析任务"><a href="#需求分析任务" class="headerlink" title="需求分析任务"></a>需求分析任务</h4><ul>
+<li>确定对系统的综合要求<ul>
+<li><strong>功能需求</strong>：系统必须提供的服务功能</li>
+<li><strong>性能需求</strong>：系统必须满足的约束条件<br>(响应速度、安全性)</li>
+<li><strong>可靠性和可用性需求</strong>：可靠性定量、可用性量化</li>
+<li><strong>出错处理需求</strong>：错误响应机制</li>
+<li><strong>接口需求</strong>：应用系统与环境通信格式常见用户接口需不硬件接口需求、软件接口需求、通信接口需求约束：用户或环境强加的限制条件（工具、语言等）</li>
+<li><strong>逆向需求</strong>：系统不应该做什么</li>
+<li><strong>将来可能提出要求</strong>：将来可能需要实现的需求</li>
+</ul>
+</li>
+<li>分析系统的数据要求</li>
+<li>导出系统的逻辑模型</li>
+<li>修正系统开发计划</li>
+</ul>
+<h3 id="3-2-与用户沟通获得需求方法"><a href="#3-2-与用户沟通获得需求方法" class="headerlink" title="3.2 与用户沟通获得需求方法"></a>3.2 与用户沟通获得需求方法</h3><p>访谈</p>
+<p>面向数据流自顶向下求精</p>
+<p>简易的应用规格说明技术</p>
+<p>快速建立软件原型</p>
+<h3 id="3-3-分析建模与规格说明"><a href="#3-3-分析建模与规格说明" class="headerlink" title="3.3 分析建模与规格说明"></a>3.3 分析建模与规格说明</h3><p><strong>模型</strong>：</p>
+<p>是指为了理解事物而对事物做出的一种抽象，是对事物的一种无歧义的书面描述。</p>
+<h4 id="模型分类："><a href="#模型分类：" class="headerlink" title="模型分类："></a>模型分类：</h4><ul>
+<li><strong>数据模型</strong>：（实体-联系图）：描绘数据对象及数据对象之间的关系。</li>
+<li><strong>功能模型</strong>：(数据流图)：描绘数据在系统中流动时被处理的逻辑过程，指明系统具有的变换数据的功能。</li>
+<li><strong>行为模型</strong>：（状态转换图）：描绘系统的各种行为模式在不同状态间转换的方式。</li>
+</ul>
+<h3 id="3-4-实体联系图、状态转换图"><a href="#3-4-实体联系图、状态转换图" class="headerlink" title="3.4 实体联系图、状态转换图"></a>3.4 实体联系图、状态转换图</h3><h4 id="一、实体联系图（E-R图）"><a href="#一、实体联系图（E-R图）" class="headerlink" title="一、实体联系图（E-R图）"></a>一、实体联系图（E-R图）</h4><ul>
+<li><strong>实体</strong>：描述数据对象</li>
+<li><strong>属性</strong>：描述数据对象的性质</li>
+<li><strong>联系</strong>：描述数据对象之间的交互方式<ul>
+<li>一对一联系1：1</li>
+<li>一对多联系1：n</li>
+<li>多对多联系n：m</li>
+</ul>
+</li>
+<li><strong>表示方式</strong><ul>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124093810762.png" alt="image-20221124093810762"></li>
+</ul>
+</li>
+</ul>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124094141288.png" alt="image-20221124094141288"></p>
+<h4 id="二、状态转换图"><a href="#二、状态转换图" class="headerlink" title="二、状态转换图"></a>二、状态转换图</h4><ul>
+<li><strong>状态</strong>：系统的行为模式，包括初态，终态，中间状态</li>
+<li><strong>事件</strong>：是指在某个特定时刻发生的事情，即对系统从一个状态转换到另一个状态的事件抽象</li>
+<li><strong>表示方式</strong><ul>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124094428104.png" alt="image-20221124094428104"></li>
+</ul>
+</li>
+</ul>
+<p><strong><font color=RED>在一张状态图中只能有<u>一个初态</u>，而<u>终态可以有0至多个</u></font></strong></p>
+<h3 id="3-5-其他图形工具"><a href="#3-5-其他图形工具" class="headerlink" title="3.5 其他图形工具"></a>3.5 其他图形工具</h3><h4 id="一、层次方框图"><a href="#一、层次方框图" class="headerlink" title="一、层次方框图"></a>一、层次方框图</h4><p><strong>表示方式</strong>：用<strong>树形结构</strong>的一系列矩形框描述<strong>数据</strong>的<strong>层次结构</strong></p>
+<p><strong>优点</strong>：随着结构的逐步精细，对数据结构的描绘也越来越详细</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124095028532.png" alt="image-20221124095028532"></p>
+<h4 id="二、Warnier图"><a href="#二、Warnier图" class="headerlink" title="二、Warnier图"></a>二、Warnier图</h4><p><strong>表示方法</strong>：用树形结构描绘<strong>信息</strong>的层次结构</p>
+<p><strong>优点</strong>：可以表明信息的逻辑组织。可以表明某类信息出现的条件或是否重复出现</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124095231688.png" alt="image-20221124095231688"></p>
+<h4 id="三、IPO图"><a href="#三、IPO图" class="headerlink" title="三、IPO图"></a>三、IPO图</h4><p><strong>表示方式</strong>：是<strong>输入</strong>、<strong>处理</strong>、<strong>输出</strong>图的简称，能够方便的描绘输入数据，对数据的处理和输出数据之间的关系</p>
+<p><strong>优点</strong>：简略描绘系统主要算法</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124095505818.png" alt="image-20221124095505818"></p>
+<h3 id="3-6-验证软件需求"><a href="#3-6-验证软件需求" class="headerlink" title="3.6 验证软件需求"></a>3.6 验证软件需求</h3><h5 id="一、从哪些方面验证软件需求的正确性"><a href="#一、从哪些方面验证软件需求的正确性" class="headerlink" title="一、从哪些方面验证软件需求的正确性"></a>一、从哪些方面验证软件需求的正确性</h5><ul>
+<li><strong>一致性</strong>：所有需求必须是一致的，任何一条需求不能和其他需求互相矛盾。</li>
+<li><strong>完整性</strong>：需求必须是完整的，规格说明书应该包括用户需要的每一个功能或性能。</li>
+<li><strong>现实性</strong>：指定的需求应该能用现有的硬件和软件技术可以实现。</li>
+<li><strong>有效性</strong>：必须证明需求是正确有效的，确实能解决用户面对的问题。</li>
+</ul>
+<h5 id="二、验证软件需求的方法"><a href="#二、验证软件需求的方法" class="headerlink" title="二、验证软件需求的方法"></a>二、验证软件需求的方法</h5><p>验证需求的一致性：自然语言描述需求、形式化语言描述需求、用软件工具验证</p>
+<p>验证需求的现实性：参照开发经验</p>
+<p>验证需求的完整性和有效性：建立软件原型</p>
+<h5 id="三、用于需求分析的软件工具"><a href="#三、用于需求分析的软件工具" class="headerlink" title="三、用于需求分析的软件工具"></a>三、用于需求分析的软件工具</h5><p>PSL&#x2F;PSA(问题陈述语言&#x2F;问题陈述分析程序)系统</p>
+<h2 id="四、总体设计"><a href="#四、总体设计" class="headerlink" title="四、总体设计"></a>四、总体设计</h2><h3 id="4-1-总体设计设计过程"><a href="#4-1-总体设计设计过程" class="headerlink" title="4.1 总体设计设计过程"></a>4.1 总体设计设计过程</h3><p>总体设计又称为概要设计或初步设计</p>
+<p>任务：</p>
+<ul>
+<li>确定系统中每个程序由哪些模块组成以及这些模块相互间的关系。</li>
+<li>划分出物理元素。包括程序、文件、数据库、文档等。</li>
+</ul>
+<p><strong>设计过程</strong>包括<strong>系统设计阶段</strong>和<strong>结构设计阶段</strong></p>
+<ul>
+<li>系统设计阶段<ul>
+<li>设想供选择的方案：数据流图出发，将处理分组，抛弃行不通分组。</li>
+<li>选取合理的方案：上一步方案选取低、中、高成本三种方案。</li>
+<li>推荐最佳方案：推荐最佳方案，制定详细实现计划</li>
+</ul>
+</li>
+<li>结构设计阶段<ul>
+<li>功能分解：对数据流图进一步细化，进行功能分解。可以用IPO图等工具描述细化后每个处理的算法。</li>
+<li>设计软件结构：层次图或结构图描绘软件结构。或数据流图导出软件结构。</li>
+<li>设计数据库</li>
+<li>定测试计划</li>
+<li>书写文档</li>
+<li>审查和复审</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-设计原理（※）"><a href="#4-2-设计原理（※）" class="headerlink" title="4.2 设计原理（※）"></a>4.2 设计原理（※）</h3><h5 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a><strong>模块化</strong></h5><p>模块：能够单独命名，由边界元素限定的程序元素的序列，是构成程序的基本构件</p>
+<p>模块化：把程序划分成独立命名且可独立访问的模块，每个模块完成一个子功能，把这些模块集成起来构成一个整体，可以完成指定的功能满足用户的需求。</p>
+<h5 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h5><p>抽出事务的本质特性而暂时不考虑它们的细节</p>
+<h5 id="逐步求精"><a href="#逐步求精" class="headerlink" title="逐步求精"></a>逐步求精</h5><p>逐步揭露出底层细节</p>
+<p>Miller法则：注意力集中在(7±2)上</p>
+<h5 id="信息隐藏与局部化"><a href="#信息隐藏与局部化" class="headerlink" title="信息隐藏与局部化"></a>信息隐藏与局部化</h5><p>信息隐藏：是指一个模块内包含的信息对于<strong>不需要这些信息的模块来说，是不能访问的</strong>。主要是指模块的实现细节。</p>
+<p>局部化：指把一些关系密切的软件元素<strong>物理地</strong>放的彼此靠近，它有助于实现信息隐藏。</p>
+<h5 id="模块独立"><a href="#模块独立" class="headerlink" title="模块独立"></a>模块独立</h5><p>模块独立性：是模块化、抽象、信息隐藏和局部化概念的直接结果。</p>
+<p>模块独立是好设计的关键，设计是决定软件质量的关键环节。</p>
+<p>度量标准：<font color=RED><strong>耦合，内聚</strong></font></p>
+<h5 id="耦合"><a href="#耦合" class="headerlink" title="耦合"></a>耦合</h5><p>是对一个软件结构内<strong>不同模块之间</strong>互连程序的度量</p>
+<p>耦合程度取决于模块接口的复杂程度、通过接口的数据等</p>
+<p><font color=RED><strong>耦合性越高，模块独立性越弱</strong></font></p>
+<p><strong>耦合分类（程度从低-&gt;高）</strong></p>
+<p><font color=RED><strong>无直接耦合-&gt;数据耦合-&gt;标记耦合（特征耦合）-&gt;控制耦合-&gt;外部耦合-&gt;公共耦合-&gt;内容耦合</strong></font></p>
+<h5 id="内聚"><a href="#内聚" class="headerlink" title="内聚"></a>内聚</h5><p>用来度量一个<strong>模块内部</strong>各个元素彼此结合的紧密程度</p>
+<p><strong>内聚分类（程度从低-&gt;高）</strong></p>
+<p><font color=RED><strong>偶然内聚-&gt;逻辑内聚-&gt;时间内聚-&gt;过程内聚-&gt;通信内聚-&gt;顺序内聚-&gt;功能内聚</strong></font></p>
+<p>同其他模块强耦合的模块意味着弱内聚；强内聚模块意味着与其它模块间弱耦合；</p>
+<p><font color=RED><strong>软件设计目标：高内聚、低耦合</strong></font></p>
+<h3 id="4-3-启发规则"><a href="#4-3-启发规则" class="headerlink" title="4.3 启发规则"></a>4.3 启发规则</h3><ul>
+<li>改进软件结构，提高模块独立性</li>
+<li>模块规模应该适中</li>
+<li>深度、宽度、扇入和扇出应适当<ul>
+<li><strong>深度</strong>：表示软件结构中控制的层数</li>
+<li><strong>宽度</strong>：软件结构内同一个层次上的模块总数的最大值</li>
+<li><strong>扇出</strong>：一个模块直接控制（调用）的模块数目，扇出过大意味着模块过分复杂。一般一个设计的好的典型系统的<strong>平均扇出是3或4，扇出的上限是5到9。</strong></li>
+<li><strong>扇入</strong>：指有多少上级模块调用它，扇入大说明上级模块共享该模块的数目多。好的软件结构<font color=RED>顶层扇出比较高，中层扇出比较少</font>，底层扇入到公共的实用模块中，即<font color=RED>底层模块有高扇入</font>。</li>
+</ul>
+</li>
+<li>模块的作用域应该在控域之内<ul>
+<li>作用域：指受该模块内一个判定影响的所有模块的集合。</li>
+<li>控制域：是这个模块本身以及所有直接或间接从属于它的模块的集合。</li>
+</ul>
+</li>
+<li>力争降低模块接口的复杂程度</li>
+<li>设计单入口单出口的模块</li>
+<li>模块功能应该可以预测</li>
+</ul>
+<h3 id="4-4-描绘软件结构的图形工具"><a href="#4-4-描绘软件结构的图形工具" class="headerlink" title="4.4 描绘软件结构的图形工具"></a>4.4 描绘软件结构的图形工具</h3><h5 id="一、层次图与IPO图"><a href="#一、层次图与IPO图" class="headerlink" title="一、层次图与IPO图"></a>一、层次图与IPO图</h5><p>层次图：用方框和连线表示，连线表示上下层的<strong>调用关系</strong></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124111403816.png" alt="image-20221124111403816"></p>
+<p>HIPO图：层次图加编号</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124111707271.png" alt="image-20221124111707271"></p>
+<h5 id="二、结构图"><a href="#二、结构图" class="headerlink" title="二、结构图"></a>二、结构图</h5><p>不仅描述调用关系，还描述传递的信息和调用方式</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124111835714.png" alt="image-20221124111835714"></p>
+<p>箭头代表调用过程传递的信息。尾部空心代表<strong>数据</strong>，实心代表<strong>控制信息</strong></p>
+<p>模块调用分类</p>
+<p>1、简单调用   2、循环调用    3、选择调用</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124112122632.png" alt="image-20221124112122632"></p>
+<h3 id="4-5-面向数据流设计方法"><a href="#4-5-面向数据流设计方法" class="headerlink" title="4.5 面向数据流设计方法"></a>4.5 面向数据流设计方法</h3><p>面向数据流设计方法也成为结构化设计方法（SD）</p>
+<p>数据流图分类</p>
+<ol>
+<li>交换流：由输入、变换中心和输出三部分组成<br><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124112323013.png" alt="image-20221124112323013"></li>
+<li>事务流：在多种事务中选择一个执行<br><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124112352765.png" alt="image-20221124112352765"></li>
+</ol>
+<p>变换分析：把具有变换流特点的数据流图映射成软件结构</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124112531373.png" alt="image-20221124112531373"></p>
+<h2 id="五、详细设计"><a href="#五、详细设计" class="headerlink" title="五、详细设计"></a>五、详细设计</h2><h3 id="5-1-详细设计的目的任务"><a href="#5-1-详细设计的目的任务" class="headerlink" title="5.1 详细设计的目的任务"></a>5.1 详细设计的目的任务</h3><ol>
+<li>详细设计目的：确定怎样具体的是实现所要求的系统，得出对目标的精确描述</li>
+<li>详细设计任务：<ol>
+<li>过程设计：即设计软件体系结构中所包含的每个模块的实现算法</li>
+<li>数据设计：设计软件数据结构</li>
+<li>接口设计：设计软件内部各模块之间的接口</li>
+</ol>
+</li>
+</ol>
+<h3 id="5-2-结构程序设计"><a href="#5-2-结构程序设计" class="headerlink" title="5.2 结构程序设计"></a>5.2 结构程序设计</h3><p>结构程序设计：只用三种基本的控制结构就能实现任何<strong>单入口单出口</strong>的程序</p>
+<p><strong>三种基本控制结构</strong>：选择、顺序、循环</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124113155501.png" alt="image-20221124113155501"></p>
+<p>扩充的控制结构：</p>
+<ul>
+<li><p><strong>经典</strong>的结构程序设计：<br>只包括三种基本结构。</p>
+</li>
+<li><p><strong>扩展</strong>的结构程序设计：</p>
+<p>除了基本控制结构还包括</p>
+<p>Do-case多分支和Do-UNTIL循环。</p>
+</li>
+<li><p><strong>修正</strong>的结构程序设计：</p>
+<p>除了基本控制结构和扩展控制结构还使用BREAK结构。</p>
+</li>
+</ul>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124113608802.png" alt="image-20221124113608802"></p>
+<h3 id="5-3-人机界面设计"><a href="#5-3-人机界面设计" class="headerlink" title="5.3 人机界面设计"></a>5.3 人机界面设计</h3><p>人机界面设计：是接口设计的一个重要的组成部分。</p>
+<p>设计人机界面过程常遇到的4个问题：</p>
+<ul>
+<li><strong>系统响应时间</strong>：重要属性：<strong>长度</strong>和<strong>易变性</strong></li>
+<li><strong>用户帮助设施</strong></li>
+<li><strong>出错信息处理</strong></li>
+<li><strong>命令交互</strong></li>
+</ul>
+<p>人机界面设计指南：</p>
+<ul>
+<li>一般交互指南</li>
+<li>信息显示指南</li>
+<li>数据输入指南</li>
+</ul>
+<h3 id="5-4-过程设计工具（※）"><a href="#5-4-过程设计工具（※）" class="headerlink" title="5.4 过程设计工具（※）"></a>5.4 过程设计工具（※）</h3><p>过程设计工具：描述程序处理过程的工具。</p>
+<ul>
+<li><h5 id="程序流程图"><a href="#程序流程图" class="headerlink" title="程序流程图"></a>程序流程图</h5><ul>
+<li>又称为程序框图，它是历史最悠久使用最广泛的描述软件设计的方法，然而它也是用得最混乱的一种方法。</li>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124114101379.png" alt="image-20221124114101379"></li>
+</ul>
+</li>
+<li><h5 id="盒图-N-S图"><a href="#盒图-N-S图" class="headerlink" title="盒图(N-S图)"></a>盒图(N-S图)</h5><ul>
+<li>出于要有一种不允许违背结构程序设计精神的图形工具的考虑。</li>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124114206775.png" alt="image-20221124114206775"></li>
+</ul>
+</li>
+<li><h5 id="PAD图"><a href="#PAD图" class="headerlink" title="PAD图"></a>PAD图</h5><p>Problem Analysis Diagram</p>
+<ul>
+<li>他用二维树形结构的图来表示程序的控制流，将这种图翻译成程序代码比较容易</li>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124114901511.png" alt="image-20221124114901511"></li>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124164750465.png" alt="image-20221124164750465"></li>
+<li>能够体现<strong>程序逻辑</strong>和<strong>数据结构</strong>，面向高级程序设计语言</li>
+</ul>
+</li>
+<li><h5 id="判定表"><a href="#判定表" class="headerlink" title="判定表"></a>判定表</h5><ul>
+<li>当<strong>算法中包含多重嵌套的条件选择</strong>时判定表却能够清晰地表示复杂的条件组合与应做的动作之间的对应关系。</li>
+<li>组成：<br>左上部列出所有条件，左下部是所有可能的动作。<br>右上部是表示各种条件组合，右下部是和每种条件组合相对应的动作。</li>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124165055113.png" alt="image-20221124165055113"></li>
+</ul>
+</li>
+<li><h5 id="判定树"><a href="#判定树" class="headerlink" title="判定树"></a>判定树</h5><ul>
+<li>是判定表的变种，也能清晰的表示复杂的条件组合与应做的动作之间的对应关系</li>
+<li><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124165509104.png" alt="image-20221124165509104"></li>
+</ul>
+</li>
+<li><h5 id="过程设计语言-PDL"><a href="#过程设计语言-PDL" class="headerlink" title="过程设计语言(PDL)"></a>过程设计语言(PDL)</h5><ul>
+<li>过程设计语言也叫伪码</li>
+<li>用正文形式表示数据和处理过程的设计工具</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-5-面向数据结构的设计方法"><a href="#5-5-面向数据结构的设计方法" class="headerlink" title="5.5 面向数据结构的设计方法"></a>5.5 面向数据结构的设计方法</h3><h5 id="Jackson图"><a href="#Jackson图" class="headerlink" title="Jackson图"></a>Jackson图</h5><p>Jackson图实质上是对第3.7节中介绍的层次方框图的一种精化。读者需要注意的是，虽然Jackson图和描绘软件结构的层次图形式相当类似，但是含义却很不相同，即<strong>层次图中的一个方框通常代表一个模块</strong>；而Jackson图即使在描绘程序结构时，一个方框也并不代表一个模块，<strong>通常一个方框只代表几个语句</strong>。<strong>层次图表现的是调用关系</strong>，通常一个模块除了调用下级模块外，还完成其他操作；而<strong>Jackson图表现的是组成关系</strong>，也就是说，一个方框中包括的操作<strong>仅仅由它下层框中的那些操作组成</strong>。</p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124171123364.png" alt="image-20221124171123364"></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124171202514.png" alt="image-20221124171202514"></p>
+<p><img src="/../pic/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA.assets/image-20221124171429089.png" alt="image-20221124171429089"></p>
+<h3 id="5-6-程序复杂度定量度量"><a href="#5-6-程序复杂度定量度量" class="headerlink" title="5.6 程序复杂度定量度量"></a>5.6 程序复杂度定量度量</h3><p>程序复杂度定量度量：</p>
+<p>定量的度量详细设计模块的质量。</p>
+<h5 id="McCabe方法"><a href="#McCabe方法" class="headerlink" title="McCabe方法"></a><strong>McCabe方法</strong></h5><p>将程序图转化为程序流程图再计算复杂度。</p>
+<p><strong>计算方法</strong>：</p>
+<ol>
+<li>流图中的区域数等于环形复杂度</li>
+<li>流图G的环形复杂度V(G)&#x3D;E-N+2,E是流图中边的条数，N是结点数。</li>
+<li>流图G的环形复杂度V(G)&#x3D;P+1,其中，P是流图中判定结点的数目。</li>
+</ol>
+<p>V(G)&lt;&#x3D;10比较科学</p>
+<h2 id="六、实现"><a href="#六、实现" class="headerlink" title="六、实现"></a>六、实现</h2><h3 id="6-1-实现"><a href="#6-1-实现" class="headerlink" title="6.1 实现"></a>6.1 实现</h3><p>软件生命周期中的编码和测试统称为<strong>实现</strong>。</p>
+<h5 id="语言选择"><a href="#语言选择" class="headerlink" title="语言选择"></a>语言选择</h5><p>选择适宜的程序设计语言是减少编程的难度、减少程序测试量、容易维护的实现基础。</p>
+<h5 id="编码风格"><a href="#编码风格" class="headerlink" title="编码风格"></a>编码风格</h5><ul>
+<li>程序内部的文档</li>
+<li>数据说明</li>
+<li>语句构造</li>
+<li>输入输出</li>
+<li><strong>效率</strong>：效率主指<strong>处理机时间</strong>和<strong>存储器容量</strong></li>
+</ul>
+<h3 id="6-2-软件测试基础"><a href="#6-2-软件测试基础" class="headerlink" title="6.2 软件测试基础"></a>6.2 软件测试基础</h3><h5 id="软件测试的自标"><a href="#软件测试的自标" class="headerlink" title="软件测试的自标"></a>软件测试的自标</h5><ul>
+<li>软件测试是为了发现错误而执行程序的过程。</li>
+<li>编码阶段（单元测试）</li>
+<li>测试阶段（各种综合测试）</li>
+</ul>
+<h5 id="软件测试准则："><a href="#软件测试准则：" class="headerlink" title="软件测试准则："></a>软件测试准则：</h5><ol>
+<li>所有测试都应该能追溯到用户需求。</li>
+<li>应该远在测试之前就制定测试计划</li>
+<li>Pareto原理：80%的错误是由20%的模块造成的。</li>
+<li>应该从“小规模”测试开始，并逐步进行大规模测试。</li>
+<li>穷举测试是不可能的；测试只能证明程序有错误，但不能证明程序无错误。</li>
+<li>为了尽最大可能的发现错误，应该由独立的第三方担任测试工作。</li>
+</ol>
+<h5 id="软件测试的方法（※）："><a href="#软件测试的方法（※）：" class="headerlink" title="软件测试的方法（※）："></a>软件测试的方法（※）：</h5><h6 id="黑盒测试法："><a href="#黑盒测试法：" class="headerlink" title="黑盒测试法："></a>黑盒测试法：</h6><p>将软件看作一个黑盒子，不考虑其内部结构和处理过程，只按照规格说明书的规定，测试软件是否能够正确接收输入数据，产生正确的输出数据。即测试程序是否正确的实现了其功能。又称为“功能测试”。</p>
+<h6 id="白盒测试法："><a href="#白盒测试法：" class="headerlink" title="白盒测试法："></a>白盒测试法：</h6><p>完全知道程序的内部结构和处理算法，因此可以将程序看作一个透明的白盒子，根据程序内部的逻辑结构测试程序内部的主要执行通路是否能够按照预定的要求正确工作。又称“结构测试”。</p>
+<h5 id="软件测试的步骤："><a href="#软件测试的步骤：" class="headerlink" title="软件测试的步骤："></a>软件测试的步骤：</h5><ol>
+<li><strong>单元测试</strong>（模块测试）：将每个模块作为一个单独的实体进行测试。<strong>发现的错误编码和详细设计阶段的错误</strong></li>
+<li><strong>子系统测试</strong>：将模块集成为一个子系统进行测试。着重测试<strong>模块的接口</strong>。</li>
+<li><strong>系统测试</strong>：将子系统<strong>组装为一个完整的系统进行测试</strong>。子系统测试和系统测试总称为“集成测试</li>
+<li><strong>验收测试</strong>（确认测试）：在用户的参与下，往往<strong>使用实际的数据进行的测试</strong>。发现需求说明中的错误</li>
+<li><strong>平行运行</strong>：<strong>同时运行新开发出来的系统和将被它取代的旧系统</strong>，以便比较新旧两个系统的处理结果。</li>
+</ol>
+<h3 id="6-3-单元测试"><a href="#6-3-单元测试" class="headerlink" title="6.3 单元测试"></a>6.3 单元测试</h3><p><strong>测试依据</strong>：详细设计文档</p>
+<p><strong>测试技术</strong>（设计测试用例的方法）：白盒测试技术</p>
+<p>着重点：</p>
+<ol>
+<li>模块接口</li>
+<li>局部数据结构</li>
+<li>重要的执行通路</li>
+<li>出错处理通路</li>
+<li>边界条件</li>
+</ol>
+<h3 id="6-4-集成测试"><a href="#6-4-集成测试" class="headerlink" title="6.4 集成测试"></a>6.4 集成测试</h3><p><strong>目标</strong>：发现与接口有关的问题</p>
+<p><strong>实施者</strong>：独立的测试机构或第三方人员</p>
+<p><strong>集成方法</strong>：非渐增测试、渐增测试</p>
+<ul>
+<li><strong>自顶向下集成</strong>：从主控模块开始沿着程序的控制层次自顶向下移动，逐步添加新的模块</li>
+<li><strong>自底向上集成</strong>：从最底层模块开始组装</li>
+</ul>
+<p>自顶向下与自底向上相结合的方法：</p>
+<p>上层模块使用自顶向下方法，下层模块采用底向上方法</p>
+<p><strong>回归测试</strong>：重新执行已经做过测试的某个子集，以保证程序的变化没有带来非预期的副作用。</p>
+<h3 id="6-5-确认测试"><a href="#6-5-确认测试" class="headerlink" title="6.5 确认测试"></a>6.5 确认测试</h3><p>又称<strong>验收测试</strong>，目标是验证软件的有效性。</p>
+<p><strong>验证</strong>：为了保证软件正确的实现了某个特定要求而进行的一系列活动。</p>
+<p><strong>确认</strong>：为了保证软件确实满足了用户需求而进行的一系列活动。</p>
+<p>Alpha测试：用户在开发者的场所，在开发者指导下进行。</p>
+<p>Beta测试：用户在用户场所进行，遇到问题报告给开发者，开发者进行修改。</p>
+<h3 id="6-6-白盒测试"><a href="#6-6-白盒测试" class="headerlink" title="6.6 白盒测试"></a>6.6 白盒测试</h3><p>测试用例：测试输入数据和预期的输出结果。</p>
+<p>测试方案：测试目的、测试用例的集合。</p>
+<ul>
+<li><strong>语句覆盖</strong>：被测试程序中的每条语句至少执行一次。</li>
+<li><strong>判定覆盖</strong>：使得被测程序中每个判定表达式至少获得一次“真”值和“假”值</li>
+<li><strong>条件覆盖</strong>：使得判定表达式中每个条件的各种可能的值至少出现一次。</li>
+<li><strong>判定&#x2F;条件覆盖</strong>：使得判定表达式中的每个条件的所有可能取值至少出现一次，并使每个判定表达式所有可能的结果也至少出现一次。</li>
+<li><strong>条件组合覆盖</strong>：设计足够多的测试用例，使得每个判定表达式中条件的各种可能的值的组合都至少出现一次。</li>
+<li><strong>路径覆盖</strong>：覆盖被测程序中所有可能的路径。</li>
+</ul>
+<p><strong>控制结构测试</strong>：基本路径测试、条件测试、循环测试</p>
+<h3 id="6-7-黑盒测试"><a href="#6-7-黑盒测试" class="headerlink" title="6.7 黑盒测试"></a>6.7 黑盒测试</h3><p>黑盒测试又称功能测试，着重测试软件的功能。</p>
+<ul>
+<li><strong>等价类划分法</strong><ol>
+<li>把程序的输入数据集合按输入条件划分为若干个等价类，每一个等价类相对于输入条件表示为一组<strong>有效</strong>或<strong>无效</strong>的输入。</li>
+<li>为每一等价类设计一个测试用例。</li>
+</ol>
+</li>
+<li><strong>边界值分析法</strong><ul>
+<li>输入等价类和输出等价类的边界就是应该着重测试的程序边界情况。选取的测试数据应该刚好<strong>等于</strong>、刚好<strong>小于</strong>、刚好<strong>大于</strong>边界值</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-8-调试"><a href="#6-8-调试" class="headerlink" title="6.8 调试"></a>6.8 调试</h3><p>调试（也称为纠错）是在测试发现错误之后排除错误的过程。</p>
+<p><strong>方法</strong>：<strong>蛮干法、回溯法、原因排除法</strong></p>
+<p>结果：</p>
+<ul>
+<li>找到了原因，然后改正和排除。</li>
+<li>没找到原因，猜测一个原因，并设计附加测试用例来验证这个假设。</li>
+</ul>
+<h3 id="6-9-软件可靠性"><a href="#6-9-软件可靠性" class="headerlink" title="6.9 软件可靠性"></a>6.9 软件可靠性</h3><p><strong>软件可靠性</strong>：程序在给定<strong>时间间隔</strong>内，按照规格说明书的规定成功运行的概率。<br><strong>软件可用性</strong>：程序在给定<strong>时间点</strong>，按照规格说明书的规定成功运行的概率</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Daniel</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://eatingcrime.github.io/2022/11/24/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/">https://eatingcrime.github.io/2022/11/24/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B%E5%AF%BC%E8%AE%BA/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Daniel</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/07/zip%E4%BC%AA%E5%8A%A0%E5%AF%86%E5%8E%9F%E7%90%86%E5%8F%8A%E6%93%8D%E4%BD%9C/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="zip伪加密原理及操作">
+                        
+                        <span class="card-title">zip伪加密原理及操作</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CTF/" class="post-category">
+                                    CTF
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/09/29/TEST_GIT/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="TEST_GIT">
+                        
+                        <span class="card-title">TEST_GIT</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Daniel
+                            
+                        </span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="917184825"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="/libs/aplayer/Meting.min.js"></script>
+
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">Daniel</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/eatingcrime" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1012375523@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=101237523" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 101237523" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+        <!-- <script src='https://unpkg.com/mermaid@latest/dist/mermaid.min.js'></script> -->
+        <script src='/libs/mermaid/mermaid.min.js'></script>
+        <script>
+          if (window.mermaid) {
+            mermaid.initialize({theme: 'forest'});
+          }
+        </script>
+    
+
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+     
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/star.js"><\/script>');
+            }
+        </script>
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

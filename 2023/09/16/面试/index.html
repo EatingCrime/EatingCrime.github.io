@@ -360,7 +360,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-16
+                    2023-09-16
                 </div>
                 
 
@@ -721,7 +721,7 @@
 <h4 id="VLAN划分方法"><a href="#VLAN划分方法" class="headerlink" title="VLAN划分方法"></a>VLAN划分方法</h4><p><img src="/../pic/%E9%9D%A2%E8%AF%95.assets/image-20230915151949623.png" alt="image-20230915151949623"></p>
 <h3 id="数据备份的种类有哪些？常用的方法有哪些？"><a href="#数据备份的种类有哪些？常用的方法有哪些？" class="headerlink" title="数据备份的种类有哪些？常用的方法有哪些？"></a>数据备份的种类有哪些？常用的方法有哪些？</h3><p>数据备份按照备份时<strong>所备份数据的特点</strong>可以分为三种：完全备份、增量备份和系统备份。</p>
 <p>根据数据备份所使用的<strong>存储介质</strong>种类可以将数据备份方法分成如下若干种：软盘备份、磁带备份、可移动存储备份、可移动硬盘备份、本机多硬盘备份和网络备份。</p>
-<h2 id="Linux篇之sshd的日志存储位置以及常见的系统日志介绍"><a href="#Linux篇之sshd的日志存储位置以及常见的系统日志介绍" class="headerlink" title="Linux篇之sshd的日志存储位置以及常见的系统日志介绍"></a>Linux篇之sshd的日志存储位置以及常见的系统日志介绍</h2><p><strong>一、前言</strong><br><strong>具体sshd服务的相关信息，可参考文章：</strong><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/xu710263124/article/details/119609099?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163159918716780271572596%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=163159918716780271572596&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2blogfirst_rank_v2~rank_v29-1-119609099.pc_v2_rank_blog_default&utm_term=ssh&spm=1018.2226.3001.4450">https://blog.csdn.net/xu710263124/article/details/119609099?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163159918716780271572596%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=163159918716780271572596&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2blogfirst_rank_v2~rank_v29-1-119609099.pc_v2_rank_blog_default&amp;utm_term=ssh&amp;spm=1018.2226.3001.4450</a></p>
+<h2 id="sshd的日志存储位置以及常见的系统日志介绍"><a href="#sshd的日志存储位置以及常见的系统日志介绍" class="headerlink" title="sshd的日志存储位置以及常见的系统日志介绍"></a>sshd的日志存储位置以及常见的系统日志介绍</h2><p><strong>一、前言</strong><br><strong>具体sshd服务的相关信息，可参考文章：</strong><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/xu710263124/article/details/119609099?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163159918716780271572596%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&request_id=163159918716780271572596&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2blogfirst_rank_v2~rank_v29-1-119609099.pc_v2_rank_blog_default&utm_term=ssh&spm=1018.2226.3001.4450">https://blog.csdn.net/xu710263124/article/details/119609099?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163159918716780271572596%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=163159918716780271572596&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2blogfirst_rank_v2~rank_v29-1-119609099.pc_v2_rank_blog_default&amp;utm_term=ssh&amp;spm=1018.2226.3001.4450</a></p>
 <p>二、<strong>日志存储位置</strong><br><strong>注：在Linux系统中，默认sshd服务的日志存放在：&#x2F;var&#x2F;log&#x2F;secure 中</strong><br>查看sshd的配置文件：&#x2F;etc&#x2F;sshd&#x2F;sshd_config<br><img src="/../pic/%E9%9D%A2%E8%AF%95.assets/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5ZCs6K-05ZSQ5YOn5LiN5ZCD6IKJ,size_20,color_FFFFFF,t_70,g_se,x_16.png" alt="在这里插入图片描述"><br><strong>但是我们在发现在sshd的配置文件 &#x2F;etc&#x2F;sshd&#x2F;sshd_config中，并未找到关于sshd服务的log配置位置</strong></p>
 <p>那么为什么sshd服务的日志会在这个地方？<br>因为在Linux系统中，服务器默认会将系统中的一些基础服务的相关日志文件存放在单独的配置文件 &#x2F;etc&#x2F;rsyslog.conf中，在该配置文件中进行定义<br>那么现在查看 &#x2F;etc&#x2F;rsyslog.conf 文件</p>
 <pre><code class="python">vim /etc/rsyslog.conf
@@ -756,7 +756,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://eatingcrime.github.io/2022/09/16/%E9%9D%A2%E8%AF%95/">https://eatingcrime.github.io/2022/09/16/%E9%9D%A2%E8%AF%95/</a>
+                    <a href="https://eatingcrime.github.io/2023/09/16/%E9%9D%A2%E8%AF%95/">https://eatingcrime.github.io/2023/09/16/%E9%9D%A2%E8%AF%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -837,54 +837,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/09/29/TEST_GIT/">
+                <a href="/2023/09/16/%E9%9D%A2%E8%AF%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="TEST_GIT">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="面试Record">
                         
-                        <span class="card-title">TEST_GIT</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-29
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Daniel
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/07/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="计算机网络">
-                        
-                        <span class="card-title">计算机网络</span>
+                        <span class="card-title">面试Record</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -895,7 +859,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-16
                             </span>
                         <span class="publish-author">
                             
@@ -903,6 +867,48 @@
                             
                             <a href="/categories/log/" class="post-category">
                                     log
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/09/15/xray/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Xray简单使用">
+                        
+                        <span class="card-title">Xray简单使用</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Tools/" class="post-category">
+                                    Tools
                                 </a>
                             
                             
